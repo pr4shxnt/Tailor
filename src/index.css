@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+
+
+.logout-panel{
+  display: none;
+  position: absolute;
+}
+
+
+
+.profile-name:hover>.logout-panel{
+  display: block;
+}
+
+.fa-brands{
+  filter: drop-shadow(gray 3px 3px 3px);
+}
+
+
+
+@media (max-width: 768px) {
+  .mapping-elem{
+    display: grid;
+    grid-column: auto;
+    justify-content: space-around;
+  }
+
+  .address12{
+    font-size: 16px;
+  }
+
+
+  .img-container{
+    display: none;
+  }
+
+  .imgbox{
+    display: none;
+  }
+
+  .about-text-box{
+    width: 80%;
+  }
+
+  .flex-box2{
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-text-box2{
+    width: 80%;
+    text-align: center;
+  }
+
+  .txtBox1{
+    z-index: 1;
+  }
+
+  .menuMbl{
+    z-index: 50;
+  }
+
+ .Damnbox{
+  width: 100%;
+  padding: 20px;
+  }
+  
+
+  .fa-brands{
+    padding: 4px;
+    font-size: 50px;
+  }
+
+  .form-flexbox1{
+    flex-direction: column;
+    gap: 10px;
+  }
+  }
+
+  
+.fa-solid,.fa-regular{
+  font-size: 3vh;
+}
+
+.damnCart{
+  color: white;
+}
+
+
