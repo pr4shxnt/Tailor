@@ -7,7 +7,7 @@ const Footer = () => {
 <h1>HELLO WORLD</h1>
             </div>
             <div className="right">
-                <h1>Bye world</h1>
+                <h1>lamo</h1>
             </div>
         </section>
       </footer>
