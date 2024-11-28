@@ -11,6 +11,7 @@ import Register from './Components/Register/Register';
 import Homepage from './Components/Landingpage/Homepage/Homepage';
 import AboutUSmp from './Components/AboutCard/AboutUSmp';
 import CartScreen from './Components/Cart/CartScreen';
+import Footer from './Components/Footer/Footer';
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
     <BrowserRouter>
       <div>
         <Navbar />
+
         <Routes>
           <Route path="/" element={<Lmain />} />
           <Route path="/login" element={<Login />} />
@@ -40,6 +42,7 @@ const App = () => {
           <Route path="/cart" element={<CartScreen />} />
           
         </Routes>
+        <Footer/>
       </div>
     </BrowserRouter>
   );
