@@ -4,7 +4,7 @@ import { Link, unstable_HistoryRouter } from 'react-router-dom';
 
 const Register = () => {
 
-  
+
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -17,13 +17,13 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen"> 
+      <div className="flex items-center justify-center h-screen">
         <div className="flex"> {/* Main container made flex */}
           <div className="img-container h80 w-80 mr-10 justify-center items-center"> {/* Added margin-right */}
-            <img className='pic-login rounded-2xl' src={loginside} alt="Login" /> 
+            <img className='pic-login rounded-2xl' src={loginside} alt="Login" />
           </div>
 
-          <div className="form-box "> 
+          <div className="form-box ">
             <h1 className='text-4xl font-bold '>Welcome, Join Us </h1>
             <p className='text-sm mb-2 text-center'>Create a new account</p>
             <div className="flex-col">
