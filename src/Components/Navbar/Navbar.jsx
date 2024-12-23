@@ -7,7 +7,7 @@ import CollectionDropdown from '../Dropdown/CollectionDropdown'
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
   return (
-    <div className="flex items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
+    <div className="fixed flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
         <img src={assets.logo} className='w-28 py-1' alt="" />
 
 <div className="">
