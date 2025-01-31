@@ -31,17 +31,17 @@ const Cards = (props) => {
           </p>
 
           {/* Cart and Wishlist Buttons */}
-          <div className="flex items-center justify-center md:hidden backdrop-blur-md mx-2 -mb-2 p-1 gap-1.5 rounded-lg">
+          <div className="flex items-center justify-center md:hidden backdrop-blur-sm mx-2 -mb-2 p-1 gap-1.5 rounded-lg">
           <button
             className=""
             onClick={() => alert(`Add ${props.product.name} to Cart`)}
           >
-            <ShoppingBasketIcon color="gray" size={30}/>            </button>
+            <ShoppingBasketIcon color="gray" size={20}/>            </button>
 
             <Link className="" to={`/product/${props.id}`}>
 
-            <button className="bg-gray-800 hover:bg-black px-3 py-2 rounded-xl text-white w-">
-              Details
+            <button className=" p-1 border-b text-white text-xs">
+              details
 
           </button>     </Link>
           <button
@@ -49,9 +49,9 @@ const Cards = (props) => {
             onClick={() => setIsWishlist(!isWishlist)}
           >
             <Heart
-              className={`{isWishlist ? "text-red-500" : "text-white"}`}
+              className={`${isWishlist ? "text-red-500" : "text-white"}`}
               fill={isWishlist ? "currentColor" : "none"} // Fill when active
-              size={30}
+              size={20}
             />
 
           </button>
@@ -60,7 +60,7 @@ const Cards = (props) => {
 
         {/* Red Layer */}
         <div
-          className="absolute md:flex hidden bottom-[-100%] left-0 w-full h-full bg-transparent backdrop-blur-2xl rounded-lg  flex-col justify-center items-center gap-4 transition-all duration-300 group-hover:bottom-0"
+          className="absolute md:flex hidden bottom-[-100%] left-0 w-full h-full backdrop-blur-sm bg-blue-500 bg-opacity-30 rounded-lg  flex-col justify-center items-center gap-4 transition-all duration-300 group-hover:bottom-0"
         >
           {/* Buy Button */}
           <Link className="w-3/4" to={`/product/${props.id}`}>

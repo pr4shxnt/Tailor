@@ -7,7 +7,7 @@ import CollectionDropdown from '../Dropdown/CollectionDropdown'
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
   return (
-    <div className="fixed flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
+    <div className=" relative flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
         <img src={assets.logo} className='w-28 py-1' alt="" />
 
 <div className="">
@@ -20,11 +20,13 @@ const Navbar = () => {
                 <p>About</p>
                 <hr className='w-5/6 border-none h-[1.5px] transition-all duration-500 bg-gray-700 hidden'/>
             </NavLink>
-            <NavLink to='/category/all_collection' className="flex py-5 relative collection flex-col items-center gap-1">
+            <div className=" group">
+            <NavLink to='/category/all_collection' className="flex py-5   flex-col items-center gap-1">
                 <p>Collection</p>
-                <hr className='w-5/6 border-none  h-[1.5px] bg-gray-700 hidden'/>
-                <div className="dropdown mx-12 top-14"><CollectionDropdown/></div>
-            </NavLink>
+                </NavLink>
+                <hr className='  border-none  h-[1.5px] bg-gray-700 hidden'/>
+                <div className="hidden absolute left-0 right-0 w-full group-hover:flex mx-2 top-14"><CollectionDropdown/></div>
+                </div>
 
             <NavLink to='/contact' className="flex py-5 flex-col items-center gap-1">
                 <p>Contact</p>

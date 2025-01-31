@@ -80,7 +80,7 @@
         fabric: "Polyester",
         price: 29.99,
         image: ["https://i.ebayimg.com/images/g/Mt8AAOSwsKtgdDvP/s-l500.webp","https://i.ebayimg.com/images/"],      masterCategory: "Mens Wear",
-        category: "Clothing",
+        category: "nothing",
         subCategory: "Sports Wear",
         size: "XXXL",
         brand: "Nike"
