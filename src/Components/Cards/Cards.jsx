@@ -60,35 +60,39 @@ const Cards = (props) => {
 
         {/* Red Layer */}
         <div
-          className="absolute md:flex hidden bottom-[-100%] left-0 w-full h-full backdrop-blur-sm bg-blue-500 bg-opacity-30 rounded-lg  flex-col justify-center items-center gap-4 transition-all duration-300 group-hover:bottom-0"
+          className="absolute md:flex hidden bottom-[-100%] left-0 w-full h-full backdrop-blur-sm bg-black bg-opacity-30 rounded-lg justify-center items-center gap-4 transition-all duration-300 group-hover:bottom-0"
         >
           {/* Buy Button */}
-          <Link className="w-3/4" to={`/product/${props.id}`}>
-            <button className="bg-gray-800 hover:bg-black p-2 rounded-xl text-white w-full">
-              Details
-            </button>
+          <Link>
+          <button
+            className="text-white hover:text-gray-400 duration-500"
+            title="add to cart?"
+            onClick={() => alert(`Add ${props.product.name} to Cart`)}
+          >
+            <ShoppingBasketIcon   size={28}/>            </button>
           </Link>
 
           {/* Add to Cart Button */}
-          <button
-            className="bg-blue-800 hover:bg-blue-900 p-2 rounded-xl text-white w-3/4"
-            onClick={() => alert(`Add ${props.product.name} to Cart`)}
-          >
-            <div className="flex gap-2 items-center justify-center"><ShoppingBasketIcon size={30}/> Add to Cart</div>
+          <Link className="" to={`/product/${props.id}`}>
 
-          </button>
+<button title="Visit the product page" className=" px-5 py-1.5 border rounded-3xl hover:bg-white hover:text-gray-600 duration-500 text-white font-light text-lg">
+  Visit
+
+</button>     </Link>
 
           {/* Wishlist Button */}
           <button
-            className="flex items-center justify-center w-3/4 bg-gray-800 hover:bg-black p-2 rounded-xl text-white"
+            className="flex items-center justify-center text-white"
             onClick={() => setIsWishlist(!isWishlist)}
+            title={`${isWishlist ? "Remove from Wishlist" : "Add to Wishlist"}`}
           >
             <Heart
-              className={isWishlist ? "text-red-500" : "text-white"}
+
+              className={`${isWishlist ? "text-red-500 scale-105" : "text-white hover:text-red-500 duration-"} duration-700`}
               fill={isWishlist ? "currentColor" : "none"} // Fill when active
-              size={20}
+              size={28}
             />
-            <span className="ml-2">{isWishlist ? "Wishlisted" : "Add to Wishlist"}</span>
+
           </button>
         </div>
 

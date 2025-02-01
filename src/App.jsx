@@ -13,6 +13,7 @@ import CartScreen from './Components/Cart/CartScreen';
 import Footer from './Components/Footer';
 import Collection from './Components/ProductBox/Collection';
 import ScrollToTop from '../essUtils/ScrollToTop';
+import MasterCategory from './Components/AdminUI/MasterCategory';
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/category/:masterCategory" element={<Collection/>} />
           <Route path="/category/:masterCategory/:category" element={<Collection/>} />
           <Route path="/category/:masterCategory/:category/:subCategory" element={<Collection/>} />
+          <Route path="/crud" element={<MasterCategory/>} />
         </Routes>
         <Footer/>
       </div>

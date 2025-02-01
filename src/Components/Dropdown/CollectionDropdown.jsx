@@ -28,7 +28,7 @@ const CollectionDropdown = () => {
   };
 
   return (
-    <div className=" w-[98vw] p-6 bg-gray-50 border rounded-lg shadow-md">
+    <div className=" w-full p-6 bg-gray-50 border   shadow-md">
 
       <div className="relative">
         {/* Scroll Buttons */}

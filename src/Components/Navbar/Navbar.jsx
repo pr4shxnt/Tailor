@@ -7,7 +7,7 @@ import CollectionDropdown from '../Dropdown/CollectionDropdown'
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
   return (
-    <div className=" relative flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
+    <div className=" fixed flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
         <img src={assets.logo} className='w-28 py-1' alt="" />
 
 <div className="">
@@ -25,7 +25,7 @@ const Navbar = () => {
                 <p>Collection</p>
                 </NavLink>
                 <hr className='  border-none  h-[1.5px] bg-gray-700 hidden'/>
-                <div className="hidden absolute left-0 right-0 w-full group-hover:flex mx-2 top-14"><CollectionDropdown/></div>
+                <div className="hidden fixed mt-2 left-0 right-0 w-full group-hover:flex top-14"><CollectionDropdown/></div>
                 </div>
 
             <NavLink to='/contact' className="flex py-5 flex-col items-center gap-1">
@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className="group relative">
                 <img src={assets.profile_icon} alt="" className="w-5 cursor-pointer" />
                 <div className="group-hover:block hidden absolute dropdown-menu z-[999] right-0 pt-4">
-                    <div className="flec f;ex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
+                    <div className="flec flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
                         <p className="cursor-pointer hover:text-black">My Profile</p>
                         <p className="cursor-pointer hover:text-black">Orders</p>
                         <p className="cursor-pointer hover:text-black">Logout</p>
