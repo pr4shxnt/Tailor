@@ -1,11 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {assets} from '../../assets/assets'
-import { Link,  NavLink } from 'react-router-dom'
+import { Link,  NavLink, useLocation } from 'react-router-dom'
 import "./Navbar.css"
 import CollectionDropdown from '../Dropdown/CollectionDropdown'
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
+
+
+    const location = useLocation();
+
+    const [isCollection, setIsCollection] = useState(false)
+    console.log(isCollection);
+    
+
+
+    useEffect(() => {
+        if (location.pathname.startsWith('/category')) setIsCollection(true
+        );
+        else setIsCollection(false);
+      }, [location]);
+
   return (
     <div className=" fixed flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
         <img src={assets.logo} className='w-28 py-1' alt="" />
@@ -20,13 +35,17 @@ const Navbar = () => {
                 <p>About</p>
                 <hr className='w-5/6 border-none h-[1.5px] transition-all duration-500 bg-gray-700 hidden'/>
             </NavLink>
-            <div className=" group">
-            <NavLink to='/category/all_collection' className="flex py-5   flex-col items-center gap-1">
-                <p>Collection</p>
-                </NavLink>
-                <hr className='  border-none  h-[1.5px] bg-gray-700 hidden'/>
-                <div className="hidden fixed mt-2 left-0 right-0 w-full group-hover:flex top-14"><CollectionDropdown/></div>
-                </div>
+            <div className="group relative">
+                        <NavLink to='/category/all_collection' className="flex py-5 flex-col items-center gap-1">
+                            <p>Collection</p>
+                            {/* Show the underline if isCollection is true */}
+                            <div className={`w-5/6 h-[1.5px] bg-black transition-all duration-500 ${isCollection ? 'block' : 'hidden'}`} />
+                        </NavLink>
+                        {/* Dropdown on hover */}
+                        <div className="hidden fixed left-0  right-0 w-full group-hover:flex  top-16">
+                            <CollectionDropdown />
+                        </div>
+                    </div>
 
             <NavLink to='/contact' className="flex py-5 flex-col items-center gap-1">
                 <p>Contact</p>

@@ -124,7 +124,8 @@ const ProductPage = ({
       <div className="products-list grid grid-cols-2 pt-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filteredFinalProducts.length > 0 ? (
           filteredFinalProducts.map((product, index) => (
-            <Cards key={index} product={product} />
+            <div className="w-full">
+            <Cards key={index} product={product} /></div>
           ))
         ) : (
           <p className="col-span-full text-center text-gray-500">
