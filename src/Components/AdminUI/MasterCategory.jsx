@@ -11,18 +11,20 @@ const MasterCategory = () => {
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   // Fetch all categories
+  const fetchCategories = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${API_URL}/masterCategories`);
+      setCategories(response.data);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+ 
   useEffect(() => {
-    const fetchCategories = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`${API_URL}/masterCategories`);
-        setCategories(response.data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+   
     fetchCategories();
   }, []);
 
@@ -58,7 +60,7 @@ const MasterCategory = () => {
     if (window.confirm('Are you sure you want to delete this category?')) {
       setIsLoading(true);
       try {
-        await axios.delete(`${API_URL}/masterCategories/${id}`);
+        await axios.delete(`${API_URL}/masterCategories/delete/${id}`);
         fetchCategories(); // Re-fetch categories
       } catch (error) {
         console.error('Error deleting category:', error);
