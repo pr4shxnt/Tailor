@@ -13,9 +13,11 @@ import Homepage from './Components/Landingpage/Homepage/Homepage';
 import AboutUSmp from './Components/AboutUSmp';
 import CartScreen from './Components/Cart/CartScreen';
 import Collection from './Components/ProductBox/Collection';
+import ScrollToTop from '../essUtils/ScrollToTop';
 import MasterCategory from './Components/AdminUI/MasterCategory';
 import Category from './Components/AdminUI/Category';
 import RootComp from "./Components/RootComp";
+import SubCategorySelect from "./Components/AdminUI/SubCategory";
 
 
 export default function App() {
@@ -79,6 +81,10 @@ export default function App() {
         { 
           path: "/crud2", 
           element: <Category /> 
+        },
+        {
+          path: "/crud3",
+          element: <SubCategorySelect/>
         }
 
       ],
