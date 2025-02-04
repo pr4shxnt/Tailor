@@ -18,6 +18,10 @@ import MasterCategory from './Components/AdminUI/MasterCategory';
 import Category from './Components/AdminUI/Category';
 import RootComp from "./Components/RootComp";
 import SubCategorySelect from "./Components/AdminUI/SubCategory";
+import AdminPageLayout from "./admin/AdminPageLayout";
+import ProductCategoriesManager from "./admin/ProductCategoriesManager";
+import AdminLogin from "./admin/AdminLogin";
+import AdminHandling from "./admin/admin panel/AdminManager";
 
 
 export default function App() {
@@ -84,11 +88,25 @@ export default function App() {
         },
         {
           path: "/crud3",
-          element: <SubCategorySelect/>
+          element: <AdminHandling/>
+        },
+        {
+          path: "/admin/login",
+          element: <AdminLogin/>,
         }
 
       ],
     },
+    {
+      path: "/admin",
+      element: <AdminPageLayout/>,
+      children: [
+        {
+          path: "",
+          element: <ProductCategoriesManager/>
+        }]
+
+    }
 
 
   ]);
