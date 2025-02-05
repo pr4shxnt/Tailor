@@ -90,10 +90,7 @@ export default function App() {
           path: "/crud3",
           element: <AdminHandling/>
         },
-        {
-          path: "/admin/login",
-          element: <AdminLogin/>,
-        }
+        
 
       ],
     },
@@ -107,7 +104,11 @@ export default function App() {
         }]
 
     }
-
+,
+{
+  path: "/admin/login",
+  element: <AdminLogin/>,
+}
 
   ]);
 

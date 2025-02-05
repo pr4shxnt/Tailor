@@ -51,8 +51,8 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#EB8F41]">
-      <div className="bg-gray-100 p-8 rounded-2xl md:w-[50vw] lg:w-[30vw] w-[90%] shadow-lg">
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="bg-gray-200 shadow-2xl p-8 rounded-2xl md:w-[50vw] lg:w-[30vw] w-[90]">
         <h2 className="text-3xl font-semibold text-center mb-6 text-gray-700">
           Administrator Login
         </h2>
@@ -70,7 +70,7 @@ const AdminLogin = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-4 py-2 border bg-gray-100  rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400"
             placeholder="Enter your username"
             required
           />
@@ -82,7 +82,7 @@ const AdminLogin = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400"
               placeholder="Enter your password"
               required
             />
@@ -97,7 +97,7 @@ const AdminLogin = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-[#EFA687] text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+            className="w-full bg-gray-700 text-white py-2 px-4 rounded-full hover:bg-gray-900 transition duration-300"
             disabled={loading}
           >
             {loading ? 'Logging in...' : 'Login'}
