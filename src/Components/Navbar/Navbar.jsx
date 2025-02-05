@@ -42,7 +42,7 @@ const Navbar = () => {
                             <div className={`w-5/6 h-[1.5px] bg-black transition-all duration-500 ${isCollection ? 'block' : 'hidden'}`} />
                         </NavLink>
                         {/* Dropdown on hover */}
-                        <div className="hidden fixed left-0  right-0 w-full group-hover:flex  top-16">
+                        <div className="hidden fixed left-0  right-0 w-full group-hover:flex  top-14">
                             <CollectionDropdown />
                         </div>
                     </div>

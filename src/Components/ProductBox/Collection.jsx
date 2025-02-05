@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductPage from "./ProductPage";
 import FilterComp from "../Filter/FilterComp";
-import products from "../../Data/Products";
 import SortFilterButton from "./ResponsiveDD/SortFilterButton";
 import SliderComp from "../Filter/SliderComp"; // Import the SliderComp component
 import { Link } from "react-router-dom"
+import axios from "axios";
 const Collection = () => {
   const { category, subCategory, masterCategory, brand } = useParams();
   const [sortOrder, setSortOrder] = useState(null); // 'asc' for low to high, 'desc' for high to low
@@ -20,30 +20,38 @@ const Collection = () => {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
 
-  useEffect(() => {
-    // Filter products based on the provided masterCategory, category, subCategory, and brand
-    let filtered = products;
+  const [products, setProducts] = useState([]);
 
-    if (masterCategory) {
-      filtered = filtered.filter(
-        (product) => product.masterCategory === masterCategory
-      );
+
+  const productsFetch = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/products`)
+      const data = await response.data
+      console.log(data);
+      
+      setProducts(data)
+  }
+
+  useEffect(() => {
+      productsFetch()
+  }, [masterCategory, category, subCategory, brand])
+
+  console.log(products);
+  
+
+  useEffect(() => {
+    let filtered = products;
+  
+    if (masterCategory && masterCategory !== "all_collection") {
+      filtered = filtered.filter((product) => product.masterCategory === masterCategory);
     }
     if (category) {
       filtered = filtered.filter((product) => product.category === category);
     }
     if (subCategory) {
-      filtered = filtered.filter(
-        (product) => product.subCategory === subCategory
-      );
+      filtered = filtered.filter((product) => product.subCategory === subCategory);
     }
-
     if (brand) {
-      filtered = filtered.filter((product) => {
-        return (
-          product.brand && product.brand.toLowerCase() === brand.toLowerCase()
-        );
-      });
+      filtered = filtered.filter((product) => product.brand && product.brand.toLowerCase() === brand.toLowerCase());
     }
     setFilteredProducts(filtered);
 
@@ -52,7 +60,7 @@ const Collection = () => {
     const sizes = [...new Set(filtered.map((product) => product.size))];
     setFilteredBrandsLocal(br4nds);
     setFilteredSizesLocal(sizes);
-  }, [masterCategory, category, subCategory, brand]);
+  }, [masterCategory, category, subCategory, brand, products]);
 
   useEffect(() => {
     setFilteredBrands(selectedBrands);

@@ -1,12 +1,32 @@
-import React, { useRef } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Products from "../../Data/Products"; // Adjust the path as needed
+// import Products from "../../Data/Products"; // Adjust the path as needed
 
 const CollectionDropdown = () => {
   const scrollContainerRef = useRef(null);
 
+  const [products, setProducts] = useState([]);
+
+
+  const productsFetch = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/products`)
+      const data = await response.data
+
+      
+      setProducts(data)
+  }
+  
+
+  useEffect(() => {
+      productsFetch()
+  }, [])
+
+  console.log(products);
+  
+
   // Extract unique masterCategories, categories, and subCategories
-  const hierarchy = Products.reduce((acc, product) => {
+  const hierarchy = products.reduce((acc, product) => {
     const { masterCategory, category, subCategory } = product;
     if (!acc[masterCategory]) acc[masterCategory] = {};
     if (!acc[masterCategory][category]) acc[masterCategory][category] = new Set();

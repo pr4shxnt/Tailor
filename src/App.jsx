@@ -22,6 +22,7 @@ import AdminPageLayout from "./admin/AdminPageLayout";
 import ProductCategoriesManager from "./admin/ProductCategoriesManager";
 import AdminLogin from "./admin/AdminLogin";
 import AdminHandling from "./admin/admin panel/AdminManager";
+import ProductsCRUD from "./admin/Products/ProductsCRUD";
 
 
 export default function App() {
@@ -84,7 +85,7 @@ export default function App() {
         },
         { 
           path: "/crud2", 
-          element: <Category /> 
+          element: <ProductsCRUD/> 
         },
         {
           path: "/crud3",
