@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import VerifyOTP from "./VerifyOTP";
+import { AuthContext } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+   const {isUserAuthenticated } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+   if (isUserAuthenticated) {
+    navigate("/");
+  }
   const [formData, setFormData] = useState({
     name: "",
     email: "",
