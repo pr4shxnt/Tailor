@@ -3,13 +3,11 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import ProductDetails from './Components/ProductDetails/ProductDetails';
-import Navbar from './Components/Navbar/Navbar';
+ import Navbar from './Components/Navbar/Navbar';
 import Contact from './Components/Contact/Contact';
 import Lmain from './Components/Landingpage/Lmain';
 import Login from './Components/Log-in/Login';
-import Register from './Components/Log-in/Register';
-import Homepage from './Components/Landingpage/Homepage/Homepage';
+ import Homepage from './Components/Landingpage/Homepage/Homepage';
 import AboutUSmp from './Components/AboutUSmp';
 import CartScreen from './Components/Cart/CartScreen';
 import Collection from './Components/ProductBox/Collection';
@@ -23,7 +21,8 @@ import ProductCategoriesManager from "./admin/ProductCategoriesManager";
 import AdminLogin from "./admin/AdminLogin";
 import AdminHandling from "./admin/admin panel/AdminManager";
 import ProductsCRUD from "./admin/Products/ProductsCRUD";
-
+import Register from "./Components/Log-in/UserRegister";
+import ProductsDetails from "./Components/ProductBox/ProductsDetails";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -50,10 +49,6 @@ export default function App() {
         {
            path: "/category/all_collection", 
            element: <Collection /> 
-        },
-        { 
-          path: "/product/:id", 
-          element: <ProductDetails />
         },
         {
            path: "/contact", 
@@ -91,6 +86,11 @@ export default function App() {
           path: "/crud3",
           element: <AdminHandling/>
         },
+        {
+          path: "/productsdetails",
+          element: <ProductsDetails/>
+        }
+
         
 
       ],
