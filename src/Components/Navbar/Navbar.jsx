@@ -103,7 +103,7 @@ const Navbar = () => {
                     } className="py-2 pl-6" to="/">HOME</NavLink>
                     <NavLink onClick={
                         () => setVisible(false)
-                    } className="py-2 pl-6" to="/collection">COLLECTION</NavLink>
+                    } className="py-2 pl-6" to="/category/all_collection">COLLECTION</NavLink>
                     <NavLink onClick={
                         () => setVisible(false)
                     } className="py-2 pl-6" to="/about">ABOUT</NavLink>

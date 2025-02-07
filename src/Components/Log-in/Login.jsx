@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import loginside from "./login-side.jpg";
 import { AuthContext } from "./AuthProvider";
 
-const Login = () => {
+const Login = ({LoginModel, setIsLoginModel}) => {
    const { isUserAuthenticated } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,9 +13,14 @@ const Login = () => {
   const navigate = useNavigate();
   // Check if the user is already logged in
 
-  if (isUserAuthenticated) {
+  if (isUserAuthenticated && LoginModel===false) {
     navigate("/");
   }
+  else if (isUserAuthenticated && LoginModel===true) {
+    setIsLoginModel(false);
+  }
+
+  console.log(LoginModel)
 
   console.log("Token from useAuth:", token);
   

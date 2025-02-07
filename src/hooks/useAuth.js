@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../Components/Log-in/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";  // Ensure you're using the correct package to decode JWT
+import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
   const { setUser, setIsUserAuthenticated } = useContext(AuthContext);
@@ -17,23 +17,20 @@ const useAuth = () => {
 
         // Check if the token has expired
         if (decodedToken.exp * 1000 < Date.now()) {
-          // Token expired
           setIsUserAuthenticated(false);
-          sessionStorage.removeItem("sessionid"); // Remove expired token
-          navigate("/login"); // Redirect to login page
+          sessionStorage.removeItem("sessionid");
+          navigate("/login");
         } else {
-          // Token is valid
           setToken(savedToken);
           setIsUserAuthenticated(true);
         }
       } catch (error) {
         setIsUserAuthenticated(false);
-        sessionStorage.removeItem("sessionid"); // Remove invalid token
-        navigate("/login"); // Redirect to login page if the token is invalid
+        sessionStorage.removeItem("sessionid");
+        navigate("/login");
       }
     } else {
-      setIsUserAuthenticated(false); // No token, set as not authenticated
-      navigate("/login"); // Redirect to login page if there's no token
+      setIsUserAuthenticated(false);
     }
   }, [navigate, setIsUserAuthenticated]);
 
@@ -48,11 +45,10 @@ const useAuth = () => {
         const userData = response.data.user;
         const userToken = response.data.token;
 
-        // Store the token in sessionStorage
+        // Store token in sessionStorage and user data in localStorage
         sessionStorage.setItem("sessionid", userToken);
         localStorage.setItem("user", JSON.stringify(userData));
-        setToken(userToken); // Update token state with the new token
-
+        setToken(userToken);
         setUser(userData);
         setIsUserAuthenticated(true);
 
@@ -64,30 +60,33 @@ const useAuth = () => {
   };
 
   const logout = () => {
-    // Clear session storage and reset user state
     sessionStorage.removeItem("sessionid");
     localStorage.removeItem("user");
-    setToken("");  // Clear token in state
-    setUser(null);  // Clear user data
-    setIsUserAuthenticated(false);  // Set authentication to false
+    setToken("");
+    setUser(null);
+    setIsUserAuthenticated(false);
     console.log("User logged out");
-
-    // Redirect to login page
-    navigate("/login"); // Redirect to login
+    navigate("/login");
   };
 
-  // Intercept any axios requests to handle token expiration
-  axios.interceptors.response.use(
-    (response) => response, // Pass through the response if no error
-    (error) => {
-      if (error.response && error.response.status === 401) {
-        // Token expired or unauthorized
-        console.log("Token expired or unauthorized");
-        logout();  // Log the user out
+  // Axios Interceptor: handles token expiration
+  useEffect(() => {
+    const interceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response && error.response.status === 401) {
+          console.log("Token expired or unauthorized");
+          logout(); // Log the user out if token expired
+        }
+        return Promise.reject(error);
       }
-      return Promise.reject(error);
-    }
-  );
+    );
+
+    // Clean up the interceptor on component unmount
+    return () => {
+      axios.interceptors.response.eject(interceptor);
+    };
+  }, []);
 
   return { login, logout, token };
 };
