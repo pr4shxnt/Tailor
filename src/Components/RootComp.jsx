@@ -9,7 +9,8 @@ const RootComp = () => {
     <div>
          <ScrollToTop/>
         <Navbar/>
-        <Outlet/>
+        <div className="min-h-screen min-w-screen"><Outlet/></div>
+        
         <Footer/>
     </div>
   )

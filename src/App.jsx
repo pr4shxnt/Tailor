@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthProvider from "./Components/Log-in/AuthProvider"; // Import AuthProvider
  import Contact from "./Components/Contact/Contact";
 import Lmain from "./Components/Landingpage/Lmain";
-import Login from "./Components/Log-in/Login";
+import UserLogin from "./Components/Log-in/UserLogin";
 import Homepage from "./Components/Landingpage/Homepage/Homepage";
 import AboutUSmp from "./Components/AboutUSmp";
 import CartScreen from "./Components/Cart/CartScreen";
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <RootComp />,
     children: [
       { path: "/", element: <Lmain /> },
-      { path: "/login", element: <Login /> },
+      { path: "/login", element: <UserLogin/> },
       { path: "/register", element: <Register /> },
       { path: "/home", element: <Homepage /> },
       { path: "/category/all_collection", element: <Collection /> },

@@ -19,6 +19,9 @@ const Login = ({LoginModel, setIsLoginModel}) => {
   else if (isUserAuthenticated && LoginModel===true) {
     setIsLoginModel(false);
   }
+  if (isUserAuthenticated && !LoginModel ) {
+    navigate('/');
+  }
 
   console.log(LoginModel)
 
@@ -31,7 +34,7 @@ const Login = ({LoginModel, setIsLoginModel}) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-full">
       <div className="flex">
         <div className="img-container h80 w-80 mr-10">
           <img className="rounded-2xl" src={loginside} alt="Login" />

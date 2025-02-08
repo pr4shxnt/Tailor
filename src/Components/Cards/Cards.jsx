@@ -26,10 +26,10 @@ console.log("Session ID before request:", sessionid);
 const handleAddToCart = async () => {
   try {
       const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
-      if (!token) {
-          console.error("No token found");
-          return;
+      if (!isUserAuthenticated && !token) {
+        setLoginModelShow(true)
       }
+
 
       // Prepare the request headers with the token
       const config = {

@@ -66,8 +66,7 @@ const useAuth = () => {
     setUser(null);
     setIsUserAuthenticated(false);
     console.log("User logged out");
-    navigate("/login");
-  };
+    };
 
   // Axios Interceptor: handles token expiration
   useEffect(() => {
