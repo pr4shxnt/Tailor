@@ -15,14 +15,14 @@ const Navbar = () => {
 
     const user = localStorage.getItem('user');
     const parsedUser = JSON.parse(user);
-    console.log(parsedUser);
+     
 
 
 
     const location = useLocation();
 
     const [isCollection, setIsCollection] = useState(false)
-    console.log(isCollection);
+     
 
 
 
@@ -58,7 +58,7 @@ const Navbar = () => {
    }, []);
 
 
-   console.log(cart);
+    
 
    let cartItems;
 

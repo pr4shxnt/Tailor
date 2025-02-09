@@ -17,12 +17,11 @@ const CollectionDropdown = () => {
       setProducts(data)
   }
   
-
+console
   useEffect(() => {
       productsFetch()
   }, [])
 
-  console.log(products);
   
 
   // Extract unique masterCategories, categories, and subCategories

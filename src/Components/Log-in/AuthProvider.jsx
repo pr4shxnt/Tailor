@@ -4,14 +4,13 @@ import { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(undefined);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
 
-    // Log the stored user to check if it's correctly retrieved from localStorage
-    console.log("Stored user from localStorage:", storedUser);
 
     // Check if user data exists in localStorage
     if (storedUser) {
@@ -31,7 +30,7 @@ const AuthProvider = ({ children }) => {
   }, []); // Empty dependency array ensures it runs only once on mount
 
   return (
-    <AuthContext.Provider value={{ isUserAuthenticated, user, setIsUserAuthenticated, setUser }}>
+    <AuthContext.Provider value={{ isUserAuthenticated, user, loading, setIsUserAuthenticated, setUser, setLoading }}>
       {children}
     </AuthContext.Provider>
   );

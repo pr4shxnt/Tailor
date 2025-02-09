@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
-  const { setUser, setIsUserAuthenticated } = useContext(AuthContext);
+  const { setUser, setIsUserAuthenticated, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [token, setToken] = useState(sessionStorage.getItem("sessionid") || "");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const savedToken = sessionStorage.getItem("sessionid");
@@ -32,7 +32,10 @@ const useAuth = () => {
     } else {
       setIsUserAuthenticated(false);
     }
-  }, [navigate, setIsUserAuthenticated]);
+
+    // Ensure loading state is properly updated
+    setLoading(false);
+  }, [navigate, setIsUserAuthenticated, setLoading]);
 
   const login = async (email, password) => {
     try {
@@ -50,6 +53,7 @@ const useAuth = () => {
         localStorage.setItem("user", JSON.stringify(userData));
         setToken(userToken);
         setUser(userData);
+        setLoading(false);
         setIsUserAuthenticated(true);
 
         console.log("User successfully logged in");
@@ -65,8 +69,10 @@ const useAuth = () => {
     setToken("");
     setUser(null);
     setIsUserAuthenticated(false);
+    setLoading(true);
     console.log("User logged out");
-    };
+    navigate("/login"); // Redirect after logout
+  };
 
   // Axios Interceptor: handles token expiration
   useEffect(() => {
