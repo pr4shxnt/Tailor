@@ -3,12 +3,18 @@ import { AuthContext } from '../Log-in/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Trash2 } from 'lucide-react';
-import { parse } from 'postcss';
 
 const CartScreen = () => {
   const { isUserAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
  
+  
+useEffect(()=>{
+  if (isUserAuthenticated === false) {
+    navigate('/login');
+  }
+})
+
 
   console.log("Auth status:", isUserAuthenticated);
 
@@ -17,12 +23,6 @@ const CartScreen = () => {
    const token = sessionStorage.getItem('sessionid');  // Ensure token is stored
 const sessionid = token
 
-
-useEffect(()=>{
-  if (isUserAuthenticated === false) {
-    navigate('/login');
-  }
-})
 
 
 
@@ -66,6 +66,8 @@ useEffect(()=>{
     }
   };
 
+  console.log(cart);
+  
   if (!cart) return <div className="flex justify-center items-center h-screen">Loading...</div>;
 
   return (

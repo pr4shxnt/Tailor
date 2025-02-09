@@ -5,6 +5,7 @@ import "./Navbar.css"
 import CollectionDropdown from '../Dropdown/CollectionDropdown'
 import { AuthContext } from '../Log-in/AuthProvider'
 import useAuth from '../../hooks/useAuth'
+import axios from 'axios'
 
 const Navbar = () => {
     const { isUserAuthenticated } = useContext(AuthContext);
@@ -31,7 +32,42 @@ const Navbar = () => {
         else setIsCollection(false);
     }, [location]);
 
-    return (
+    const [cart, setCart] = useState([]);
+
+    const token = sessionStorage.getItem('sessionid');  // Ensure token is stored
+ const sessionid = token
+ 
+ 
+ 
+ 
+ 
+   // Fetch cart data
+   useEffect(() => {
+     const fetchCart = async () => {
+       if ( !token) return;
+       try {
+         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${sessionid}`, {
+         });
+         setCart(response.data);
+       } catch (error) {
+         console.error('Error fetching cart data:', error);
+       }
+     };
+ 
+     fetchCart();
+   }, []);
+
+
+   console.log(cart);
+
+   let cartItems;
+
+   cart.items ? cartItems = cart.items.length : "0" 
+
+
+
+   
+   return (
         <div className=" fixed flex w-full items-center  justify-between md:px-10 px-3  shadow-lg  z-[999]  bg-white  font-medium">
             <img src={assets.logo} className='w-28 py-1' alt="" />
 
@@ -82,7 +118,7 @@ const Navbar = () => {
 
                 <Link className='relative' to="/cart">
                     <img src={assets.cart_icon} className='w-5' alt="" />
-                    <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">10</p>
+                    <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">{cartItems}</p>
                 </Link>
 
                 <img onClick={() => {
