@@ -16,15 +16,11 @@ const Lmain = () => {
         </div>
     <AboutUSlp/>
 
-    <Fmain/>
+  
 
 
 
-
-    <div className="flex flex-col justify-center align-middle text-center"><h1 className='text-4xl font-bold'>We're Trusted by</h1><p></p></div>
-
-    <Partners/>
-
+    
     </>
   )
 }

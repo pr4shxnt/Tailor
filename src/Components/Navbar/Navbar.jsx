@@ -102,7 +102,7 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
 
                 {
-                    isUserAuthenticated ? <div className="group relative">
+                    isUserAuthenticated ? <div className="group hidden md:block relative">
                         <div className="flex items-center gap-2 py-2 border-black border rounded-full px-3"> <img src={assets.profile_icon} alt="" className="w-5 cursor-pointer" /> <h1> {parsedUser.name}</h1> </div>
 
                         <div className="group-hover:block hidden absolute dropdown-menu z-[999] right-0 pt-4">

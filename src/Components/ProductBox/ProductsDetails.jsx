@@ -2,13 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams
 import { Heart, ShoppingCart, Star, Truck, Shield, ArrowLeft, ArrowRight } from 'lucide-react';
 import axios from 'axios';
+import ItemsCounter from '../ProductDetails/ItemsCounter';
+import LoginModel from '../Log-in/LoginModel';
+import { AuthContext } from '../Log-in/AuthProvider';
+import { useContext } from 'react';
 
 function ProductsDetails() {
-  const { id } = useParams(); // Get the id from the URL
-  const [selectedSize, setSelectedSize] = useState('M');
+  const { id } = useParams();
+  const { isUserAuthenticated } = useContext(AuthContext); 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [product, setProduct] = useState(null); // Product state to hold fetched data
+  const [quantity, setQuantity] = useState(1)
+  const [loginModelShow, setLoginModelShow] = useState(false)
+  const [token, setToken] = useState("")
+  const userid = localStorage.getItem("userid")
 
+
+
+  const sessionid = sessionStorage.getItem("sessionid");
   // Map image paths to full URLs
   const images = product?.images?.map((image) => `${import.meta.env.VITE_IMAGES}/${image}`) || [];
 
@@ -39,6 +50,40 @@ function ProductsDetails() {
   if (!product) {
     return <div>Loading...</div>; // Show a loading state while the product is being fetched
   }
+
+  console.log(quantity);
+  
+  const handleAddToCart = async () => {
+    try {
+        const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
+        if (!isUserAuthenticated && !token) {
+          setLoginModelShow(true)
+        }
+  
+  
+        // Prepare the request headers with the token
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,  // Attach token to Authorization header
+            },
+        };
+  
+        // Make the request with the token in the header
+        const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
+            { productId: product._id, quantity: quantity, userId: userid },
+            config
+        );
+  
+        console.log("Item added to cart:", response.data);
+    } catch (error) {
+        console.error("Failed to add to cart:", error.response?.data?.message || error.message);
+    }
+  };
+  
+
+  console.log(product.name);
+  
 
   return (
     <div className="min-h-screen pt-16 text-black">
@@ -81,7 +126,7 @@ function ProductsDetails() {
             <div className="mt-3 flex items-center">
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400" fill={i < 4 ? 'currentColor' : 'none'} />
+                  <Star key={i} className="w-5 h-5 text-yellow-400" fill={i < product.avgRating ? 'currentColor' : 'none'} />
                 ))}
               </div>
               <p className="ml-2 text-sm text-gray-500">({product.avgRating} reviews)</p>
@@ -94,19 +139,32 @@ function ProductsDetails() {
             </div>
 
             {/* Size selector */}
-            <div className="mt-8">
-              <h3 className="text-sm font-medium text-gray-900">Size</h3>
-              <div className="mt-2 flex gap-2">
+            
+
+<div className="flex items-center h-28 gap-4">
+  <div className="">
+    <ItemsCounter quantity={quantity} setQuantity={setQuantity}/>
+  </div>
+  <div className="flex items-center mt-5 select-none  text-2xl ">
+              <h3 className=" font-medium   text-gray-900">Size:&nbsp; </h3>
+              <div className="   gap-2">
               {product.size}
               </div>
             </div>
-
+</div>
             {/* Add to cart */}
             <div className="mt-8">
-              <button className="w-full bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 flex items-center justify-center gap-2">
+            <div
+            className="text-white hover:text-gray-400 duration-500"
+            title="Add to cart"
+            onClick={handleAddToCart}
+            
+          >
+            <button className="w-full bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 flex items-center justify-center gap-2">
                 <ShoppingCart className="w-5 h-5" />
                 Add to Cart
               </button>
+          </div>
             </div>
 
             {/* Features */}
@@ -130,6 +188,8 @@ function ProductsDetails() {
           </div>
         </div>
       </div>
+      {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} LoginModel={loginModelShow} />}
+      
     </div>
   );
 }

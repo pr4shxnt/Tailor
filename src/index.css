@@ -101,4 +101,26 @@
   color: white;
 }
 
+.item {
+  width: auto;
+  max-width: 150px;
+  margin: 0 15px;
+  aspect-ratio: 3/2;
+  object-fit: contain;
+}
 
+.mover {
+  display: flex;
+  background-color: white;
+  animation: scroll 20s linear infinite;
+  
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}

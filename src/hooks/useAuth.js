@@ -5,9 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
-  const { setUser, setIsUserAuthenticated, setLoading } = useContext(AuthContext);
+  const { setUser,isUserAuthenticated, setIsUserAuthenticated, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
+
+
+  if(!isUserAuthenticated){
+    setLoading(false)
+  }
 
   useEffect(() => {
     const savedToken = sessionStorage.getItem("sessionid");
@@ -19,7 +24,10 @@ const useAuth = () => {
         if (decodedToken.exp * 1000 < Date.now()) {
           setIsUserAuthenticated(false);
           sessionStorage.removeItem("sessionid");
-          navigate("/login");
+
+          // Instead of redirecting, show a session expiration message
+          alert("Your session has expired. Please log in again.");
+
         } else {
           setToken(savedToken);
           setIsUserAuthenticated(true);
@@ -27,15 +35,13 @@ const useAuth = () => {
       } catch (error) {
         setIsUserAuthenticated(false);
         sessionStorage.removeItem("sessionid");
-        navigate("/login");
       }
     } else {
       setIsUserAuthenticated(false);
     }
 
-    // Ensure loading state is properly updated
     setLoading(false);
-  }, [navigate, setIsUserAuthenticated, setLoading]);
+  }, [setIsUserAuthenticated, setLoading]);
 
   const login = async (email, password) => {
     try {
@@ -53,8 +59,8 @@ const useAuth = () => {
         localStorage.setItem("user", JSON.stringify(userData));
         setToken(userToken);
         setUser(userData);
-        setLoading(false);
         setIsUserAuthenticated(true);
+        setLoading(false);
 
         console.log("User successfully logged in");
       }
@@ -71,7 +77,9 @@ const useAuth = () => {
     setIsUserAuthenticated(false);
     setLoading(true);
     console.log("User logged out");
-    navigate("/login"); // Redirect after logout
+
+    // Only redirect if it's NOT a modal login
+ 
   };
 
   // Axios Interceptor: handles token expiration
@@ -81,13 +89,15 @@ const useAuth = () => {
       (error) => {
         if (error.response && error.response.status === 401) {
           console.log("Token expired or unauthorized");
-          logout(); // Log the user out if token expired
+
+          // Instead of logging out, show an alert
+          alert("Your session has expired. Please log in again.");
+          logout();
         }
         return Promise.reject(error);
       }
     );
 
-    // Clean up the interceptor on component unmount
     return () => {
       axios.interceptors.response.eject(interceptor);
     };
