@@ -10,7 +10,7 @@ const Cards = (props) => {
   const [loginModelShow, setLoginModelShow] = useState(false);
   const [isWishlist, setIsWishlist] = useState(false); // Track wishlist state
   const [loading, setLoading] = useState(false); // Track loading state
-  const userid = localStorage.getItem("userid"); // Get userid from localStorage
+  const user = localStorage.getItem("user"); // Get userid from localStorage
   const gradient = "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%)";
 
   const cardStyle = {
@@ -19,45 +19,85 @@ const Cards = (props) => {
     backgroundPosition: "center",
   };
 
-  const sessionid = sessionStorage.getItem("sessionid");
-console.log("Session ID before request:", sessionid);
+  const parsedUser = JSON.parse(user)
+  console.log(parsedUser);
+  
+  const userid = parsedUser.id
 
-// Axios request
-const handleAddToCart = async () => {
-  try {
+  const sessionid = sessionStorage.getItem("sessionid");
+
+  // Axios request for adding to cart
+  const handleAddToCart = async () => {
+    try {
       const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
       if (!isUserAuthenticated && !token) {
-        setLoginModelShow(true)
+        setLoginModelShow(true);
+        return; // Early exit if not authenticated and no session token
       }
-
 
       // Prepare the request headers with the token
       const config = {
-          headers: {
-              Authorization: `Bearer ${token}`,  // Attach token to Authorization header
-          },
+        headers: {
+          Authorization: `Bearer ${token}`, // Attach token to Authorization header
+        },
       };
 
       // Make the request with the token in the header
       const response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
-          { productId: props.product._id, quantity: 1, userId: userid },
-          config
+        `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
+        { productId: props.product._id, quantity: 1, userId: userid },
+        config
       );
 
       console.log("Item added to cart:", response.data);
-  } catch (error) {
+      alert("Item added to cart!");
+    } catch (error) {
       console.error("Failed to add to cart:", error.response?.data?.message || error.message);
-  }
-};
+      alert("Failed to add to cart.");
+    }
+  };
+
+  // Axios request for adding/removing from wishlist
+  const handleAddWishlist = async () => {
+    try {
+      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
+      if (!isUserAuthenticated && !token) {
+        setLoginModelShow(true);
+        return; // Early exit if not authenticated and no session token
+      }
+
+      // Prepare the request headers with the token
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`, // Attach token to Authorization header
+        },
+      };
+
+      // Make the request with the token in the header
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
+        { productId: props.product._id, userId: userid },
+        config
+      );
+
+      setIsWishlist(true); // Toggle wishlist state
+      alert(isWishlist ? "Removed from wishlist" : "Added to wishlist");
+    } catch (error) {
+      console.error("Wishlist operation failed:", error.response?.data?.message || error.message);
+      alert("Failed to update wishlist.");
+    }
+  };
 
 
-
+  console.log(props.product._id);
+  console.log(userid);
+  
+  
   return (
     <div className="flex flex-col w-full items-center gap-2">
       <div
         style={cardStyle}
-        className="group relative w-full h-80 rounded-lg flex flex-col justify-end items-start  overflow-hidden cursor-pointer"
+        className="group relative w-full h-80 rounded-lg flex flex-col justify-end items-start overflow-hidden cursor-pointer"
       >
         {/* Text Section */}
         <div className="absolute text-center justify-center w-full z-10 bottom-4 left-0 flex flex-col gap-1 transition-all duration-300 ">
@@ -94,7 +134,7 @@ const handleAddToCart = async () => {
           {/* Wishlist Button */}
           <button
             className="flex items-center justify-center text-white"
-            onClick={() => setIsWishlist(!isWishlist)}
+            onClick={handleAddWishlist}
             title={`${isWishlist ? "Remove from Wishlist" : "Add to Wishlist"}`}
           >
             <Heart

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import video from '../../../assets/background-video-header.mp4'; // Update with your video path
-
+ 
 const Homepage = () => {
   return (
     <>
