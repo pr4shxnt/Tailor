@@ -1,16 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Heart, ShoppingBasketIcon } from "lucide-react";
 import LoginModel from "../Log-in/LoginModel";
 import { AuthContext } from "../Log-in/AuthProvider";
+import { WLContext } from "../Wishlist/WishlistContext"; // Import WLContext
 import axios from "axios"; // Import axios
 
 const Cards = (props) => {
   const { isUserAuthenticated } = useContext(AuthContext);
+  const { checkProductWishList, setIsWishListed, isWishListed, setWishList } = useContext(WLContext); // Destructure from WLContext
   const [loginModelShow, setLoginModelShow] = useState(false);
-  const [isWishlist, setIsWishlist] = useState(false); // Track wishlist state
   const [loading, setLoading] = useState(false); // Track loading state
-  const user = localStorage.getItem("user"); // Get userid from localStorage
+  const user = localStorage.getItem("user"); // Get user id from localStorage
   const gradient = "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%)";
 
   const cardStyle = {
@@ -19,10 +20,8 @@ const Cards = (props) => {
     backgroundPosition: "center",
   };
 
-  const parsedUser = JSON.parse(user)
-  console.log(parsedUser);
-  
-  const userid = parsedUser? parsedUser.id : null ;
+  const parsedUser = JSON.parse(user);
+  const userid = parsedUser ? parsedUser.id : null;
 
   const sessionid = sessionStorage.getItem("sessionid");
 
@@ -66,29 +65,82 @@ const Cards = (props) => {
         return; // Early exit if not authenticated and no session token
       }
 
-      // Prepare the request headers with the token
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`, // Attach token to Authorization header
-        },
-      };
-
-      // Make the request with the token in the header
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
-        { productId: props.product._id, userId: userid },
-        config
-      );
-
-      setIsWishlist(true); // Toggle wishlist state
-      alert(isWishlist ? "Removed from wishlist" : "Added to wishlist");
+      // Check if product is already in wishlist
+      const exists = await checkProductWishList(props.product._id);
+      console.log(exists);
+      
+      addToWishList()
+      if (exists) {
+        setIsWishListed(true)
+      }
     } catch (error) {
       console.error("Wishlist operation failed:", error.response?.data?.message || error.message);
       alert("Failed to update wishlist.");
     }
   };
 
+  console.log(isWishListed);
   
+  // Function to remove from wishlist
+  const removeFromWishList = async () => {
+    try {
+      const token = sessionStorage.getItem("sessionid");
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/wishlist/remove`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          data: {
+            userId: userid,
+            productId: props.product._id,
+          },
+        }
+      );
+
+      console.log("Removed from wishlist:", response.data);
+      setWishList(wishList.filter(item => item.productId !== props.product._id));
+      alert("Removed from wishlist");
+    } catch (error) {
+      console.error("Error removing from wishlist:", error.message);
+    }
+  };
+
+  // Function to add to wishlist
+  const addToWishList = async () => {
+    try {
+      const token = sessionStorage.getItem("sessionid");
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
+        {
+          userId: userid,
+          productId: props.product._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Added to wishlist:", response.data);
+      setWishList([...wishList, { productId: props.product._id }]); // Update local wishlist state
+      alert("Added to wishlist");
+    } catch (error) {
+      console.error("Error adding to wishlist:", error.message);
+    }
+  };
+
+  // Check if product is in wishlist when the component mounts
+  useEffect(() => {
+    const checkWishlistStatus = async () => {
+      const exists = await checkProductWishList(props.product._id);
+      setIsWishListed(exists);
+    };
+
+    if (userid) checkWishlistStatus();
+  }, [userid, props.product._id, checkProductWishList, setIsWishListed]);
+
   return (
     <div className="flex flex-col w-full items-center gap-2">
       <div
@@ -96,7 +148,7 @@ const Cards = (props) => {
         className="group relative w-full h-80 rounded-lg flex flex-col justify-end items-start overflow-hidden cursor-pointer"
       >
         {/* Text Section */}
-        <div className="absolute text-center justify-center w-full z-10 bottom-4 left-0 flex flex-col gap-1 transition-all duration-300 ">
+        <div className="absolute text-center justify-center w-full z-10 bottom-4 left-0 flex flex-col gap-1 transition-all duration-300">
           <h1 className="text-lg md:text-lg text-white font-bold hover:text-gray-200">
             {props.product.name}
           </h1>
@@ -131,11 +183,11 @@ const Cards = (props) => {
           <button
             className="flex items-center justify-center text-white"
             onClick={handleAddWishlist}
-            title={`${isWishlist ? "Remove from Wishlist" : "Add to Wishlist"}`}
+            title={`${isWishListed ? "Remove from Wishlist" : "Add to Wishlist"}`}
           >
             <Heart
-              className={`${isWishlist ? "text-red-500 scale-105" : "text-white hover:text-red-500 duration-"} duration-700`}
-              fill={isWishlist ? "currentColor" : "none"} // Fill when active
+              className={`${isWishListed ? "text-red-500 scale-105" : "text-white hover:text-red-500 duration-"} duration-700`}
+              fill={isWishListed ? "currentColor" : "none"} // Fill when active
               size={28}
             />
           </button>

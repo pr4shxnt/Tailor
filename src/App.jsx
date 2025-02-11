@@ -17,6 +17,7 @@ import AdminHandling from "./admin/admin panel/AdminManager";
 import ProductsCRUD from "./admin/Products/ProductsCRUD";
 import Register from "./Components/Log-in/UserRegister";
 import ProductsDetails from "./Components/ProductBox/ProductsDetails";
+import WishListProvider from "./Components/Wishlist/WishlistContext";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,9 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <AuthProvider>
+      <WishListProvider>
       <RouterProvider router={router} />
+      </WishListProvider>
     </AuthProvider>
   );
 }
