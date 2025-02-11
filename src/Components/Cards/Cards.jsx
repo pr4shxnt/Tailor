@@ -22,7 +22,7 @@ const Cards = (props) => {
   const parsedUser = JSON.parse(user)
   console.log(parsedUser);
   
-  const userid = parsedUser.id
+  const userid = parsedUser? parsedUser.id : null ;
 
   const sessionid = sessionStorage.getItem("sessionid");
 
@@ -88,10 +88,6 @@ const Cards = (props) => {
     }
   };
 
-
-  console.log(props.product._id);
-  console.log(userid);
-  
   
   return (
     <div className="flex flex-col w-full items-center gap-2">
