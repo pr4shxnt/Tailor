@@ -29,7 +29,7 @@ const Cards = (props) => {
   // Axios request for adding to cart
   const handleAddToCart = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
+      const token = sessionStorage.getItem("sessionid");
       if (!isUserAuthenticated && !token) {
         setLoginModelShow(true);
         return; // Early exit if not authenticated and no session token
@@ -38,11 +38,11 @@ const Cards = (props) => {
       // Prepare the request headers with the token
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`, // Attach token to Authorization header
+          Authorization: `Bearer ${token}`,
         },
       };
 
-      // Make the request with the token in the header
+      
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
         { productId: props.product._id, quantity: 1, userId: userid },
@@ -60,24 +60,24 @@ const Cards = (props) => {
   // Axios request for adding/removing from wishlist
   const handleAddWishlist = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
+      const token = sessionStorage.getItem("sessionid"); 
       if (!isUserAuthenticated && !token) {
         setLoginModelShow(true);
-        return; // Early exit if not authenticated and no session token
+        return;
       }
 
-      // Check if product is already in wishlist
+      
       const exists = await checkProductWishList(props.product._id);
       if (exists) {
         setIsWishListed(true); // If already in wishlist, mark as wished
-        await removeFromWishList(); // Remove from wishlist
+        await removeFromWishList(); 
       } else {
         setIsWishListed(false); // If not in wishlist, mark as not wished
-        await addToWishList(); // Add to wishlist
+        await addToWishList(); 
       }
 
-      // Re-fetch the updated wishlist
-      getWishList();
+    
+      getWishList();  // Re-fetch the updated wishlist
     } catch (error) {
       console.error("Wishlist operation failed:", error.response?.data?.message || error.message);
       alert("Failed to update wishlist.");
