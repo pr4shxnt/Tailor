@@ -18,6 +18,7 @@ import ProductsCRUD from "./admin/Products/ProductsCRUD";
 import Register from "./Components/Log-in/UserRegister";
 import ProductsDetails from "./Components/ProductBox/ProductsDetails";
 import WishListProvider from "./Components/Wishlist/WishlistContext";
+import WishListContainer from "./Components/Wishlist/WishListContainer";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: "/crud2", element: <ProductsCRUD /> },
       { path: "/crud3", element: <AdminHandling /> },
       { path: "/product/:id", element: <ProductsDetails /> },
+      {path: "/test" , element : <WishListContainer/>}
     ],
   },
   {

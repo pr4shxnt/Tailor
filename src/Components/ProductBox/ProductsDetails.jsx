@@ -1,42 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Heart, ShoppingCart, Star, Truck, Shield, ArrowLeft, ArrowRight } from 'lucide-react';
 import axios from 'axios';
 import ItemsCounter from '../ProductDetails/ItemsCounter';
 import LoginModel from '../Log-in/LoginModel';
 import { AuthContext } from '../Log-in/AuthProvider';
-import { useContext } from 'react';
+import { WLContext } from '../Wishlist/WishlistContext';
 
 function ProductsDetails() {
   const { id } = useParams();
-  const { isUserAuthenticated } = useContext(AuthContext); 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [product, setProduct] = useState(null); // Product state to hold fetched data
-  const [quantity, setQuantity] = useState(1)
-  const [loginModelShow, setLoginModelShow] = useState(false)
-  const [token, setToken] = useState("")
-  const userid = localStorage.getItem("userid")
+  const { addToWishList, removeFromWishList, getWishList, checkProductWishList } = useContext(WLContext);
+  const { isUserAuthenticated } = useContext(AuthContext);
 
+  const [product, setProduct] = useState(null);
+  const [isWishListed, setIsWishListed] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [loginModelShow, setLoginModelShow] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0); // ✅ Moved hook to top level
 
-
-  const sessionid = sessionStorage.getItem("sessionid");
-  // Map image paths to full URLs
-  const images = product?.images?.map((image) => `${import.meta.env.VITE_IMAGES}/${image}`) || [];
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
+  const token = sessionStorage.getItem("sessionid");
+  const userid = localStorage.getItem("userid");
 
   useEffect(() => {
-    // Fetch product details based on id
     const fetchProductDetails = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/products/${id}`);
-        setProduct(response.data); // Store product data
+        setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product data:', error);
       }
@@ -47,78 +36,86 @@ function ProductsDetails() {
     }
   }, [id]);
 
+  useEffect(() => {
+    const checkWishlistStatus = async () => {
+      if (product) {
+        const exists = await checkProductWishList(product._id);
+        setIsWishListed(exists);
+      }
+    };
+
+    checkWishlistStatus(); // ✅ Always call this useEffect when product changes
+  }, [product]);
+
   if (!product) {
-    return <div>Loading...</div>; // Show a loading state while the product is being fetched
+    return <div>Loading...</div>;
   }
 
-  console.log(quantity);
-  
-  const handleAddToCart = async () => {
+  const images = product?.images?.map((image) => `${import.meta.env.VITE_IMAGES}/${image}`) || [];
+
+  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+
+  const handleAddWishlist = async () => {
+    if (!isUserAuthenticated && !token) {
+      setLoginModelShow(true);
+      return;
+    }
+
     try {
-        const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
-        if (!isUserAuthenticated && !token) {
-          setLoginModelShow(true)
-        }
-  
-  
-        // Prepare the request headers with the token
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,  // Attach token to Authorization header
-            },
-        };
-  
-        // Make the request with the token in the header
-        const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
-            { productId: product._id, quantity: quantity, userId: userid },
-            config
-        );
-  
-        console.log("Item added to cart:", response.data);
+      if (isWishListed) {
+        await removeFromWishList(product._id);
+      } else {
+        await addToWishList(product._id);
+      }
+      setIsWishListed(!isWishListed);
+      getWishList();
     } catch (error) {
-        console.error("Failed to add to cart:", error.response?.data?.message || error.message);
+      console.error("Wishlist operation failed:", error.response?.data?.message || error.message);
     }
   };
-  
 
-  console.log(product.name);
-  
+  const handleAddToCart = async () => {
+    if (!isUserAuthenticated && !token) {
+      setLoginModelShow(true);
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
+        { productId: product._id, quantity, userId: userid },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+    } catch (error) {
+      console.error("Failed to add to cart:", error.response?.data?.message || error.message);
+    }
+  };
 
   return (
     <div className="min-h-screen pt-16 text-black">
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-          {/* Image gallery */}
+          
+          {/* Image Gallery */}
           <div className="relative h-[500px]">
-            <div className="relative w-full h-full  rounded-lg overflow-hidden">
-              <img
-                src={images[currentImageIndex]}
-                alt="Product"
-                className="w-full h-full object-contain object-center"
-              />
-              <button
-                onClick={prevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 hover:bg-white"
-              >
+            <div className="relative w-full h-full rounded-lg overflow-hidden">
+              <img src={images[currentImageIndex]} alt="Product" className="w-full h-full object-contain" />
+              <button onClick={prevImage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 hover:bg-white">
                 <ArrowLeft className="w-5 h-5" />
               </button>
-
-              <button
-                onClick={nextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 hover:bg-white"
-              >
+              <button onClick={nextImage} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 hover:bg-white">
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          {/* Product info */}
+          {/* Product Info */}
           <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
             <div className="flex justify-between items-center">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900">{product.name}</h1>
-              <button className="p-2 hover:bg-gray-100 rounded-full">
-                <Heart className="w-6 h-6" />
+              <button onClick={handleAddWishlist} title={isWishListed ? "Remove from Wishlist" : "Add to Wishlist"}>
+                <Heart className={`duration-700 ${isWishListed ? "text-red-500 scale-105" : "text-black hover:text-red-500"} `} fill={isWishListed ? "currentColor " : "none"} size={28} />
               </button>
             </div>
 
@@ -138,58 +135,34 @@ function ProductsDetails() {
               <p className="mt-1 text-sm text-gray-500">Free shipping on orders over $100</p>
             </div>
 
-            {/* Size selector */}
+            {/* Quantity & Size */}
+            <div className="flex items-center h-28 gap-4">
+              <ItemsCounter quantity={quantity} setQuantity={setQuantity} />
+              <div className="flex items-center mt-5 text-2xl">
+                <h3 className="font-medium text-gray-900">Size:&nbsp;</h3>
+                <div>{product.size}</div>
+              </div>
+            </div>
+
+            {/* Add to Cart */}
+            <button onClick={handleAddToCart} className="w-full bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 flex items-center justify-center gap-2">
+              <ShoppingCart className="w-5 h-5" />
+              Add to Cart
+            </button>
+
+            <div className="mt-8 border-t border-gray-200 pt-8 text-gray-500">{product.description}</div>
             
-
-<div className="flex items-center h-28 gap-4">
-  <div className="">
-    <ItemsCounter quantity={quantity} setQuantity={setQuantity}/>
-  </div>
-  <div className="flex items-center mt-5 select-none  text-2xl ">
-              <h3 className=" font-medium   text-gray-900">Size:&nbsp; </h3>
-              <div className="   gap-2">
-              {product.size}
-              </div>
-            </div>
-</div>
-            {/* Add to cart */}
-            <div className="mt-8">
-            <div
-            className="text-white hover:text-gray-400 duration-500"
-            title="Add to cart"
-            onClick={handleAddToCart}
-            
-          >
-            <button className="w-full bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 flex items-center justify-center gap-2">
-                <ShoppingCart className="w-5 h-5" />
-                Add to Cart
-              </button>
-          </div>
-            </div>
-
-            {/* Features */}
-            <div className="mt-8 border-t border-gray-200 pt-8">
-              <div className="prose prose-sm text-gray-500">
-                <p>{product.description}</p>
-              </div>
-            </div>
-
-            {/* Shipping and returns */}
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-gray-400" />
-                <span className="text-sm text-gray-500">Free shipping</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-gray-400" />
-                <span className="text-sm text-gray-500">30-day returns</span>
-              </div>
+            {/* Shipping & Returns */}
+            <div className="mt-8 flex gap-4">
+              <div className="flex items-center gap-2"><Truck className="w-5 h-5 text-gray-400" /><span className="text-sm">Free shipping</span></div>
+              <div className="flex items-center gap-2"><Shield className="w-5 h-5 text-gray-400" /><span className="text-sm">30-day returns</span></div>
             </div>
           </div>
+
+          
         </div>
       </div>
-      {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} LoginModel={loginModelShow} />}
-      
+      {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} />}
     </div>
   );
 }
