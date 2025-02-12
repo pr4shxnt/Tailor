@@ -8,12 +8,11 @@ import axios from "axios"; // Import axios
 
 const Cards = (props) => {
   const { isUserAuthenticated } = useContext(AuthContext);
-  const { checkProductWishList, getWishList, setWishList, wishList } = useContext(WLContext); // Destructure from WLContext
+  const { checkProductWishList, setIsWishListed, isWishListed, setWishList } = useContext(WLContext); // Destructure from WLContext
   const [loginModelShow, setLoginModelShow] = useState(false);
-  const [isWishListed, setIsWishListed] = useState(false);
   const [loading, setLoading] = useState(false); // Track loading state
   const user = localStorage.getItem("user"); // Get user id from localStorage
-  const gradient = "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%)";
+  const gradient = "line ar-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%)";
 
   const cardStyle = {
     backgroundImage: `${gradient}, url(${import.meta.env.VITE_IMAGES}/${props.product.images[0]})`,
@@ -29,7 +28,7 @@ const Cards = (props) => {
   // Axios request for adding to cart
   const handleAddToCart = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid");
+      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
       if (!isUserAuthenticated && !token) {
         setLoginModelShow(true);
         return; // Early exit if not authenticated and no session token
@@ -38,7 +37,7 @@ const Cards = (props) => {
       // Prepare the request headers with the token
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Attach token to Authorization header
         },
       };
 
@@ -60,30 +59,28 @@ const Cards = (props) => {
   // Axios request for adding/removing from wishlist
   const handleAddWishlist = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid"); 
+      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
       if (!isUserAuthenticated && !token) {
         setLoginModelShow(true);
-        return;
+        return; // Early exit if not authenticated and no session token
       }
 
-      
+      // Check if product is already in wishlist
       const exists = await checkProductWishList(props.product._id);
+      console.log(exists);
+      
+      addToWishList()
       if (exists) {
-        setIsWishListed(true); // If already in wishlist, mark as wished
-        await removeFromWishList(); 
-      } else {
-        setIsWishListed(false); // If not in wishlist, mark as not wished
-        await addToWishList(); 
+        setIsWishListed(true)
       }
-
-    
-      getWishList();  // Re-fetch the updated wishlist
     } catch (error) {
       console.error("Wishlist operation failed:", error.response?.data?.message || error.message);
       alert("Failed to update wishlist.");
     }
   };
 
+  console.log(isWishListed);
+  
   // Function to remove from wishlist
   const removeFromWishList = async () => {
     try {
@@ -101,8 +98,9 @@ const Cards = (props) => {
         }
       );
 
-      alert("Removed from wishlist:", response.data);
-      
+      console.log("Removed from wishlist:", response.data);
+      setWishList(wishList.filter(item => item.productId !== props.product._id));
+      alert("Removed from wishlist");
     } catch (error) {
       console.error("Error removing from wishlist:", error.message);
     }
@@ -125,9 +123,9 @@ const Cards = (props) => {
         }
       );
 
-      alert("Added to wishlist:", response.data);
-      
-      
+      console.log("Added to wishlist:", response.data);
+      setWishList([...wishList, { productId: props.product._id }]); // Update local wishlist state
+      alert("Added to wishlist");
     } catch (error) {
       console.error("Error adding to wishlist:", error.message);
     }
@@ -137,11 +135,11 @@ const Cards = (props) => {
   useEffect(() => {
     const checkWishlistStatus = async () => {
       const exists = await checkProductWishList(props.product._id);
-      setIsWishListed(exists); // Update wishlist status on mount
+      setIsWishListed(exists);
     };
 
     if (userid) checkWishlistStatus();
-  }, [userid, props.product._id, checkProductWishList]);
+  }, [userid, props.product._id, checkProductWishList, setIsWishListed]);
 
   return (
     <div className="flex flex-col w-full items-center gap-2">
