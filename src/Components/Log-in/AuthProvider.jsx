@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 
 // Creating the Auth Context
@@ -7,30 +8,39 @@ const AuthProvider = ({ children }) => {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(undefined);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
+  const [userData, setUserData] = useState([])
+
+  const getUserDetailsById = async ()=>{
+    if (!user) return;
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${user}`);
+        setUserData(response.data );
+    } catch (error) {
+        console.error("Error fetching wishlist:", error);
+    }
+  }
+
+  useEffect(() => {
+    getUserDetailsById()
+  }, [])
+  
+  
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    setUser(storedUser)
 
 
     // Check if user data exists in localStorage
     if (storedUser) {
-      try {
-        // Parse the user object from localStorage
-        const parsedUser = JSON.parse(storedUser);
-        console.log("Parsed user:", parsedUser);
-
-        setIsUserAuthenticated(true);
-        setUser(parsedUser); // Store user data in state
-      } catch (error) {
-        console.error("Invalid user data in localStorage", error);
-      }
+     return
     } else {
       setIsUserAuthenticated(false);
     }
   }, []); // Empty dependency array ensures it runs only once on mount
 
   return (
-    <AuthContext.Provider value={{ isUserAuthenticated, user, loading, setIsUserAuthenticated, setUser, setLoading }}>
+    <AuthContext.Provider value={{ isUserAuthenticated, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData}}>
       {children}
     </AuthContext.Provider>
   );

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
-  const { setUser,isUserAuthenticated, setIsUserAuthenticated, setLoading } = useContext(AuthContext);
+  const { setUser, user, isUserAuthenticated, setIsUserAuthenticated, setLoading, userData,  setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
 
@@ -13,6 +13,25 @@ const useAuth = () => {
   if(!isUserAuthenticated){
     setLoading(false)
   }
+
+  const getUserDetailsById = async () => {
+    if (!user) return;
+    
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${user}`);
+      setUserData(response.data);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+  
+  useEffect(() => {
+    getUserDetailsById();
+  }, [user]); // Fetch when user changes
+  
+
+  console.log(userData);
+  
 
   useEffect(() => {
     const savedToken = sessionStorage.getItem("sessionid");
@@ -56,7 +75,7 @@ const useAuth = () => {
 
         // Store token in sessionStorage and user data in localStorage
         sessionStorage.setItem("sessionid", userToken);
-        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("user", userData.id);
         setToken(userToken);
         setUser(userData);
         setIsUserAuthenticated(true);

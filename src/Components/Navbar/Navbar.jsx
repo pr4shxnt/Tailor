@@ -7,14 +7,15 @@ import { AuthContext } from '../Log-in/AuthProvider'
 import useAuth from '../../hooks/useAuth'
 import axios from 'axios'
 
+
 const Navbar = () => {
-    const { isUserAuthenticated } = useContext(AuthContext);
+    const { isUserAuthenticated, userData } = useContext(AuthContext);
     const { logout } = useAuth();
 
+    console.log(userData);
+    
     const [visible, setVisible] = useState(false)
 
-    const user = localStorage.getItem('user');
-    const parsedUser = JSON.parse(user);
      
 
 
@@ -103,7 +104,7 @@ const Navbar = () => {
 
                 {
                     isUserAuthenticated ? <div className="group hidden md:block relative">
-                        <div className="flex items-center gap-2 py-2 border-black border rounded-full px-3"> <img src={assets.profile_icon} alt="" className="w-5 cursor-pointer" /> <h1> {parsedUser.name}</h1> </div>
+                        <div className="flex items-center gap-2 py-2 border-black border rounded-full px-3"> <img src={assets.profile_icon} alt="" className="w-5 cursor-pointer" /> <h1> {userData.name}</h1> </div>
 
                         <div className="group-hover:block hidden absolute dropdown-menu z-[999] right-0 pt-4">
                             <div className="flec flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">

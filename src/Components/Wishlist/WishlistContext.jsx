@@ -8,13 +8,11 @@ const WishListProvider = ({ children }) => {
     const [wishList, setWishList] = useState([]);
 
     const user = localStorage.getItem('user');
-    const parsedUser = user ? JSON.parse(user) : null;
-    const userId = parsedUser ? parsedUser.id : null;
 
     const getWishList = async () => {
-        if (!userId) return;
+        if (!user) return;
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/wishlist/${userId}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/wishlist/${user}`);
             setWishList(response.data.items || []);
         } catch (error) {
             console.error("Error fetching wishlist:", error);
@@ -23,14 +21,14 @@ const WishListProvider = ({ children }) => {
 
     useEffect(() => {
         getWishList();
-    }, [userId]);
+    }, [user]);
 
     // ✅ Function to check if a product is in wishlist
     const checkProductWishList = async (productId) => {
-      if (!userId) return false; // Ensure user is logged in
+      if (!user) return false; // Ensure user is logged in
   
       try {
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/wishlist/check/${userId}/${productId}`);
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/wishlist/check/${user}/${productId}`);
           return response.data.exists; // Returns true or false
       } catch (error) {
           console.error("Error checking wishlist:", error);
@@ -45,7 +43,7 @@ const WishListProvider = ({ children }) => {
                 `${import.meta.env.VITE_BACKEND_URL}/wishlist/remove`,
                 {
                     headers: { Authorization: `Bearer ${token}` },
-                    data: { userId, productId },
+                    data: { user, productId },
                 }
             );
 
@@ -62,7 +60,7 @@ const WishListProvider = ({ children }) => {
             const token = sessionStorage.getItem("sessionid");
             await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
-                { userId, productId },
+                { user, productId },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 

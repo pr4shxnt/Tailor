@@ -23,9 +23,6 @@ const Cards = (props) => {
 
   
 
-  const parsedUser = JSON.parse(user);
-  const userid = parsedUser ? parsedUser.id : null;
-
   const sessionid = sessionStorage.getItem("sessionid");
 
   // Axios request for adding to cart
@@ -47,9 +44,10 @@ const Cards = (props) => {
       // Make the request with the token in the header
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
-        { productId: props.product._id, quantity: 1, userId: userid },
+        { productId: props.product._id, quantity: 1, userId: user },
         config
       );
+
 
       console.log("Item added to cart:", response.data);
       alert("Item added to cart!");
@@ -97,7 +95,7 @@ const Cards = (props) => {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            userId: userid,
+            userId: user,
             productId: props.product._id,
           },
         }
@@ -117,7 +115,7 @@ const Cards = (props) => {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
         {
-          userId: userid,
+          userId: user,
           productId: props.product._id,
         },
         {
@@ -142,8 +140,8 @@ const Cards = (props) => {
       setIsWishListed(exists); // Update wishlist status on mount
     };
 
-    if (userid) checkWishlistStatus();
-  }, [userid, props.product._id, checkProductWishList]);
+    if (user) checkWishlistStatus();
+  }, [user, props.product._id, checkProductWishList]);
 
   return (
     <div className="flex flex-col w-full items-center gap-2">
