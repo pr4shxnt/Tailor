@@ -103,11 +103,11 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
 
                 {
-                    isUserAuthenticated ? <div className="group hidden md:block relative">
-                        <div className="flex items-center gap-2 py-2 border-black border rounded-full px-3"> <img src={assets.profile_icon} alt="" className="w-5 cursor-pointer" /> <h1> {userData.name}</h1> </div>
+                    isUserAuthenticated ? <div className="group  relative">
+                        <div className="flex items-center gap-2 py-2 border-black border rounded-full px-3"> <img src={assets.profile_icon} alt="" className="w-5 cursor-pointer" /> <h1 className='hidden md:block'> {userData.name}</h1> </div>
 
                         <div className="group-hover:block hidden absolute dropdown-menu z-[999] right-0 pt-4">
-                            <div className="flec flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
+                            <div className="flex z-[2000] flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
                                 <p className="cursor-pointer hover:text-black">My Profile</p>
                                 <p className="cursor-pointer hover:text-black">Orders</p>
                                 <p onClick={logout} className="cursor-pointer hover:text-black">Logout</p>

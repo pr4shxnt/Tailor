@@ -10,19 +10,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [userData, setUserData] = useState([])
 
-  const getUserDetailsById = async ()=>{
-    if (!user) return;
-    try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${user}`);
-        setUserData(response.data );
-    } catch (error) {
-        console.error("Error fetching wishlist:", error);
-    }
-  }
-
-  useEffect(() => {
-    getUserDetailsById()
-  }, [])
+  
   
   
 
