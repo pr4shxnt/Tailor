@@ -125,6 +125,8 @@ const ProductPage = ({
         {filteredFinalProducts.length > 0 ? (
           filteredFinalProducts.map((product, index) => (
             <div className="w-full">
+              {console.log(product)
+              }
             <Cards key={index} product={product} /></div>
           ))
         ) : (

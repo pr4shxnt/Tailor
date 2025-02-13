@@ -7,15 +7,21 @@ const WishListContainer = () => {
     console.log(wishList);
 
     return (
-        <div>
+        <div className='pt-16'>
+            <h1 className='text-5xl font-semibold '>Your WishList</h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
             {wishList?.length > 0 ? (
+               
                 wishList.map((item) => (
-                    <Cards key={item.productId._id} products={item.productId} />
+                    <div className="">{console.log(item.productId)
+                    }<Cards key={item.productId._id} product={item.productId} /></div>
+                    
+
                 ))
             ) : (
                 <p>No items in wishlist</p>
             )}
-        </div>
+        </div></div>
     );
 };
 

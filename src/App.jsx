@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       { path: "/crud2", element: <ProductsCRUD /> },
       { path: "/crud3", element: <AdminHandling /> },
       { path: "/product/:id", element: <ProductsDetails /> },
-      {path: "/test" , element : <WishListContainer/>}
+      {path: "/wishlist" , element : <WishListContainer/>}
     ],
   },
   {

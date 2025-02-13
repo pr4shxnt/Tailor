@@ -16,10 +16,12 @@ function ProductsDetails() {
   const [isWishListed, setIsWishListed] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [loginModelShow, setLoginModelShow] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0); // ✅ Moved hook to top level
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const token = sessionStorage.getItem("sessionid");
   const userid = localStorage.getItem("userid");
+
+
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -30,38 +32,26 @@ function ProductsDetails() {
         console.error('Error fetching product data:', error);
       }
     };
-
-    if (id) {
-      fetchProductDetails();
-    }
+    if (id) fetchProductDetails();
   }, [id]);
 
   useEffect(() => {
-    const checkWishlistStatus = async () => {
-      if (product) {
+    if (product) {
+      (async () => {
         const exists = await checkProductWishList(product._id);
         setIsWishListed(exists);
-      }
-    };
-
-    checkWishlistStatus(); // ✅ Always call this useEffect when product changes
+      })();
+    }
   }, [product]);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  if (!product) return <div>Loading...</div>;
 
-  const images = product?.images?.map((image) => `${import.meta.env.VITE_IMAGES}/${image}`) || [];
-
-  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
   const handleAddWishlist = async () => {
     if (!isUserAuthenticated && !token) {
       setLoginModelShow(true);
       return;
     }
-
     try {
       if (isWishListed) {
         await removeFromWishList(product._id);
@@ -71,7 +61,7 @@ function ProductsDetails() {
       setIsWishListed(!isWishListed);
       getWishList();
     } catch (error) {
-      console.error("Wishlist operation failed:", error.response?.data?.message || error.message);
+      console.error("Wishlist operation failed:", error);
     }
   };
 
@@ -80,7 +70,6 @@ function ProductsDetails() {
       setLoginModelShow(true);
       return;
     }
-
     try {
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/cart/add`,
@@ -88,9 +77,16 @@ function ProductsDetails() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
     } catch (error) {
-      console.error("Failed to add to cart:", error.response?.data?.message || error.message);
+      console.error("Failed to add to cart:", error);
     }
   };
+
+
+  const images = product?.images?.map((image) => `${import.meta.env.VITE_IMAGES}/${image}`) || [];
+
+  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+
 
   return (
     <div className="min-h-screen pt-16 text-black">
