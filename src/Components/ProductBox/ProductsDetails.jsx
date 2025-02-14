@@ -6,6 +6,7 @@ import ItemsCounter from '../ProductDetails/ItemsCounter';
 import LoginModel from '../Log-in/LoginModel';
 import { AuthContext } from '../Log-in/AuthProvider';
 import { WLContext } from '../Wishlist/WishlistContext';
+import ProductReview from './ProductReview';
 
 function ProductsDetails() {
   const { id } = useParams();
@@ -157,6 +158,7 @@ function ProductsDetails() {
 
           
         </div>
+        <ProductReview/>
       </div>
       {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} />}
     </div>
