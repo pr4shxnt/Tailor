@@ -1,11 +1,113 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { Star } from "lucide-react";
+import axios from "axios";
 
-const ProductReview = () => {
+const ProductReview = ({ productId, token }) => {
+  const [review, setReview] = useState("");
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [reviews, setReviews] = useState([]);
+
+
+  const user = localStorage.getItem('user')
+
+  useEffect(() => {
+    fetchReviews();
+  }, [productId]);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/review/${productId}`);
+      setReviews(response.data.reviews);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!token) {
+      alert("Please log in to submit a review");
+      return;
+    }
+    if (review.trim() === "" || rating === 0) {
+      alert("Please enter a review and select a rating before submitting.");
+      return;
+    }
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/review`, {
+        product: productId,
+        user: user, // Replace with actual user ID from token
+        rating,
+        comment: review,
+        token,
+      });
+      fetchReviews(); // Refresh reviews
+      setReview("");
+      setRating(0);
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
+
   return (
-    <div>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex numquam, quaerat sunt laudantium molestiae voluptas molestias id laboriosam odit veritatis quos beatae harum, neque libero, aut similique. Amet rerum, unde corrupti esse debitis placeat aspernatur maiores, cum, expedita perspiciatis tenetur fugit officia repellendus eveniet labore dicta culpa porro? Incidunt, quod quam id voluptatibus sit harum enim, temporibus vitae corrupti error animi eum! Consequatur fugiat nihil doloribus dolore, magni laboriosam perspiciatis dicta laudantium corrupti totam voluptates delectus distinctio quae, voluptas obcaecati incidunt. Molestiae a consequatur dolore obcaecati laudantium optio autem unde totam nam voluptas pariatur amet impedit sit esse perspiciatis itaque corporis, hic, recusandae repudiandae dignissimos blanditiis distinctio illo. Exercitationem ea cumque, suscipit porro libero veniam! Adipisci repellendus minima iste minus quibusdam magnam, deleniti in! Est a laboriosam error hic quia dolor modi, quaerat aut voluptate optio sequi asperiores libero laudantium earum fuga ex! Cum corporis sapiente dignissimos necessitatibus tenetur laborum, recusandae dolor omnis, earum accusamus provident totam adipisci. Possimus reiciendis amet quibusdam quod molestiae ipsam iusto deleniti magnam veritatis velit modi, asperiores explicabo sapiente minus recusandae consectetur impedit animi cum, adipisci expedita deserunt voluptatem? Consectetur maiores distinctio vitae debitis qui itaque, quo, pariatur expedita totam aut ipsa, numquam odit quasi. Itaque, assumenda dignissimos excepturi sequi minima aliquid iste et corporis, beatae quos perspiciatis est quis aperiam ea ut pariatur. Aperiam quidem minima ab deleniti eos explicabo doloremque earum incidunt iste omnis dolore recusandae dolorem nemo praesentium fugit debitis molestiae, unde facere aliquam cum molestias iusto? Quibusdam illo dolores, perspiciatis odio dicta expedita neque corrupti modi ratione sed, architecto dolorum recusandae totam voluptas officiis ullam soluta amet eius voluptates esse. Consectetur labore nobis rem maiores! Rem minima beatae, dolor magnam porro temporibus aliquid consequuntur fugit nisi minus dolorem cupiditate eligendi voluptatem quibusdam aut ipsum, blanditiis cum adipisci enim quisquam hic fugiat debitis repudiandae? Aspernatur nulla, voluptatem autem explicabo fugit commodi eius dolorum architecto iure, odio quasi! Cupiditate, modi, atque rerum quis neque, facere optio tempore ea dolores labore corporis aperiam voluptatibus velit fugiat magnam rem culpa accusantium soluta earum? Possimus qui maiores at soluta aspernatur nesciunt nisi praesentium inventore dolorem aliquam, voluptatum nam excepturi quas hic distinctio tempore quis ut eius et aperiam, quasi repellendus? Voluptas porro numquam amet. Natus aliquam provident expedita. Perferendis numquam quas, modi cupiditate sed doloribus culpa aut adipisci earum recusandae deleniti voluptatem harum magni sequi natus tempore saepe ipsam, commodi excepturi nemo vero et perspiciatis incidunt maxime. Dolorem commodi sequi voluptas, dicta eos quo reiciendis blanditiis natus recusandae tempora quis modi voluptates vitae maiores ipsum qui praesentium culpa quisquam nisi quasi enim corrupti quibusdam nesciunt necessitatibus! Pariatur dolore totam ratione voluptatibus minus, impedit odit eos sapiente corporis perspiciatis consequatur excepturi aliquam ad provident delectus nisi aut vel. Id reprehenderit exercitationem pariatur. Deserunt illo officia quisquam! Suscipit ratione harum maxime sequi mollitia sunt ducimus soluta molestiae, eius quia iure labore inventore, similique, accusamus at? Voluptates libero illum delectus nemo beatae eligendi ab saepe officiis recusandae incidunt nihil quod labore rerum aliquid adipisci sint, officia blanditiis ea est quisquam quaerat, sequi nisi vel porro? Fugit pariatur quasi magnam iste perferendis nisi tempore consectetur, similique aspernatur, eius in culpa vero commodi dolore fugiat corrupti explicabo cumque rerum doloremque? Iusto magnam, quo nulla quas quae ab architecto. Necessitatibus, nostrum aliquid et, esse adipisci in vel delectus non provident, saepe iure! Sapiente, id! Temporibus exercitationem consequatur commodi voluptatum at officiis veritatis, pariatur, dolorum corrupti dolor eligendi laborum ipsa, quas accusantium delectus id praesentium totam sapiente aperiam repudiandae autem cumque? Ducimus error voluptate placeat ea adipisci numquam ipsum voluptatibus eveniet animi porro atque excepturi repudiandae, praesentium in! Repellat aliquid quam repudiandae, possimus accusantium est enim officiis facere libero suscipit. Voluptatibus dignissimos quaerat eligendi quas natus maxime est, quidem aspernatur provident vero voluptatum earum fugit temporibus aut repellat molestias nemo dicta ipsam error officiis placeat odit consectetur iusto. Explicabo natus unde doloremque, amet at saepe. Voluptate atque maxime eaque quisquam neque amet, voluptatibus consectetur voluptas deleniti sapiente, doloribus porro error esse! Accusantium maiores quis adipisci non tempore modi assumenda quibusdam. Quo amet nam ex soluta itaque distinctio a aliquid! Voluptates sint minus magni aliquid distinctio doloribus ab ut rerum tenetur, corrupti omnis. Impedit, enim facilis omnis nulla voluptatibus debitis eligendi aliquid laborum autem!
-    </div>
-  )
-}
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-xl">
+      <h1 className="text-2xl font-bold mb-4 text-gray-800">Review of Product</h1>
 
-export default ProductReview
+      {/* Star Rating System */}
+      <div className="flex mb-4">
+        {[...Array(5)].map((_, index) => {
+          const currentRating = index + 1;
+          return (
+            <Star
+              key={index}
+              size={30}
+              className={`cursor-pointer transition ${
+                currentRating <= (hover || rating)
+                  ? "text-yellow-500 fill-yellow-500"
+                  : "text-gray-300"
+              }`}
+              onClick={() => setRating(currentRating)}
+              onMouseEnter={() => setHover(currentRating)}
+              onMouseLeave={() => setHover(0)}
+            />
+          );
+        })}
+      </div>
+
+      {/* Review Input */}
+      <form onSubmit={handleSubmit}>
+        <textarea
+          rows={5}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Write your review here..."
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+        ></textarea>
+        <button
+          type="submit"
+          className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Submit Review
+        </button>
+      </form>
+
+      {/* Display Reviews */}
+      <div className="mt-6">
+        <h2 className="text-xl font-semibold mb-3">User Reviews:</h2>
+        {reviews.length > 0 ? (
+          reviews.map((r, index) => (
+            <div key={index} className="border-b py-3">
+              <p className="text-yellow-500">Rating: {r.rating} ⭐</p>
+              <p className="text-gray-700">{r.comment}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500">No reviews yet.</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProductReview;

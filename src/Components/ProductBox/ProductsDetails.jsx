@@ -159,7 +159,7 @@ function ProductsDetails() {
 
           
         </div>
-        <ProductReview/>
+        <ProductReview productId={product._id} token={token}/>
       </div>
       {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} />}
     </div>
