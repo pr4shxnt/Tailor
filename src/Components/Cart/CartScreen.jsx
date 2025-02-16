@@ -7,7 +7,7 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 
 const CartScreen = () => {
-  const { isUserAuthenticated, loading } = useContext(AuthContext); // Get authentication status
+  const { isUserAuthenticated, loading, fetchCart } = useContext(AuthContext); // Get authentication status
   const navigate = useNavigate();
   const [cart, setCart] = useState(null); // Store cart data
   const token = sessionStorage.getItem("sessionid"); // Get session ID from storage
@@ -54,6 +54,8 @@ const CartScreen = () => {
           .filter((item) => item.productId._id !== productId)
           .reduce((total, item) => total + item.price * item.quantity, 0),
       }));
+
+      fetchCart()
     } catch (error) {
       console.error("Error removing item:", error);
     }

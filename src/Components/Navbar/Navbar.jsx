@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 const Navbar = () => {
-    const { isUserAuthenticated, userData } = useContext(AuthContext);
+    const { isUserAuthenticated, userData, CartDataCount } = useContext(AuthContext);
     const { logout } = useAuth();
 
     const [visible, setVisible] = useState(false);
@@ -25,21 +25,7 @@ const Navbar = () => {
     }, [location]);
 
     // Fetch cart data
-    useEffect(() => {
-        const fetchCart = async () => {
-            if (!token) return;
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${token}`);
-                setCart(response.data);
-                setCartUpdated(false); // Reset after fetching latest data
-            } catch (error) {
-                console.error("Error fetching cart data:", error);
-            }
-        };
-
-        fetchCart();
-    }, [token, cartUpdated]); // Runs when session changes or cart updates
-
+ 
     // Function to trigger cart update when an item is added
     const addItemToCart = async (newItem) => {
         try {
@@ -112,7 +98,7 @@ const Navbar = () => {
                 <Link className="relative" to="/cart">
                     <img src={assets.cart_icon} className="w-5" alt="Cart" />
                     <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-                        {cart.items ? cart.items.length : "0"}
+                        {CartDataCount? CartDataCount : "0"}
                     </p>
                 </Link>
 

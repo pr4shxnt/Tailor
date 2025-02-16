@@ -11,7 +11,7 @@ import ProductReview from './ProductReview';
 function ProductsDetails() {
   const { id } = useParams();
   const { addToWishList, removeFromWishList, getWishList, checkProductWishList } = useContext(WLContext);
-  const { isUserAuthenticated } = useContext(AuthContext);
+  const { isUserAuthenticated, fetchCart } = useContext(AuthContext);
 
   const [product, setProduct] = useState(null);
   const [isWishListed, setIsWishListed] = useState(false);
@@ -77,6 +77,7 @@ function ProductsDetails() {
         { productId: product._id, quantity, userId: userid },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      fetchCart()
     } catch (error) {
       console.error("Failed to add to cart:", error);
     }

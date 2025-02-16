@@ -9,15 +9,37 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
   const [userData, setUserData] = useState([])
+  const[CartDataCount, setCartDataCount] =useState()
+  const [cartData, setCartData] = useState([])
+const token = sessionStorage.getItem("sessionid")
+ 
+    const fetchCart = async () => {
+        if (!token) return;
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${token}`);
+            setCartData(response.data);
+            setCartDataCount(response.data.items.length)
+        } catch (error) {
+            console.error("Error fetching cart data:", error);
+        }
+    };
+    useEffect(() => {
+     
+    fetchCart();
+    
+}, [token]); // Runs when session changes or cart updates
 
-  
+
+console.log(CartDataCount);
+
+
   
   
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     setUser(storedUser)
-
+    
 
     // Check if user data exists in localStorage
     if (storedUser) {
@@ -27,8 +49,9 @@ const AuthProvider = ({ children }) => {
     }
   }, []); // Empty dependency array ensures it runs only once on mount
 
+  
   return (
-    <AuthContext.Provider value={{ isUserAuthenticated, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData}}>
+    <AuthContext.Provider value={{ isUserAuthenticated, CartDataCount, fetchCart, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData}}>
       {children}
     </AuthContext.Provider>
   );

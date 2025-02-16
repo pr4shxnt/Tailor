@@ -7,7 +7,7 @@ import { WLContext } from "../Wishlist/WishlistContext"; // Import WLContext
 import axios from "axios"; // Import axios
 
 const Cards = (props) => {
-  const { isUserAuthenticated } = useContext(AuthContext);
+  const { isUserAuthenticated, fetchCart } = useContext(AuthContext);
   const { checkProductWishList, getWishList, setWishList, wishList } = useContext(WLContext); // Destructure from WLContext
   const [loginModelShow, setLoginModelShow] = useState(false);
   const [isWishListed, setIsWishListed] = useState(false);
@@ -50,6 +50,7 @@ const Cards = (props) => {
 
 
       console.log("Item added to cart:", response.data);
+      fetchCart();
       alert("Item added to cart!");
     } catch (error) {
       console.error("Failed to add to cart:", error.response?.data?.message || error.message);
