@@ -5,48 +5,44 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
-  const { setUser, user, isUserAuthenticated, setIsUserAuthenticated, setLoading, userData,  setUserData } = useContext(AuthContext);
+  const { setUser, user, isUserAuthenticated, setIsUserAuthenticated, setLoading, userData, setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
 
-
-  if(!isUserAuthenticated){
-    setLoading(false)
+  // Ensure that loading is false if not authenticated
+  if (!isUserAuthenticated) {
+    setLoading(false);
   }
 
+  // Updated: Use user.id if user is an object
   const getUserDetailsById = async () => {
     if (!user) return;
-    
+    // If user is an object, extract its id; otherwise, assume user is already an id
+    const userId = typeof user === "object" && user !== null ? user.id : user;
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${user}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
   };
-  
+
   useEffect(() => {
     getUserDetailsById();
   }, [user]); // Fetch when user changes
-  
 
   console.log(userData);
-  
 
   useEffect(() => {
     const savedToken = sessionStorage.getItem("sessionid");
     if (savedToken) {
       try {
         const decodedToken = jwtDecode(savedToken);
-
         // Check if the token has expired
         if (decodedToken.exp * 1000 < Date.now()) {
           setIsUserAuthenticated(false);
           sessionStorage.removeItem("sessionid");
-
-          // Instead of redirecting, show a session expiration message
           alert("Your session has expired. Please log in again.");
-
         } else {
           setToken(savedToken);
           setIsUserAuthenticated(true);
@@ -73,7 +69,7 @@ const useAuth = () => {
         const userData = response.data.user;
         const userToken = response.data.token;
 
-        // Store token in sessionStorage and user data in localStorage
+        // Store token in sessionStorage and user id in localStorage
         sessionStorage.setItem("sessionid", userToken);
         localStorage.setItem("user", userData.id);
         setToken(userToken);
@@ -96,9 +92,7 @@ const useAuth = () => {
     setIsUserAuthenticated(false);
     setLoading(true);
     console.log("User logged out");
-
-    // Only redirect if it's NOT a modal login
- 
+    // You can add redirection or further actions here if needed.
   };
 
   // Axios Interceptor: handles token expiration
@@ -108,8 +102,6 @@ const useAuth = () => {
       (error) => {
         if (error.response && error.response.status === 401) {
           console.log("Token expired or unauthorized");
-
-          // Instead of logging out, show an alert
           alert("Your session has expired. Please log in again.");
           logout();
         }

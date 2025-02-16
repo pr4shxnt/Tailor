@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import axios from "axios";
 
-const ProductReview = ({ productId, token }) => {
+const ProductReview = ({ productId, token, setIsModelOpen, isUserAuthenticated }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -50,11 +50,19 @@ const ProductReview = ({ productId, token }) => {
     }
   };
 
+  
+
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-xl">
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Review of Product</h1>
+    <div className="mt-10 mx-10  p-6 bg-white shadow-lg">
 
       {/* Star Rating System */}
+    
+
+      <div className="flex justify-between items-start pr-20">
+<div className="">
+
+<h1 className="text-2xl font-bold mb-4 text-gray-800">Review of Product</h1>
+
       <div className="flex mb-4">
         {[...Array(5)].map((_, index) => {
           const currentRating = index + 1;
@@ -74,7 +82,6 @@ const ProductReview = ({ productId, token }) => {
           );
         })}
       </div>
-
       {/* Review Input */}
       <form onSubmit={handleSubmit}>
         <textarea
@@ -84,6 +91,8 @@ const ProductReview = ({ productId, token }) => {
           value={review}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
+
+        
         <button
           type="submit"
           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
@@ -91,7 +100,7 @@ const ProductReview = ({ productId, token }) => {
           Submit Review
         </button>
       </form>
-
+      </div>
       {/* Display Reviews */}
       <div className="mt-6">
         <h2 className="text-xl font-semibold mb-3">User Reviews:</h2>
@@ -100,11 +109,13 @@ const ProductReview = ({ productId, token }) => {
             <div key={index} className="border-b py-3">
               <p className="text-yellow-500">Rating: {r.rating} ⭐</p>
               <p className="text-gray-700">{r.comment}</p>
+              <p className="">{r.user.name}</p>
             </div>
           ))
         ) : (
           <p className="text-gray-500">No reviews yet.</p>
         )}
+      </div>
       </div>
     </div>
   );
