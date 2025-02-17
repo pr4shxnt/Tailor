@@ -10,7 +10,7 @@ const CartScreen = () => {
   const { isUserAuthenticated } = useContext(AuthContext); // Get authentication status
   const navigate = useNavigate();
   const [cart, setCart] = useState(null); // Store cart data
-  const token = sessionStorage.getItem("sessionid"); // Get session ID from storage
+  const token = localStorage.getItem("sessionid"); // Get session ID from storage
 
   // 🛑 Redirect to login if not authenticated
   useEffect(() => {
@@ -38,6 +38,9 @@ const CartScreen = () => {
 
     fetchCart();
   }, [token]);
+
+  console.log(cart);
+  
 
   // ❌ Remove item from cart
   const removeItem = async (productId) => {

@@ -185,7 +185,16 @@ const ProductDetails = () => {
             {/* Price */}
             <div className="mt-4">
               <p className="text-3xl tracking-tight text-gray-900">${product.price}</p>
-              <p className="mt-1 text-sm text-gray-500">Free shipping on orders over $100</p>
+              <div className="mt-4 flex gap-4">
+              <div className="flex items-center gap-2">
+                <Truck className="w-5 h-5 text-gray-400" />
+                <span className="text-sm">Free shipping</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-5 h-5 text-gray-400" />
+                <span className="text-sm">30-day returns</span>
+              </div>
+            </div>
             </div>
 
             {/* Quantity & Size */}
@@ -207,22 +216,13 @@ const ProductDetails = () => {
               {loading ? "Adding..." : "Add to Cart"}
             </button>
 
-            <div className="mt-8 border-t border-gray-200 pt-8 text-gray-500">{product.description}</div>
+            <div className="mt-8 border-t border-gray-200 text-sm pt-8 text-gray-500">{product.description}</div>
 
             {/* Shipping & Returns */}
-            <div className="mt-8 flex gap-4">
-              <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-gray-400" />
-                <span className="text-sm">Free shipping</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-gray-400" />
-                <span className="text-sm">30-day returns</span>
-              </div>
-            </div>
+           
           </div>
         </div>
-        <ProductReview productId={product._id} token={token} setLoginModelShow={setLoginModelShow} isUserAuthenticated={isUserAuthenticated} />
+        <ProductReview productName={product.name} productId={product._id} token={token} setLoginModelShow={setLoginModelShow} isUserAuthenticated={isUserAuthenticated} />
       </div>
       {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} LoginModel={loginModelShow} />}
     </div>

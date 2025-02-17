@@ -23,12 +23,12 @@ const Cards = (props) => {
 
   
 
-  const sessionid = sessionStorage.getItem("sessionid");
+  const sessionid = localStorage.getItem("sessionid");
 
   // Axios request for adding to cart
   const handleAddToCart = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
+      const token = localStorage.getItem("sessionid"); // Get the token from session storage
       if (!isUserAuthenticated && !token) {
         setLoginModelShow(true);
         return; // Early exit if not authenticated and no session token
@@ -61,7 +61,7 @@ const Cards = (props) => {
   // Axios request for adding/removing from wishlist
   const handleAddWishlist = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid"); // Get the token from session storage
+      const token = localStorage.getItem("sessionid"); // Get the token from session storage
       if (!isUserAuthenticated && !token) {
         setLoginModelShow(true);
         return; // Early exit if not authenticated and no session token
@@ -88,7 +88,7 @@ const Cards = (props) => {
   // Function to remove from wishlist
   const removeFromWishList = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid");
+      const token = localStorage.getItem("sessionid");
       const response = await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}/wishlist/remove`,
         {
@@ -112,7 +112,7 @@ const Cards = (props) => {
   // Function to add to wishlist
   const addToWishList = async () => {
     try {
-      const token = sessionStorage.getItem("sessionid");
+      const token = localStorage.getItem("sessionid");
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
         {

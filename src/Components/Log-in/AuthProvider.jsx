@@ -30,6 +30,9 @@ const token = localStorage.getItem("sessionid")
 }, [token]); // Runs when session changes or cart updates
 
 
+console.log(cartData);
+
+
 console.log(CartDataCount);
 
 
@@ -51,7 +54,7 @@ console.log(CartDataCount);
 
   
   return (
-    <AuthContext.Provider value={{ isUserAuthenticated, CartDataCount, fetchCart, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData}}>
+    <AuthContext.Provider value={{ isUserAuthenticated, CartDataCount, fetchCart, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData, cartData}}>
       {children}
     </AuthContext.Provider>
   );

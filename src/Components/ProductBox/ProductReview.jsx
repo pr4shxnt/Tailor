@@ -4,7 +4,7 @@ import axios from "axios";
 
 const MAX_CHARS = 500;
 
-const ProductReview = ({ productId, token, isUserAuthenticated }) => {
+const ProductReview = ({ productId, productName, token, isUserAuthenticated }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -145,12 +145,18 @@ const ProductReview = ({ productId, token, isUserAuthenticated }) => {
       }
       <div className="flex justify-between items-center">
       <div>
-  <p className="text-yellow-500">Rating: {review.rating} ⭐</p>
-  <p className="text-gray-700">{review.comment}</p>
-  <p>
-    {review.user.name} at{" "}
+      <p className="text-yellow-500">
+  Rating: <div className="flex">{Array.from({ length: review.rating }).map((_, index) => (
+    <div key={index}>⭐</div>
+  ))}</div>
+</p>
+
+  
+  <p className="text-gray-400 flex items-center text-sm gap-1">
+    <div className="text-green-900 ">{review.user.name}</div> at{" "}
     {new Date(review.createdAt).toLocaleString()}
   </p>
+  <p className="text-gray-700 ">{review.comment}</p>
 </div>
 
         {isUserAuthenticated && review.user._id === userId && (
@@ -180,7 +186,7 @@ const ProductReview = ({ productId, token, isUserAuthenticated }) => {
   );
 
   return (
-    <div className="p-6 mt-10 bg-white shadow-lg">
+    <div className="p-6 mt-3 bg-white shadow-lg">
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
           {error}
@@ -189,7 +195,7 @@ const ProductReview = ({ productId, token, isUserAuthenticated }) => {
       
       <div className="flex flex-col md:flex-row justify-between items-start gap-10">
         <div className="w-full max-w-2xl">
-          <h1 className="text-2xl font-bold mb-4 text-gray-800">Review of Product</h1>
+          <h1 className="text-2xl font-bold mb-4 text-gray-800">Review of {productName}</h1>
 
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Rate this product</h3>
@@ -272,7 +278,7 @@ const ProductReview = ({ productId, token, isUserAuthenticated }) => {
           )}
           {!isLoading && reviews.length > 0 && (
             <>
-              {reviews.slice(0, 3).map((review, index) => (
+              {reviews.slice(0, 2).map((review, index) => (
                 <ReviewItem
                   key={review._id}
                   review={review}
@@ -280,7 +286,7 @@ const ProductReview = ({ productId, token, isUserAuthenticated }) => {
                   showOptionsMenu={setShowOptions}
                 />
               ))}
-              {reviews.length > 3 && (
+              {reviews.length > 2 && (
                 <button
                   className="mt-4 text-blue-600 hover:underline"
                   onClick={() => setShowAllReviews(true)}
@@ -294,11 +300,11 @@ const ProductReview = ({ productId, token, isUserAuthenticated }) => {
       </div>
 
       {showAllReviews && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 px-3 flex justify-center items-center z-50">
-          <div ref={modalRef} className="bg-white p-6 mx-2 rounded-lg max-w-lg w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div ref={modalRef} className="bg-white pt-6 pl-6 pb-6 mx-2 rounded-lg max-w-2xl w-full">
             <h2 className="text-2xl font-semibold mb-4">All Reviews</h2>
 
-            <div className="h-96 overflow-auto">
+            <div className="h-96 md:px-6 pr-6  overflow-auto">
               {reviews.map((review, index) => (
                 <ReviewItem
                   key={review._id}
