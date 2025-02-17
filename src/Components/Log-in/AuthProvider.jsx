@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState([])
   const[CartDataCount, setCartDataCount] =useState()
   const [cartData, setCartData] = useState([])
-const token = sessionStorage.getItem("sessionid")
+const token = localStorage.getItem("sessionid")
  
     const fetchCart = async () => {
         if (!token) return;

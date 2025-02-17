@@ -34,14 +34,14 @@ const useAuth = () => {
   console.log(userData);
 
   useEffect(() => {
-    const savedToken = sessionStorage.getItem("sessionid");
+    const savedToken = localStorage.getItem("sessionid");
     if (savedToken) {
       try {
         const decodedToken = jwtDecode(savedToken);
         // Check if the token has expired
         if (decodedToken.exp * 1000 < Date.now()) {
           setIsUserAuthenticated(false);
-          sessionStorage.removeItem("sessionid");
+          localStorage.removeItem("sessionid");
           alert("Your session has expired. Please log in again.");
         } else {
           setToken(savedToken);
@@ -49,7 +49,7 @@ const useAuth = () => {
         }
       } catch (error) {
         setIsUserAuthenticated(false);
-        sessionStorage.removeItem("sessionid");
+        localStorage.removeItem("sessionid");
       }
     } else {
       setIsUserAuthenticated(false);
@@ -69,8 +69,8 @@ const useAuth = () => {
         const userData = response.data.user;
         const userToken = response.data.token;
 
-        // Store token in sessionStorage and user id in localStorage
-        sessionStorage.setItem("sessionid", userToken);
+        // Store token in localStorage and user id in localStorage
+        localStorage.setItem("sessionid", userToken);
         localStorage.setItem("user", userData.id);
         setToken(userToken);
         setUser(userData);
@@ -85,7 +85,7 @@ const useAuth = () => {
   };
 
   const logout = () => {
-    sessionStorage.removeItem("sessionid");
+    localStorage.removeItem("sessionid");
     localStorage.removeItem("user");
     setToken("");
     setUser(null);

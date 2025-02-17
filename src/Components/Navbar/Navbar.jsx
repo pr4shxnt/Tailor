@@ -17,7 +17,7 @@ const Navbar = () => {
     const [cartUpdated, setCartUpdated] = useState(false); // Tracks cart changes
 
     const location = useLocation();
-    const token = sessionStorage.getItem("sessionid");
+    const token = localStorage.getItem("sessionid");
 
     // Check if current path belongs to category
     useEffect(() => {

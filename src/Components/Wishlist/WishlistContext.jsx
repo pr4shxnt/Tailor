@@ -38,7 +38,7 @@ const WishListProvider = ({ children }) => {
     // ✅ Function to remove from wishlist
     const removeFromWishList = async (productId) => {
         try {
-            const token = sessionStorage.getItem("sessionid");
+            const token = localStorage.getItem("sessionid");
             await axios.delete(
                 `${import.meta.env.VITE_BACKEND_URL}/wishlist/remove`,
                 {
@@ -57,7 +57,7 @@ const WishListProvider = ({ children }) => {
     // ✅ Function to add to wishlist
     const addToWishList = async (productId) => {
         try {
-            const token = sessionStorage.getItem("sessionid");
+            const token = localStorage.getItem("sessionid");
             await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/wishlist/add`,
                 { user, productId },

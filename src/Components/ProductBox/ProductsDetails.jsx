@@ -18,7 +18,7 @@ const ProductDetails = () => {
   const [loginModelShow, setLoginModelShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const token = sessionStorage.getItem("sessionid");
+  const token = localStorage.getItem("sessionid");
   const user = localStorage.getItem("user");
 
   // Fetch product details
