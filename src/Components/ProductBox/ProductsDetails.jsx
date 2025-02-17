@@ -14,6 +14,7 @@ const ProductDetails = () => {
   const { checkProductWishList, getWishList } = useContext(WLContext);
   const [product, setProduct] = useState(null);
   const [isWishListed, setIsWishListed] = useState(false);
+  const [reviewsCount, setReviewsCount] = useState()
   const [quantity, setQuantity] = useState(1);
   const [loginModelShow, setLoginModelShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -174,12 +175,31 @@ const ProductDetails = () => {
 
             {/* Rating */}
             <div className="mt-3 flex items-center">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400" fill={i < product.avgRating ? "currentColor" : "none"} />
-                ))}
-              </div>
-              <p className="ml-2 text-sm text-gray-500">({product.avgRating} reviews)</p>
+            <div className="flex items-center">
+  {[...Array(5)].map((_, i) => {
+    const isFull = i + 1 <= product.avgRating; // Fully filled stars
+    const isHalf = i < product.avgRating && i + 1 > product.avgRating; // Half-filled star
+    
+    return (
+      <Star
+        key={i}
+        className="w-5 h-5 text-yellow-400"
+        fill={isFull ? "currentColor" : isHalf ? "url(#half-fill)" : "none"}
+      />
+    );
+  })}
+  {/* Half-Filled Star Gradient */}
+  <svg width="0" height="0">
+    <defs>
+      <linearGradient id="half-fill">
+        <stop offset="50%" stopColor="#FACC15" />
+        <stop offset="50%" stopColor="transparent" />
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
+
+              <p className="ml-2 text-sm text-gray-500">({reviewsCount} reviews)</p>
             </div>
 
             {/* Price */}
@@ -222,7 +242,7 @@ const ProductDetails = () => {
            
           </div>
         </div>
-        <ProductReview productName={product.name} productId={product._id} token={token} setLoginModelShow={setLoginModelShow} isUserAuthenticated={isUserAuthenticated} />
+        <ProductReview setReviewsCount={setReviewsCount} productName={product.name} productId={product._id} token={token} setLoginModelShow={setLoginModelShow} isUserAuthenticated={isUserAuthenticated} />
       </div>
       {loginModelShow && <LoginModel setLoginModel={setLoginModelShow} LoginModel={loginModelShow} />}
     </div>

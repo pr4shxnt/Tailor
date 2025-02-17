@@ -8,7 +8,7 @@ const Footer = () => {
     <div>
       <div className=" min-h-[70vh] flex flex-col items-center bg-gray-200 text-black">
         <div className="w-full h-2 shadow-2xl bg-gray-500"></div>
-        <Marquee/>
+        
           <div className="flex pt-14 justify-between w-full px-28">
           <div className="">
             <img src={logo} alt="" className="h-40" />

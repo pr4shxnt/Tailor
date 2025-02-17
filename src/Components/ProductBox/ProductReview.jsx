@@ -4,7 +4,7 @@ import axios from "axios";
 
 const MAX_CHARS = 500;
 
-const ProductReview = ({ productId, productName, token, isUserAuthenticated }) => {
+const ProductReview = ({ productId, productName, setReviewsCount, token, isUserAuthenticated }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -32,6 +32,7 @@ const ProductReview = ({ productId, productName, token, isUserAuthenticated }) =
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/review/${productId}`);
       if (response.data && response.data.reviews) {
         setReviews(response.data.reviews);
+        setReviewsCount(response.data.reviews.length)
       } else {
         setReviews([]);
       }
