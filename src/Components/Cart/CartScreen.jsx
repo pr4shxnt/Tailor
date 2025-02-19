@@ -5,7 +5,7 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 
 const CartScreen = () => {
-  const { isUserAuthenticated, loading } = useContext(AuthContext);
+  const { isUserAuthenticated, loading, userData } = useContext(AuthContext);
   const navigate = useNavigate();
   const [cart, setCart] = useState(null);
   const token = localStorage.getItem("sessionid");
@@ -65,9 +65,10 @@ const CartScreen = () => {
 
   return (
     <div className="container mx-auto p-6 pt-20">
-      <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold mb-6">Your Cart</h2>
-        <div className="text-right text-xl font-bold">Total Price: NPR {cart.totalPrice}</div>
+       <h2 className="text-3xl text-center font-bold mb-6">Your Cart</h2>
+      <div className="flex w-full justify-between">
+       <div className="">{userData.name}</div>
+        <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">Checkout <p className="font-light text-xs lowercase">NPR. {cart.totalPrice}</p></div>
       </div>
       <div className="flex-wrap flex gap-6">
         {cart.items.map((item) => (
