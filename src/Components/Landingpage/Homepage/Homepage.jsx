@@ -1,21 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import ImageCarousel from "./Carousels"
 
- 
 const Homepage = () => {
   return (
-    <>
-      <section className="header-container bg-gray-300 h-screen flex items-center justify-center relative overflow-hidden">
-        <div className=" text-center">
-          <h1 className="text-4xl font-bold  text-gray-700">Tailor-Made Elegance</h1>
-          <p className="text-sm mb-6 text-gray-600">Crafted with precision, designed for you.</p>
-          <Link to="/category/all_collection" className="text-sm font-semibold border-solid border-2 rounded-md p-3 hover:bg-gray-400 transition-all duration-700 border-gray-400 hover:text-black bg-transparent text-gray-400">
-            Shop Now
-          </Link>
+    <section className="min-h-screen bg-gray-200">
+      <div className="container mx-auto">
+        <div className="w-[90%] lg:w-[80%] relative mx-auto pt-24 pb-8">
+          <div className="gap-8">
+            <div className="">
+              <div className="text-5xl py-14 pb-3 flex justify-between w-full font-semibold tracking-wide space-y-2">
+                <div className="">
+                <div className="animate-fade-in-up flex gap-3">Walk with a <h1 className="">Pride</h1></div>
+                <div className="animate-fade-in-up animation-delay-200">Live with a passion</div>
+                <div className="animate-fade-in-up animation-delay-400 flex gap-3">Go with <h1 className="text-purple-500">the Fashion...</h1></div>
+                </div>
+                <div className="text-2xl absolute bottom-10 right-10 text-end">
+                  <h1 className="text-4xl">Hello,</h1><h1 className="">Prashant Adhikari</h1>
+                  <p className="text-xs text-purple-500 font-light underline">View Your Account</p>
+                </div>
+            </div>
+            </div>
+           
+          </div>
         </div>
-      </section>
-    </>
-  );
-};
+        <div className="w-full relative">
+          
+          <ImageCarousel />
+        </div>
+      </div>
+    </section>
+  )
+}
 
-export default Homepage;
+export default Homepage
+
