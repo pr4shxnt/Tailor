@@ -33,7 +33,7 @@ function Contact() {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-white">
+    <div className="min-h-screen  bg-white">
       {/* Hero Section */}
       <div
         className="h-[60vh] bg-cover bg-center relative"
@@ -41,11 +41,11 @@ function Contact() {
           backgroundImage: 'url("https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80")'
         }}
       >
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4 flex items-center justify-center gap-3">
-              <Scissors className="w-10 h-10" />
+        <div className="absolute inset-0  bg-gradient-to-t from-gray-800 to-transparent " />
+        <div className="absolute inset-0 flex items-center  justify-center">
+          <div className="text-center   text-white ">
+            <h1 className="text-5xl font-bold mb-4  flex items-center justify-center gap-3">
+              <Scissors className="w-10  h-10" />
               Contact Us
             </h1>
             <p className="text-xl">We're Here to Help You Look Your Best</p>

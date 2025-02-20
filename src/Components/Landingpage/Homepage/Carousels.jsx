@@ -75,7 +75,7 @@ export default function ImageCarousel() {
             key={index}
             onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full transition-all ${
-              currentIndex === index ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+              currentIndex === index ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/75'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

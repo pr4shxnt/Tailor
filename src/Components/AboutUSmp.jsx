@@ -3,7 +3,7 @@ import { Scissors, Star, Clock, Medal, Users, ThumbsUp } from 'lucide-react';
 
 function AboutUSmp() {
   return (
-    <div className="min-h-screen pt-16 bg-white">
+    <div className="min-h-screen  bg-white">
       {/* Hero Section */}
       <div
         className="h-[60vh] bg-cover bg-center relative"
@@ -11,7 +11,7 @@ function AboutUSmp() {
           backgroundImage: 'url("https://images.unsplash.com/photo-1586105449897-20b5efeb3233?auto=format&fit=crop&q=80")'
         }}
       >
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-5xl font-bold mb-4 flex items-center justify-center gap-3">

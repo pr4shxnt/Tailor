@@ -3,7 +3,7 @@ export default {
   theme: {
     extend: {
       animation: {
-        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+        'fade-in-up': 'fadeInUp 6s ease-out forwards',
       },
       keyframes: {
         fadeInUp: {
@@ -13,7 +13,7 @@ export default {
           },
           '100%': {
             opacity: '1',
-            transform: 'translateY(0)',
+            transform: 'translateY(-10px)',
           },
         },
       },
