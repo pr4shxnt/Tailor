@@ -8,7 +8,7 @@ function AboutUSmp() {
       <div
         className="h-[60vh] bg-cover bg-center relative"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1586105449897-20b5efeb3233?auto=format&fit=crop&q=80")'
+          backgroundImage: 'url("https://imgs.search.brave.com/UBTtnte-2v_tuoBxwbBjd4pX0CNi89S3W1DQvBOpOXk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/b2ZmaWNlLXdvbWFu/LWhhbmRzLW9uLXJl/cG9ydC5qcGc_d2lk/dGg9MTAwMCZmb3Jt/YXQ9cGpwZyZleGlm/PTAmaXB0Yz0w")'
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent" />

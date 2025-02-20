@@ -1,16 +1,33 @@
-import React from 'react';
-import { Heart, Search, ShoppingCart, User } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Heart, Home, Scroll, Search, ShoppingCart, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import CollectionDropdown from '../Dropdown/CollectionDropdown';
 
 const Navbar1 = () => {
+
+        const [isScrollTriggered, setIsScrollTriggered] = useState(false);
+        useEffect(() => {
+            const handleScroll = () => {
+              if (window.scrollY > 100) {
+                setIsScrollTriggered(true);
+              } else {
+                setIsScrollTriggered(false);
+              }
+            };
+        
+            window.addEventListener("scroll", handleScroll);
+            return () => {
+              window.removeEventListener("scroll", handleScroll);
+            };
+          }, []);
+
     return (
         <div className="z-[100] w-full fixed ">
-            <div className="container mx-auto px-10">
+            <div className={`container ${isScrollTriggered? "bg-gray-100 transition-all ease-in-out duration-500 shadow-2xl" : "transition-all ease-in-out duration-500"} mx-auto px-10`}>
                 <div className="flex justify-between items-center">
                     {/* Left Section */}
                     <div className="flex items-center gap-6">
-                        <NavLink to='/' className="text-3xl py-4 font-bold uppercase tracking-wider hover:text-purple-500 transition">
+                        <NavLink to='/' className="text-3xl py-4 font-bold uppercase tracking-wider text-gray-700 hover:text-gray-500 transition-all duration-300">
                             Shanta
                         </NavLink>
                         
@@ -25,7 +42,7 @@ const Navbar1 = () => {
                         </div>
 
                         {/* Search Bar */}
-                        <div className="relative w-80">
+                        <div className="relative w-96">
                             <input type="text" placeholder='Search...' className='bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 px-4 py-2 pl-10 w-full rounded-full' />
                             <div className="absolute top-2 left-3 text-purple-600">
                                 <Search size={20} />
@@ -35,44 +52,36 @@ const Navbar1 = () => {
                     
                     {/* Right Section */}
                     <div className="flex items-center gap-6">
-                        <div className="flex gap-4 text-sm font-semibold uppercase">
+                        <div className="flex gap-4 text-sm font-semibold text-gray-500  uppercase">
                             <NavLink to='/' className="hover:text-purple-600 transition">Home</NavLink>
                             <NavLink to='/about' className="hover:text-purple-600 transition">About</NavLink>
                             <NavLink to='/contact' className="hover:text-purple-600 transition">Contact</NavLink>
                         </div>
                         
                         {/* Separator */}
-                        <div className="h-8 w-0.5 bg-gray-300"></div>
+        
+                        <div className="w-1 min-w-[1.5px] rounded-full bg-black h-8"></div>
 
                         {/* Wishlist */}
                         <NavLink to='/wishlist' className="group flex items-center">
-                            <div className="relative flex items-center overflow-hidden">
-                                <Heart size={24} className="text-purple-600 transition" />
-                                <span className="ml-0 w-0 opacity-0 group-hover:ml-2 group-hover:w-auto group-hover:opacity-100 transition-all duration-700 ease-in-out text-sm text-gray-700 bg-white">
-                                    Wishlist
-                                </span>
-                            </div>
+                           
+                                <User size={24} className="text-purple-600 transition" />
+                               
+                         
                         </NavLink>
 
                         {/* Cart */}
-                        <NavLink to='/cart' className="group flex items-center">
-                            <div className="relative flex items-center overflow-hidden">
-                                <ShoppingCart size={24} className="text-purple-600 transition" />
-                                <span className="ml-0 w-0 opacity-0 group-hover:ml-2 group-hover:w-auto group-hover:opacity-100 transition-all duration-700 ease-in-out text-sm text-gray-700 bg-white">
-                                    Cart
-                                </span>
-                            </div>
+                        <NavLink to='/cart' className="w-full">
+                            
+                            <ShoppingCart/>
+                            
+                            
                         </NavLink>
 
+                       
+
                         {/* Profile */}
-                        <NavLink to='/profile' className="group flex items-center">
-                            <div className="relative flex items-center overflow-hidden">
-                                <User size={24} className="text-purple-600 transition" />
-                                <span className="ml-0 w-0 opacity-0 group-hover:ml-2 group-hover:w-auto group-hover:opacity-100 transition-all duration-700 ease-in-out text-sm text-gray-700 bg-white">
-                                    Profile
-                                </span>
-                            </div>
-                        </NavLink>
+                      
                     </div>
                 </div>
             </div>

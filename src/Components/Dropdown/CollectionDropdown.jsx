@@ -47,7 +47,7 @@ console
   };
 
   return (
-    <div className=" w-full p-6 bg-gray-50 border   shadow-md">
+    <div className=" w-full p-6 bg-white border   shadow-md">
 
       <div className="relative">
         {/* Scroll Buttons */}
