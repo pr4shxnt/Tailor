@@ -4,11 +4,13 @@ import SlidingIcon from "../../Cards/SlidingIcons";
 import { Home } from "lucide-react";
 import { AuthContext } from "../../Log-in/AuthProvider";
 import { useContext } from "react";
+import useAuth from "../../../hooks/useAuth";
 
 const Homepage = () => {
 
   const {isUserAuthenticated, userData} = useContext(AuthContext)
   console.log(userData);
+  const { login, logout, token } = useAuth();
   
 
   return (
@@ -43,7 +45,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        <div className="w-full animate-fade-in-up opacity-0 relative">
+        <div className="w-full animate-fade-in-up animation-delay-1200 opacity-0 relative">
           <ImageCarousel />
         </div>
       </div>

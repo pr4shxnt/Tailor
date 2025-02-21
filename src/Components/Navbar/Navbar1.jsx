@@ -22,7 +22,7 @@ const Navbar1 = () => {
           }, []);
 
     return (
-        <div className="z-[100] w-full fixed ">
+        <div className="z-[100] w-full fixed animate-fade-up-down opacity-0 animation-delay-300">
             <div className={`container ${isScrollTriggered? "bg-gray-100 transition-all ease-in-out duration-500 shadow-2xl" : "transition-all ease-in-out duration-500"} mx-auto px-10`}>
                 <div className="flex justify-between items-center">
                     {/* Left Section */}

@@ -30,14 +30,8 @@ const token = localStorage.getItem("sessionid")
 }, [token]); // Runs when session changes or cart updates
 
 
-console.log(cartData);
+console.log(userData);
 
-
-console.log(CartDataCount);
-
-
-  
-  
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

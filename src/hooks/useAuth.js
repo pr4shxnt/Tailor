@@ -14,30 +14,35 @@ const useAuth = () => {
     setLoading(false);
   }
 
+  console.log(user);
+
+  
+
   // Updated: Use user.id if user is an object
   const getUserDetailsById = async () => {
-    if (!user) return;
-    // If user is an object, extract its id; otherwise, assume user is already an id
-    const userId = typeof user === "object" && user !== null ? user.id : user;
+    const userId = localStorage.getItem("user"); // Get user ID from storage
+    if (!userId) return; // Stop if user ID is missing
+
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`);
-      setUserData(response.data);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`);
+        setUserData(response.data);
     } catch (error) {
-      console.error("Error fetching user details:", error);
+        console.error("Error fetching user details:", error);
     }
-  };
+};
 
   useEffect(() => {
     getUserDetailsById();
   }, [user]); // Fetch when user changes
 
-  console.log(userData);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("sessionid");
     if (savedToken) {
       try {
         const decodedToken = jwtDecode(savedToken);
+        console.log();
+        
         // Check if the token has expired
         if (decodedToken.exp * 1000 < Date.now()) {
           setIsUserAuthenticated(false);

@@ -4,7 +4,8 @@ export default {
     extend: {
       animation: {
         'fade-in-up': 'fadeInUp 1s ease-out forwards',
-        'fade-left-right' : 'fadeLtoR 1s ease-out forwards'
+        'fade-left-right' : 'fadeLtoR 1s ease-out forwards',
+        'fade-up-down' : 'fadeupDown 0.6s ease-out forwards'
       },
       keyframes: {
         fadeInUp: {
@@ -14,6 +15,10 @@ export default {
         fadeLtoR: {
           '0%' : {opactiy: '0', transform: 'translateX(-20px)' },
           '100%': { opacity: '1', transform: 'translateX(0px)' },
+        },
+        fadeupDown:{
+          '0%' : {opactiy: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0px)' },
         }
       },
     },
