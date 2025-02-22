@@ -19,7 +19,8 @@ import Register from "./Components/Log-in/UserRegister";
 import ProductsDetails from "./Components/ProductBox/ProductsDetails";
 import WishListProvider from "./Components/Wishlist/WishlistContext";
 import WishListContainer from "./Components/Wishlist/WishListContainer";
-
+import AccountRootComp from "./Components/UserAccount/AccountRootComp";
+import UserDetails from "./Components/UserAccount/UserDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,8 +40,7 @@ const router = createBrowserRouter([
       { path: "/crud", element: <MasterCategory /> },
       { path: "/crud2", element: <ProductsCRUD /> },
       { path: "/crud3", element: <AdminHandling /> },
-      { path: "/product/:id", element: <ProductsDetails /> },
-      {path: "/wishlist" , element : <WishListContainer/>}
+      { path: "/product/:id", element: <ProductsDetails /> }
     ],
   },
   {
@@ -51,6 +51,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <AdminLogin />,
+  },
+  {
+    path: "/user",
+    element: <AccountRootComp/>,
+    children: [{ path: "", element: 'damn bro' },
+      {path: "wishlist" , element : <WishListContainer/>},
+      {path: "account" ,element: <UserDetails/> }
+    ],
   },
 ]);
 

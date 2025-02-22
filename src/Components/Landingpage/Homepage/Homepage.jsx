@@ -5,6 +5,7 @@ import { Home } from "lucide-react";
 import { AuthContext } from "../../Log-in/AuthProvider";
 import { useContext } from "react";
 import useAuth from "../../../hooks/useAuth";
+import { NavLink } from "react-router-dom";
 
 const Homepage = () => {
 
@@ -36,9 +37,9 @@ const Homepage = () => {
                 </div>
                 <div className="text-2xl  absolute bottom-10 right-10 text-end">
                   <h1 className="text-4xl animate-fade-in-up animation-delay-400 opacity-0">Hello,</h1>
-                  <h1 className="animate-fade-left-right animation-delay-1000 opacity-0">{userData.name}</h1>
+                  <h1 className="animate-fade-left-right animation-delay-1000 opacity-0">{userData.name ? userData.name : "Guest"}</h1>
                   <p className="text-xs animate-fade-left-right animation-delay-1000 opacity-0 text-purple-500 font-light underline">
-                    View Your Account
+                  <h1>{userData.name ? <NavLink to={`/user/account`}>View Your Acccount</NavLink> :  <NavLink to={`/login`}>Log in into Your Acccount</NavLink>}</h1>
                   </p>       
                 </div>
               </div>
