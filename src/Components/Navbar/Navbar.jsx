@@ -71,7 +71,7 @@ const Navbar = () => {
                         </NavLink>
 
                         {/* Cart */}
-                        <NavLink to='/cart' className="w-full">
+                        <NavLink to='/user/cart' className="w-full">
                             
                             <ShoppingCart/>
                             

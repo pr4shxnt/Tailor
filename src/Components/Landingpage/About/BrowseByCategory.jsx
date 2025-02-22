@@ -59,7 +59,7 @@ const BrowseByCategory = () => {
                 <img src="https://imgs.search.brave.com/aecOkH35TEUPtieqe1o7o4Y6Kkb8__pZklBQrKhttsA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyNS8w/Mi8wMi8xNC8wNi9i/aXJkLTkzNzY4MzFf/NjQwLmpwZw" alt="" className="w-full object-cover h-[300px]"/>
             </div>
             <div className="p-5">
-             <h2 className="text-xl uppercase font-semibold ">Kids</h2>
+             <h2 className="text-xl uppercase font-semibold ">UNISEX WEAR</h2>
              <p className="text-purple-500 text-sm tracking-wider font-extralight underline">Visit</p>
            </div>
 </div>
@@ -76,7 +76,7 @@ const BrowseByCategory = () => {
                 <img src="https://imgs.search.brave.com/aecOkH35TEUPtieqe1o7o4Y6Kkb8__pZklBQrKhttsA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyNS8w/Mi8wMi8xNC8wNi9i/aXJkLTkzNzY4MzFf/NjQwLmpwZw" alt="" className="w-full object-cover h-[300px]"/>
             </div>
             <div className="p-5">
-             <h2 className="text-xl uppercase font-semibold ">Kids</h2>
+             <h2 className="text-xl uppercase font-semibold ">WOMEN WEAR</h2>
              <p className="text-purple-500 text-sm tracking-wider font-extralight underline">Visit</p>
            </div>
 </div>
@@ -93,7 +93,7 @@ const BrowseByCategory = () => {
                 <img src="https://imgs.search.brave.com/aecOkH35TEUPtieqe1o7o4Y6Kkb8__pZklBQrKhttsA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyNS8w/Mi8wMi8xNC8wNi9i/aXJkLTkzNzY4MzFf/NjQwLmpwZw" alt="" className="w-full object-cover h-[300px]"/>
             </div>
             <div className="p-5">
-             <h2 className="text-xl uppercase font-semibold ">Kids</h2>
+             <h2 className="text-xl uppercase font-semibold ">KIDS WEAR</h2>
              <p className="text-purple-500 text-sm tracking-wider font-extralight underline">Visit</p>
            </div>
 </div>
@@ -110,7 +110,7 @@ const BrowseByCategory = () => {
                 <img src="https://imgs.search.brave.com/aecOkH35TEUPtieqe1o7o4Y6Kkb8__pZklBQrKhttsA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyNS8w/Mi8wMi8xNC8wNi9i/aXJkLTkzNzY4MzFf/NjQwLmpwZw" alt="" className="w-full object-cover h-[300px]"/>
             </div>
             <div className="p-5">
-             <h2 className="text-xl uppercase font-semibold ">Kids</h2>
+             <h2 className="text-xl uppercase font-semibold ">MEN WEAR</h2>
              <p className="text-purple-500 text-sm tracking-wider font-extralight underline">Visit</p>
            </div>
 </div>

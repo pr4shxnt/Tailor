@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       { path: "/category/all_collection", element: <Collection /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <AboutUSmp /> },
-      { path: "/cart", element: <CartScreen /> },
+      
       { path: "/category/:masterCategory", element: <Collection /> },
       { path: "/category/:masterCategory/:category", element: <Collection /> },
       { path: "/category/:masterCategory/:category/:subCategory", element: <Collection /> },
@@ -57,7 +57,8 @@ const router = createBrowserRouter([
     element: <AccountRootComp/>,
     children: [{ path: "", element: 'damn bro' },
       {path: "wishlist" , element : <WishListContainer/>},
-      {path: "account" ,element: <UserDetails/> }
+      {path: "account" ,element: <UserDetails/> },
+      { path: "cart", element: <CartScreen /> },
     ],
   },
 ]);

@@ -64,10 +64,10 @@ const CartScreen = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 pt-20">
-       <h2 className="text-3xl text-center font-bold mb-6">Your Cart</h2>
+    <div className="container mx-auto ">
+      
       <div className="flex w-full justify-between">
-       <div className="">{userData.name}</div>
+       <div className=""> <h2 className="text-3xl text-center font-bold mb-6">Your Cart</h2></div>
         <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">Checkout <p className="font-light text-xs lowercase">NPR. {cart.totalPrice}</p></div>
       </div>
       <div className="flex-wrap flex gap-6">
