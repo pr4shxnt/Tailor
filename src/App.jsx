@@ -21,6 +21,7 @@ import WishListProvider from "./Components/Wishlist/WishlistContext";
 import WishListContainer from "./Components/Wishlist/WishListContainer";
 import AccountRootComp from "./Components/UserAccount/AccountRootComp";
 import UserDetails from "./Components/UserAccount/UserDetails";
+import ProductsManager from "./Components/AdminUI/ProductsManager";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,7 +47,8 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminPageLayout />,
-    children: [{ path: "", element: <ProductCategoriesManager /> }],
+    children: [{ path: "", element: <ProductCategoriesManager />, },
+    { path: "product-management", element: <ProductsManager/>, }],
   },
   {
     path: "/admin/login",

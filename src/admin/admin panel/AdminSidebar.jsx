@@ -116,7 +116,7 @@ const AdminSidebar = ({ isToggled, setIsToggled }) => {
         </NavLink>
         <NavLink
           className="sidecomp hover:bg-[#EB8F41] hover:bg-opacity-80 hover:text-white rounded-lg transition-all"
-          to="settings"
+          to="product-management"
         >
           <li
             className={`flex items-center space-x-4  py-3 cursor-pointer  ${
@@ -124,7 +124,7 @@ const AdminSidebar = ({ isToggled, setIsToggled }) => {
             }`}
           >
             <Settings className="icon text-xl" />
-            {!isMinimized && <span>Admin Settings</span>}
+            {!isMinimized && <span>Management</span>}
           </li>
         </NavLink>
         <NavLink

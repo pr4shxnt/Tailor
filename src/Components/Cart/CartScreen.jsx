@@ -5,25 +5,24 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 
 const CartScreen = () => {
-  const { isUserAuthenticated, loading, userData } = useContext(AuthContext);
+  const { isUserAuthenticated, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [cart, setCart] = useState(null);
+  const [cartLoading, setCartLoading] = useState(true);
+  const [error, setError] = useState(null);
   const token = localStorage.getItem("sessionid");
   const [confirmDelete, setConfirmDelete] = useState(null);
 
-  // Redirect to login if not authenticated
   useEffect(() => {
     if (!loading && isUserAuthenticated === false) {
       navigate("/login");
     }
   }, [isUserAuthenticated, loading, navigate]);
 
-  // Wait for authentication check before rendering
   if (isUserAuthenticated === null) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
 
-  // Fetch cart data from backend
   useEffect(() => {
     const loadCart = async () => {
       if (!token) return;
@@ -32,66 +31,73 @@ const CartScreen = () => {
         setCart(response.data);
       } catch (error) {
         console.error("Error fetching cart data:", error);
+        setError("Failed to load cart. Please try again later.");
+      } finally {
+        setCartLoading(false);
       }
     };
 
     loadCart();
   }, [token]);
 
-  // Remove item from cart with confirmation
   const removeItem = async (productId) => {
     try {
       await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/cart/remove/${productId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      
-      // Update cart state
-      setCart((prevCart) => ({
-        ...prevCart,
-        items: prevCart.items.filter((item) => item.productId._id !== productId),
-        totalPrice: prevCart.items
-          .filter((item) => item.productId._id !== productId)
-          .reduce((total, item) => total + item.price * item.quantity, 0),
-      }));
+      setCart((prevCart) => {
+        const updatedItems = prevCart.items.filter((item) => item.productId._id !== productId);
+        return {
+          ...prevCart,
+          items: updatedItems,
+          totalPrice: updatedItems.reduce((total, item) => total + item.price * item.quantity, 0),
+        };
+      });
     } catch (error) {
       console.error("Error removing item:", error);
+      setError("Failed to remove item. Please try again.");
     }
   };
 
-  // Show message if the cart is empty
-  if (!cart || !cart.items?.length) {
-    return <div className="flex justify-center items-center h-screen">Your cart is empty.</div>;
-  }
-
   return (
-    <div className="container mx-auto ">
-      
-      <div className="flex w-full justify-between">
-       <div className=""> <h2 className="text-3xl text-center font-bold mb-6">Your Cart</h2></div>
-        <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">Checkout <p className="font-light text-xs lowercase">NPR. {cart.totalPrice}</p></div>
+    <div className="container mx-auto "> 
+      <div className="flex w-full justify-between mb-3">
+        <div className=""> <h2 className="text-3xl text-center font-bold mb-6">Your Cart</h2></div>
+        <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">
+          Checkout <p className="font-light text-xs lowercase">NPR. {cart && cart.items.length > 0 ? cart.totalPrice : "Add items to cart"}</p>
+        </div>
       </div>
-      <div className="flex-wrap flex gap-6">
-        {cart.items.map((item) => (
-          <div key={item.productId._id} className="flex w-full md:w-auto flex-row items-center shadow-2xl border rounded-lg">
-            <img src={`${import.meta.env.VITE_IMAGES}/${item.productId.images[0]}`} alt={item.productId.name} className="w-32 h-32 object-cover" />
-            <div className="flex flex-col md:flex-row justify-between flex-grow px-6 md:gap-6">
-              <div>
-                <h3 className=" text-lg md:text-xl font-semibold">{item.productId.name.slice(0,13)+".."} (x {item.quantity})</h3>
-                <p className="text-gray-600 text-xs md:text-sm">NPR {item.price} x {item.quantity} = NPR {item.price * item.quantity}</p>
-                <NavLink to={`/product/${item.productId._id}`}>
-                  <button className="text-blue-500 text-sm font-light hover:underline">View Product</button>
-                </NavLink>
+
+      {cartLoading ? (
+        <div className="flex justify-center items-center h-screen">Loading cart...</div>
+      ) : error ? (
+        <div className="text-red-500 text-center">{error}</div>
+      ) : cart && cart.items.length > 0 ? (
+        <div className="grid grid-cols-3 gap-2">
+          {cart.items.map((item) => (
+            <div key={item.productId._id} className="flex w-full md:w-auto flex-row items-center shadow-2xl border rounded-lg">
+              <img src={`${import.meta.env.VITE_IMAGES}/${item.productId.images[0]}`} alt={item.productId.name} className="w-28 h-28 object-cover" />
+              <div className="flex flex-col md:flex-row justify-between flex-grow px-4 md:gap-6">
+                <div>
+                  <h3 className=" text-lg md:text-xl font-semibold">{item.productId.name.slice(0,13) + ".."} (x {item.quantity})</h3>
+                  <p className="text-gray-600 text-xs md:text-sm">NPR {item.price} x {item.quantity} = NPR {item.price * item.quantity}</p>
+                  <NavLink to={`/product/${item.productId._id}`}>
+                    <button className="text-blue-500 text-sm font-light hover:underline">View Product</button>
+                  </NavLink>
+                </div>
+                <button
+                  className=" rounded-full text-red-500 hover:text-red-300 transition"
+                  onClick={() => setConfirmDelete(item.productId._id)}
+                >
+                  <Trash2 />
+                </button>
               </div>
-              <button
-                className="p-2 rounded-full hover:bg-gray-100 transition"
-                onClick={() => setConfirmDelete(item.productId._id)}
-              >
-                <Trash2 stroke="red" />
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center items-center h-screen">Your cart is empty.</div>
+      )}
       
       {confirmDelete && (
         <div className="fixed top-0 left-0 w-screen h-full bg-opacity-70 backdrop-blur-sm bg-black flex justify-center items-center">

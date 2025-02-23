@@ -16,17 +16,17 @@ const Homepage = () => {
 
   return (
     <section 
-      className="pb-11 container mx-auto bg-cover bg-center" 
+      className="pb-11 md:min-h-screen container mx-auto bg-cover bg-center" 
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="container mx-auto">
         <div className="w-[90%] lg:w-[85%] relative mx-auto pt-24 pb-8">
           <div className="gap-8">
             <div className="">
-              <div className="text-5xl py-14 pb-3 flex justify-between w-full font-semibold tracking-wide space-y-2">
+              <div className="text-3xl md:text-5xl py-14 pb-3 flex flex-col md:flex-row justify-between w-full font-semibold tracking-wide space-y-2">
                 <div className="">
                   <div className="animate-fade-in-up opacity-0 flex gap-3">
-                    Walk with a <h1 className="">Pride</h1>
+                    Walk with a Pride
                   </div>
                   <div className="animate-fade-in-up opacity-0 animation-delay-400">
                     Live with a passion
@@ -35,9 +35,9 @@ const Homepage = () => {
                     Go with <h1 className="text-purple-500">the Fashion...</h1>
                   </div>
                 </div>
-                <div className="text-2xl  absolute bottom-10 right-10 text-end">
+                <div className="text-2xl flex flex-col  justify-end items-end text-end">
                   <h1 className="text-4xl animate-fade-in-up animation-delay-400 opacity-0">Hello,</h1>
-                  <h1 className="animate-fade-left-right animation-delay-1000 opacity-0">{userData.name ? userData.name : "Guest"}</h1>
+                  <h1 className="animate-fade-left-right animation-delay-1000 opacity-0">{userData.name ? userData.name : "Guest User"}</h1>
                   <p className="text-xs animate-fade-left-right animation-delay-1000 opacity-0 text-purple-500 font-light underline">
                   <h1>{userData.name ? <NavLink to={`/user/account`}>View Your Acccount</NavLink> :  <NavLink to={`/login`}>Log in into Your Acccount</NavLink>}</h1>
                   </p>       
@@ -46,7 +46,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        <div className="w-full animate-fade-in-up animation-delay-1200 opacity-0 relative">
+        <div className="w-full animate-fade-in-up animation-delay-400 opacity-0 relative">
           <ImageCarousel />
         </div>
       </div>

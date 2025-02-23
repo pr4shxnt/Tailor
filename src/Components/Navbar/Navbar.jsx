@@ -63,7 +63,7 @@ const Navbar = () => {
                         <div className="w-1 min-w-[1.5px] rounded-full bg-black h-8"></div>
 
                         {/* Wishlist */}
-                        <NavLink to='/wishlist' className="group flex items-center">
+                        <NavLink to='/user/account' className="group flex items-center">
                            
                                 <User size={24} className="text-purple-600 transition" />
                                
