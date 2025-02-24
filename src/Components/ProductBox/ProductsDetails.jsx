@@ -137,7 +137,7 @@ const ProductDetails = () => {
   };
 
   // Image gallery navigation
-  const images = product?.images?.map((img) => `${import.meta.env.VITE_IMAGES}/${img}`) || [];
+  const images = product?.images?.map((img) => `${img}`) || [];
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 

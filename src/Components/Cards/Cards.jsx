@@ -16,7 +16,7 @@ const Cards = (props) => {
   const gradient = "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%)";
 
   const cardStyle = {
-    backgroundImage: `${gradient}, url(${import.meta.env.VITE_IMAGES}/${props.product.images[0]})`,
+    backgroundImage: `${gradient}, url(${props.product.images[0]})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
