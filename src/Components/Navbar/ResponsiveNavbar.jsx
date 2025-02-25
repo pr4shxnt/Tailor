@@ -42,12 +42,13 @@ const ResponsiveNavbar = () => {
                     <NavLink onClick={()=>setMenuOpen(false)} to='/' className="hover:text-purple-600 transition">Home</NavLink>
                     <NavLink onClick={()=>setMenuOpen(false)} to='/about' className="hover:text-purple-600 transition">About</NavLink>
                     <NavLink onClick={()=>setMenuOpen(false)} to='/contact' className="hover:text-purple-600 transition">Contact</NavLink>
+                    <NavLink onClick={()=>setMenuOpen(false)} to='/category/all_collection' className="hover:text-purple-600 transition">All Collection</NavLink>
                 </div>
             )}
 
             {/* Collection Dropdown */}
             {isCollectionOpen && (
-                <div className="absolute w-full px-1 animate-fade-up-down opacity-0 animation-delay-100">
+                <div className="absolute w-full z-50 px-1 animate-fade-up-down opacity-0 animation-delay-100">
                     <CollectionDropdown />
                 </div>
             )}

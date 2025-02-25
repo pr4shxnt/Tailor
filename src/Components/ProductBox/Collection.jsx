@@ -102,10 +102,10 @@ const Collection = () => {
   };
 
   return (
-    <section className="bg-gray-100 pt-16 lg:mx-10 mb-20 min-h-screen">
+    <section className=" pt-16 lg:mx-10 mb-20 min-h-screen">
       <div className="flex flex-col">
         {/* Mobile Sort/Filter Button */}
-        <div className="block fixed top-[60px] border-t w-full z-[800] lg:hidden">
+        <div className="block fixed top-[61px] z-20 border-t w-full  lg:hidden">
           <SortFilterButton
             minPrice={filteredPrice[0]}
             maxPrice={filteredPrice[1]}
