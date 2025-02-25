@@ -32,7 +32,7 @@ const BrowseByCategory = () => {
         hasBeenVisible ? `animate-fade-left-right` : ""
       }`}>
         <div className="flex gap-2">
-          Browse by 
+          Browse:
           <span className="text-purple-500">Category.</span>
         </div>
         <p className="text-[10px] md:text-[13px] leading-4 font-light">
