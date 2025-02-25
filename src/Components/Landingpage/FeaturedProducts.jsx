@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Cards from "../Cards/Cards";
+import CardsNew from "../Cards/CardsNew";
 
 const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -63,7 +64,7 @@ const FeaturedProducts = () => {
                   hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 300}` : ""
                 }`}
               >
-                <Cards product={products.product} />
+                <CardsNew product={products.product} />
               </div>
             ))
           ) : (
