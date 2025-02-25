@@ -6,55 +6,63 @@ import Marquee from './Marquee'
 const Footer = () => {
   return (
     <div>
-      <div className=" min-h-[70vh] flex flex-col items-center bg-gray-200 text-black">
+      <div className=" min-h-[60vh] flex flex-col items-center bg-gray-200 text-black">
         <div className="w-full h-2 shadow-2xl bg-gray-500"></div>
         
-          <div className="flex pt-14 justify-between w-full px-28">
+          <div className="flex flex-col md:flex-row pt-14 justify-between w-full px-8 py-10 md:px-28">
           <div className="">
             <img src={logo} alt="" className="h-40" />
           </div>
           <div className="grid lg:flex gap-10 grid-cols-2 ">
             <div className="">
-              <h1 className='text-2xl font-semibold '>QuickLinks</h1>
-              <div className="flex pl-4 pt-2 flex-col">
+              <h1 className='text-xl md:text-2xl font-semibold '>QuickLinks</h1>
+              <div className="flex text-xs md:text-sm pl-4 pt-2 flex-col">
               <NavLink className="hover:underline font-light">Home</NavLink>
               <NavLink className="hover:underline font-light ">About</NavLink>
               <NavLink className="hover:underline font-light ">All Collection</NavLink>
               <NavLink className="hover:underline font-light ">Contact</NavLink>
               <NavLink className="hover:underline font-light ">Cart</NavLink>
               <NavLink className="hover:underline font-light ">Orders</NavLink>
+              <NavLink className="hover:underline font-light ">Cart</NavLink>
+              <NavLink className="hover:underline font-light ">Orders</NavLink>
+              <NavLink className="hover:underline font-light ">Cart</NavLink>
               </div>
             </div>
 
             <div className="grid lg:flex gap-10 grid-cols-2 ">
             <div className="">
-              <h1 className='text-2xl font-semibold '>QuickLinks</h1>
-              <div className="flex pl-4 pt-2 flex-col">
+              <h1 className='text-xl md:text-2xl font-semibold '>QuickLinks</h1>
+              <div className="flex text-xs md:text-sm pl-4 pt-2 flex-col">
               <NavLink className="hover:underline font-light">Home</NavLink>
               <NavLink className="hover:underline font-light ">About</NavLink>
               <NavLink className="hover:underline font-light ">All Collection</NavLink>
               <NavLink className="hover:underline font-light ">Contact</NavLink>
               <NavLink className="hover:underline font-light ">Cart</NavLink>
               <NavLink className="hover:underline font-light ">Orders</NavLink>
+              <NavLink className="hover:underline font-light ">Orders</NavLink>
               </div>
             </div>
             </div>
 
             <div className="">
-              <h1 className='text-2xl font-semibold '>QuickLinks</h1>
-              <div className="flex pl-4 pt-2 flex-col">
+              <h1 className='text-xl md:text-2xl font-semibold '>QuickLinks</h1>
+              <div className="flex text-xs md:text-sm pl-4 pt-2 flex-col">
               <NavLink className="hover:underline font-light ">Home</NavLink>
               <NavLink className="hover:underline font-light ">About</NavLink>
               <NavLink className="hover:underline font-light ">All Collection</NavLink>
               <NavLink className="hover:underline font-light ">Contact</NavLink>
               <NavLink className="hover:underline font-light ">Cart</NavLink>
               <NavLink className="hover:underline font-light ">Orders</NavLink>
+              <NavLink className="hover:underline font-light ">Cart</NavLink>
+              <NavLink className="hover:underline font-light ">Orders</NavLink>
+              <NavLink className="hover:underline font-light ">Cart</NavLink>
+              <NavLink className="hover:underline font-light ">Orders</NavLink>
               </div>
             </div>
 
             <div className="">
-              <h1 className='text-2xl font-semibold '>QuickLinks</h1>
-              <div className="flex pl-4 pt-2 flex-col">
+              <h1 className='text-xl md:text-2xl font-semibold '>QuickLinks</h1>
+              <div className="flex text-xs md:text-sm pl-4 pt-2 flex-col">
               <NavLink className="hover:underline font-light ">Home</NavLink>
               <NavLink className="hover:underline font-light ">About</NavLink>
               <NavLink className="hover:underline font-light ">All Collection</NavLink>
