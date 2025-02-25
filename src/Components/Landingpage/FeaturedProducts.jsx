@@ -38,14 +38,14 @@ const FeaturedProducts = () => {
       <div>
         {/* Heading */}
         <h1
-          className={`text-4xl uppercase tracking-wider font-bold opacity-0 ${
+          className={`text-2xl md:text-4xl uppercase tracking-wider font-bold opacity-0 ${
             hasBeenVisible ? "animate-fade-left-right" : ""
           }`}
         >
           <div className="flex gap-3">
             Featured <span className="text-purple-500">Products.</span>
           </div>
-          <p className="text-[13px] leading-4 font-light">
+          <p className="text-[10px] md:text-[13px] leading-4 font-light">
             Enjoy Shopping and subscribe for free coupons.
           </p>
         </h1>
