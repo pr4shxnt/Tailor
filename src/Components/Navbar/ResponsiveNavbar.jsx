@@ -8,40 +8,50 @@ const ResponsiveNavbar = () => {
     const [isCollectionOpen, setIsCollectionOpen] = useState(false)
 
     return (
-        <div className='w-full bg-white z-30 fixed'>
-            <div className="w-full px-3 py-3 shadow-md flex justify-between items-center">
-                <div className="flex gap-2">
-                    <h1 className='uppercase text-3xl  font-bold tracking-wider'>Shanta</h1>
-                    <div onClick={()=>setIsCollectionOpen(!isCollectionOpen)} className="flex uppercase pb-1 text-sm font-semibold tracking-wider items-end">Collection
-
-                        <div  className="">{isCollectionOpen? <ChevronUp size={17}/> : <ChevronDown size={17}/>}</div>
-                    </div>
+        <div className="w-full bg-white z-30 fixed shadow-md">
+            <div className="w-full px-4 py-3 flex justify-between items-center">
+                {/* Brand + Collection Dropdown */}
+                <div className="flex gap-3">
+                    <h1 className="uppercase text-3xl text-gray-800 font-bold tracking-wider">Shanta</h1>
+                    <button 
+                        onClick={() => {setIsCollectionOpen(!isCollectionOpen)
+                            setMenuOpen(false)
+                        }} 
+                        className="flex items-end pb-1 text-sm font-semibold uppercase tracking-wider"
+                        aria-expanded={isCollectionOpen}
+                    >
+                        Collection {isCollectionOpen ? <ChevronUp size={17}/> : <ChevronDown size={17}/>}
+                    </button>
                 </div>
 
-                <div onClick={() => setMenuOpen(!menuOpen)} className="">
-                    {menuOpen ? <X /> : <Menu />}
-                </div>
+                {/* Mobile Menu Toggle */}
+                <button 
+                    onClick={() => {setMenuOpen(!menuOpen)
+                        setIsCollectionOpen(false)
+                    }} 
+                    className="focus:outline-none" 
+                    aria-expanded={menuOpen}
+                >
+                    {menuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
             </div>
 
-            {
-                menuOpen && <div className="absolute h-screen bg-white w-full">
-                    <div className="flex flex-col items-center gap-4 text-sm font-semibold text-gray-500  uppercase">
-                        <NavLink to='/' className="hover:text-purple-600 transition">Home</NavLink>
-                        <NavLink to='/about' className="hover:text-purple-600 transition">About</NavLink>
-                        <NavLink to='/contact' className="hover:text-purple-600 transition">Contact</NavLink>
-                    </div>
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className="absolute animate-fade-up-down opacity-0 animation-delay-100 w-full h-[50vh] shadow-xl bg-white flex flex-col items-center gap-6 pt-20 text-sm font-semibold text-gray-600 uppercase">
+                    <NavLink onClick={()=>setMenuOpen(false)} to='/' className="hover:text-purple-600 transition">Home</NavLink>
+                    <NavLink onClick={()=>setMenuOpen(false)} to='/about' className="hover:text-purple-600 transition">About</NavLink>
+                    <NavLink onClick={()=>setMenuOpen(false)} to='/contact' className="hover:text-purple-600 transition">Contact</NavLink>
                 </div>
-            }
+            )}
 
-
-            {
-                isCollectionOpen && <div className="px-1 animate-fade-up-down opacity-0  bg-transparent">
-                    <CollectionDropdown/>
+            {/* Collection Dropdown */}
+            {isCollectionOpen && (
+                <div className="absolute w-full px-1 animate-fade-up-down opacity-0 animation-delay-100">
+                    <CollectionDropdown />
                 </div>
-            }
+            )}
         </div>
-
-        
     )
 }
 
