@@ -12,12 +12,12 @@ const ResponsiveNavbar = () => {
             <div className="w-full px-4 py-3 flex justify-between items-center">
                 {/* Brand + Collection Dropdown */}
                 <div className="flex gap-3">
-                    <h1 className="uppercase text-3xl text-gray-800 font-bold tracking-wider">Shanta</h1>
+                    <h1 className="uppercase text-2xl text-gray-800 font-bold tracking-wider">Shanta</h1>
                     <button 
                         onClick={() => {setIsCollectionOpen(!isCollectionOpen)
                             setMenuOpen(false)
                         }} 
-                        className="flex items-end pb-1 text-sm font-semibold uppercase tracking-wider"
+                        className="flex items-end pb-1 text-xs font-semibold uppercase tracking-wider"
                         aria-expanded={isCollectionOpen}
                     >
                         Collection {isCollectionOpen ? <ChevronUp size={17}/> : <ChevronDown size={17}/>}
