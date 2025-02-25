@@ -36,7 +36,7 @@ const Homepage = () => {
                   </div>
                 </div>
                 <div className="text-2xl flex flex-col  justify-end items-end text-end">
-                  <h1 className="text-4xl animate-fade-in-up animation-delay-400 opacity-0">Hello,</h1>
+                  <h1 className="text-3xl animate-fade-in-up animation-delay-400 opacity-0">Hello,</h1>
                   <h1 className="animate-fade-left-right animation-delay-1000 opacity-0">{userData.name ? userData.name : "Guest User"}</h1>
                   <p className="text-xs animate-fade-left-right animation-delay-1000 opacity-0 text-purple-500 font-light underline">
                   <h1>{userData.name ? <NavLink to={`/user/account`}>View Your Acccount</NavLink> :  <NavLink to={`/login`}>Log in into Your Acccount</NavLink>}</h1>
