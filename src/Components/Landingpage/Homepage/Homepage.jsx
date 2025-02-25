@@ -23,7 +23,7 @@ const Homepage = () => {
         <div className="w-[90%] lg:w-[85%] relative mx-auto pt-24 pb-8">
           <div className="gap-8">
             <div className="">
-              <div className="text-[26px] md:text-5xl py-9 pb-3 flex flex-col md:flex-row justify-between w-full font-semibold tracking-wide space-y-2">
+              <div className="text-[26px] md:text-5xl py-9 pb-3 flex flex-col md:flex-row justify-between w-full font-semibold tracking-normal space-y-2">
                 <div className="">
                   <div className="animate-fade-in-up opacity-0 flex gap-3">
                     Walk with a Pride
