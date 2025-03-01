@@ -46,9 +46,10 @@ console.log(userData);
     }
   }, []); // Empty dependency array ensures it runs only once on mount
 
+
   
   return (
-    <AuthContext.Provider value={{ isUserAuthenticated, CartDataCount, fetchCart, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData, cartData}}>
+    <AuthContext.Provider value={{ isUserAuthenticated, CartDataCount, fetchCart, token, user, loading, setIsUserAuthenticated, setUser, setLoading, userData , setUserData, cartData}}>
       {children}
     </AuthContext.Provider>
   );
