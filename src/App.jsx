@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthProvider from "./Components/Log-in/AuthProvider"; // Import AuthProvider
- import Contact from "./Components/Contact/Contact";
+import Contact from "./Components/Contact/Contact";
 import Lmain from "./Components/Landingpage/Lmain";
 import UserLogin from "./Components/Log-in/UserLogin";
 import Homepage from "./Components/Landingpage/Homepage/Homepage";
@@ -28,13 +28,12 @@ const router = createBrowserRouter([
     element: <RootComp />,
     children: [
       { path: "/", element: <Lmain /> },
-      { path: "/login", element: <UserLogin/> },
+      { path: "/login", element: <UserLogin /> },
       { path: "/register", element: <Register /> },
       { path: "/home", element: <Homepage /> },
       { path: "/category/all_collection", element: <Collection /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <AboutUSmp /> },
-      
       { path: "/category/:masterCategory", element: <Collection /> },
       { path: "/category/:masterCategory/:category", element: <Collection /> },
       { path: "/category/:masterCategory/:category/:subCategory", element: <Collection /> },
@@ -48,7 +47,7 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPageLayout />,
     children: [{ path: "", element: <ProductCategoriesManager />, },
-    { path: "product-management", element: <ProductsManager/>, }],
+    { path: "product-management", element: <ProductsManager />, }],
   },
   {
     path: "/admin/login",
@@ -56,11 +55,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <AccountRootComp/>,
+    element: <AccountRootComp />,
     children: [{ path: "", element: 'damn bro' },
-      {path: "wishlist" , element : <WishListContainer/>},
-      {path: "account" ,element: <UserDetails/> },
-      { path: "cart", element: <CartScreen /> },
+    { path: "wishlist", element: <WishListContainer /> },
+    { path: "account", element: <UserDetails /> },
+    { path: "cart", element: <CartScreen /> },
     ],
   },
 ]);
@@ -69,7 +68,7 @@ export default function App() {
   return (
     <AuthProvider>
       <WishListProvider>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </WishListProvider>
     </AuthProvider>
   );

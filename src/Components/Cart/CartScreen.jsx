@@ -73,7 +73,7 @@ const CartScreen = () => {
       ) : error ? (
         <div className="text-red-500 text-center">{error}</div>
       ) : cart && cart.items.length > 0 ? (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {cart.items.map((item) => (
             <div key={item.productId._id} className="flex w-full md:w-auto flex-row items-center shadow-2xl border rounded-lg">
               <img src={`${import.meta.env.VITE_IMAGES}/${item.productId.images[0]}`} alt={item.productId.name} className="w-28 h-28 object-cover" />

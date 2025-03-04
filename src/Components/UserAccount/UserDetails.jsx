@@ -64,23 +64,23 @@ const UserDetails = () => {
 
     return (
         <div className="flex justify-center items-center min-h-full bg-gradient-to-b from-gray-300 to-gray-100 p-4">
-            <div className="w-full max-w-md bg-transparent hover:shadow-xl transition-all duration-500 cursor-pointer rounded-lg hover:scale-105 p-6">
+            <div className="w-full max-w-md bg-transparent hover:shadow-xl transition-all duration-500 cursor-pointer rounded-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">User Details</h2>
                 <div className="space-y-4">
-                    <div className="flex items-center space-x-3">
+                    <div className="flex  hover:scale-105 items-center space-x-3">
                         <User className="text-blue-500" />
                         <span className="text-gray-700 font-medium">{userData.name}</span>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex  hover:scale-105 items-center space-x-3">
                         <MapPin className="text-red-500" />
                         <span className="text-gray-700 font-medium">{userData.Address}</span> 
                         {/* Use "Address" here */}
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex  hover:scale-105 items-center space-x-3">
                         <Phone className="text-green-500" />
                         <span className="text-gray-700 font-medium">{userData.number}</span>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex  hover:scale-105 items-center space-x-3">
                         <Mail className="text-yellow-500" />
                         <span className="text-gray-700 font-medium">{userData.email}</span>
                     </div>

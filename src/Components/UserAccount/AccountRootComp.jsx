@@ -1,15 +1,19 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer'
 import UserSidebar from './UserSidebar'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Log-in/AuthProvider'
 import useAuth from '../../hooks/useAuth'
+import { ArrowBigRight } from 'lucide-react'
+import ResponsiveNavbar from '../Navbar/ResponsiveNavbar'
 
 const AccountRootComp = () => {
+
+
 const navigate = useNavigate()
 const { isUserAuthenticated, loading, userData } = useContext(AuthContext);
-
+const [isResponsive, setIsResponsive] = useState(false)
 
 useEffect(() => {
     if (!loading && isUserAuthenticated === false) {
@@ -24,9 +28,17 @@ useEffect(() => {
 
   return (
 <>
+<div onClick={()=>setIsResponsive(true)} className="fixed  top-28 md:hidden">
+  <ArrowBigRight size={30}/>
+</div>
+<div className="hidden md:block">
 <Navbar/>
+</div>
+<div className="md:hidden">
+  <ResponsiveNavbar/>
+</div>
 <div className="pt-[70px]  h-full flex gap-5 container w-[85%] mx-auto">
-    <UserSidebar/>
+    <UserSidebar isResponsive={isResponsive} setIsResponsive={setIsResponsive}/>
     <div className="w-full">   <Outlet/></div>
  
 </div>
