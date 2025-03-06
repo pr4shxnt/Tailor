@@ -42,6 +42,12 @@ Ensure you create a `.env` file in the root directory and add the required envir
 VITE_BACKEND_URL= edit this with your backend url
 ```
 
+## Deployment
+This website is deployed using Vercel. Link:
+```
+https://tailor-nu.vercel.app/
+```
+
 ## Contributing
 Contributions are welcome! If you’d like to improve this project, feel free to fork the repository and submit a pull request.
 
