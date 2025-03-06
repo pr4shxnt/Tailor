@@ -47,6 +47,7 @@ const useAuth = () => {
         if (decodedToken.exp * 1000 < Date.now()) {
           setIsUserAuthenticated(false);
           localStorage.removeItem("sessionid");
+          localStorage.removeItem("user");
           alert("Your session has expired. Please log in again.");
         } else {
           setToken(savedToken);
