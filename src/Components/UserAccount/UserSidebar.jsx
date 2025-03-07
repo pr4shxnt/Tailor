@@ -7,7 +7,7 @@ const UserSidebar = ({ isResponsive, setIsResponsive }) => {
   const { logout } = useAuth();
 
   return (
-    <div className={`${isResponsive ? 'fixed left-0' : 'hidden'} md:block bg-gray-100 z-[500]`}>
+    <div className={`${isResponsive ? 'fixed left-0 animate-fade-left-right' : 'hidden '} md:block bg-gray-100 z-[500]`}>
       <div className="relative  ">
         <div className="w-64 h-full bg-gray-100 p-4 shadow-md">
           {/* Close button for responsive sidebar */}

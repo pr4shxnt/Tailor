@@ -22,6 +22,7 @@ import WishListContainer from "./Components/Wishlist/WishListContainer";
 import AccountRootComp from "./Components/UserAccount/AccountRootComp";
 import UserDetails from "./Components/UserAccount/UserDetails";
 import ProductsManager from "./Components/AdminUI/ProductsManager";
+import UserDetailsMeasurement from "./Components/UserAccount/UserDetailsMeasurement";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
     element: <AccountRootComp />,
     children: [{ path: "", element: 'damn bro' },
     { path: "wishlist", element: <WishListContainer /> },
-    { path: "account", element: <UserDetails /> },
+    { path: "account", element: <UserDetailsMeasurement/> },
     { path: "cart", element: <CartScreen /> },
     ],
   },

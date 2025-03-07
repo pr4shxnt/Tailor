@@ -63,7 +63,7 @@ const UserDetails = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-full bg-gradient-to-b from-gray-300 to-gray-100 p-4">
+        <div className="flex w-full justify-center ">
             <div className="w-full max-w-md bg-transparent  transition-all duration-500 cursor-pointer rounded-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">User Details</h2>
                 <div className="space-y-4">
@@ -93,7 +93,7 @@ const UserDetails = () => {
             </div>
 
             {editModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg shadow-xl w-96">
                         <h3 className="text-xl font-semibold mb-4">Edit User Details</h3>
                         <form onSubmit={handleSubmit} className="space-y-4">
