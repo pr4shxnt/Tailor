@@ -23,6 +23,7 @@ import AccountRootComp from "./Components/UserAccount/AccountRootComp";
 import UserDetails from "./Components/UserAccount/UserDetails";
 import ProductsManager from "./Components/AdminUI/ProductsManager";
 import UserDetailsMeasurement from "./Components/UserAccount/UserDetailsMeasurement";
+import ContextProvider from "./Context/ContextProvider";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -68,9 +69,11 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <AuthProvider>
+      <ContextProvider>
       <WishListProvider>
         <RouterProvider router={router} />
       </WishListProvider>
+      </ContextProvider>
     </AuthProvider>
   );
 }
