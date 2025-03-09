@@ -1,9 +1,9 @@
 import React from 'react'
 
-const LowerBody = () => {
+const lowerBody = () => {
   return (
-    <div>LowerBody</div>
+    <div>lowerBody</div>
   )
 }
 
-export default LowerBody
+export default lowerBody

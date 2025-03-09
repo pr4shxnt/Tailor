@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import UpperBody from "./upperBody";
-import LowerBody from "./LowerBody";
+import lowerBody from "./lowerBody";
 import Additional from "./additional";
 
 
 const sections = [
   { key: "upperBody", label: "Upper Body", component: <UpperBody /> },
-  { key: "lowerBody", label: "Lower Body", component: <LowerBody /> },
+  { key: "lowerBody", label: "Lower Body", component: <lowerBody /> },
   { key: "additional", label: "Additional", component: <Additional /> },
 ];
 
