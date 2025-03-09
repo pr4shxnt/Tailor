@@ -24,6 +24,7 @@ import UserDetails from "./Components/UserAccount/UserDetails";
 import ProductsManager from "./Components/AdminUI/ProductsManager";
 import UserDetailsMeasurement from "./Components/UserAccount/UserDetailsMeasurement";
 import ContextProvider from "./Context/ContextProvider";
+import MainMeasurementPage from "./Components/UserAccount/Measurement/MainMeasurementPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
     { path: "cart", element: <CartScreen /> },
     ],
   },
+  {
+    path: "/user/measurement",
+    element: <MainMeasurementPage/>,
+  }
 ]);
 
 export default function App() {
