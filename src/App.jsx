@@ -63,12 +63,13 @@ const router = createBrowserRouter([
     { path: "wishlist", element: <WishListContainer /> },
     { path: "account", element: <UserDetailsMeasurement/> },
     { path: "cart", element: <CartScreen /> },
+    {
+      path: "measurement",
+      element: <MainMeasurementPage/>,
+    },
     ],
   },
-  {
-    path: "/user/measurement",
-    element: <MainMeasurementPage/>,
-  }
+ 
 ]);
 
 export default function App() {

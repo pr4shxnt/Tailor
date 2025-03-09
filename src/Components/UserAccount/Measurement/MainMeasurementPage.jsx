@@ -4,6 +4,7 @@ import UpperBody from "./upperBody";
 import LowerBody from "./LowerBody";
 import Additional from "./additional";
 
+
 const sections = [
   { key: "upperBody", label: "Upper Body", component: <UpperBody /> },
   { key: "lowerBody", label: "Lower Body", component: <LowerBody /> },

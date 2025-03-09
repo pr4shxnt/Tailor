@@ -42,7 +42,7 @@ const Measurement = () => {
         <div className='w-full'>
             <h2>Measurement Details</h2>
             {error ? <p>{error}</p> : <div className=""></div> }
-            {error == "Measurement not found" ? <Link to={`/measurement-user`}>Add measurement</Link> : null}
+            {error == "Measurement not found" ? <Link to={`/user/measurement`}>Add measurement</Link> : null}
         </div>
     );
 };

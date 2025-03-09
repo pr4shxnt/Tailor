@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect, useCallback } from "react";
 
 export const Context = createContext();
 
@@ -7,8 +7,8 @@ const ContextProvider = ({ children }) => {
   const userId = localStorage.getItem("user");
   const token = localStorage.getItem("sessionid");
 
-
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // Upper Body Measurements
   const [upperBodyData, setUpperBodyData] = useState({
@@ -26,10 +26,6 @@ const ContextProvider = ({ children }) => {
     jacketLength: "",
   });
 
-
-
-
-
   // Lower Body Measurements
   const [lowerBodyData, setLowerBodyData] = useState({
     waist: "",
@@ -45,9 +41,6 @@ const ContextProvider = ({ children }) => {
     crotchLengthBack: "",
   });
 
-
-
-
   // Additional Measurements
   const [additionalData, setAdditionalData] = useState({
     bustPointToBustPoint: "",
@@ -58,9 +51,36 @@ const ContextProvider = ({ children }) => {
     backWidth: "",
   });
 
+  const fetchMeasurement = useCallback(async () => {
+    if (!userId) {
+      setError("User ID not found");
+      setLoading(false);
+      return;
+    }
 
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/measurement/${userId}`
+      );
+      setUpperBodyData(response.data.upperBody || {});
+      setLowerBodyData(response.data.lowerBody || {});
+      setAdditionalData(response.data.additional || {});
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+      if (error.response && error.response.status === 404) {
+        setError(error.response.data.message);
+      } else {
+        setError("Error fetching measurement");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [userId]);
 
-  
+  useEffect(() => {
+    fetchMeasurement();
+  }, [fetchMeasurement]);
+
   // Function to save measurements
   const saveMeasurement = async () => {
     try {
@@ -75,10 +95,14 @@ const ContextProvider = ({ children }) => {
         }
       );
       console.log("Measurement saved:", response.data);
+      
+      // Fetch updated measurement data after saving
+      fetchMeasurement();
     } catch (error) {
       console.error("Error saving measurement:", error);
     }
   };
+  
 
   return (
     <Context.Provider
@@ -90,6 +114,8 @@ const ContextProvider = ({ children }) => {
         additionalData,
         setAdditionalData,
         saveMeasurement,
+        loading,
+        error,
       }}
     >
       {children}
