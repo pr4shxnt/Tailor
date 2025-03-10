@@ -18,32 +18,38 @@ const formSections = [
 ];
 
 const UpperBody = () => {
-  const { upperBodyData, setUpperBodyData } = useContext(Context);
+  const { upperBodyData, setUpperBodyData, saveMeasurement } = useContext(Context);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUpperBodyData((prevData) => ({
-      ...prevData,
+    setUpperBodyData((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
 
-  const nextForm = () => {
-    if (currentIndex < formSections.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
-  const prevForm = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+    try {
+      await saveMeasurement();
+      alert("Measurements saved successfully!");
+    } catch (err) {
+      setError("Error saving measurements. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center space-x-6 p-4">
-      {/* Image Side - Dynamically changes */}
+      {/* Image Side */}
       <div className="w-1/2 hidden md:block">
         <img
           src={formSections[currentIndex].image}
@@ -53,7 +59,7 @@ const UpperBody = () => {
       </div>
 
       {/* Form Side */}
-      <div className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
+      <form onSubmit={handleSubmit} className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
         <h3 className="text-lg font-semibold mb-4">{formSections[currentIndex].label}</h3>
 
         <input
@@ -65,39 +71,37 @@ const UpperBody = () => {
           onChange={handleChange}
         />
 
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+
         {/* Navigation Controls */}
         <div className="flex items-center justify-between mt-6">
-          {/* Previous Button */}
           <button
-            onClick={prevForm}
-            disabled={currentIndex === 0}
+            type="button"
+            onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
             className="p-2 text-gray-600 hover:text-black disabled:text-gray-300 disabled:cursor-not-allowed"
+            disabled={currentIndex === 0}
           >
             <ChevronLeft size={32} />
           </button>
 
-          {/* Navigation Dots */}
-          <div className="flex space-x-1">
-            {formSections.map((_, index) => (
-              <span
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentIndex ? "bg-blue-500" : "bg-gray-300"
-                }`}
-              ></span>
-            ))}
-          </div>
-
-          {/* Next Button */}
           <button
-            onClick={nextForm}
-            disabled={currentIndex === formSections.length - 1}
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+            disabled={loading}
+          >
+            {loading ? "Saving..." : "Save"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentIndex((prev) => Math.min(formSections.length - 1, prev + 1))}
             className="p-2 text-gray-600 hover:text-black disabled:text-gray-300 disabled:cursor-not-allowed"
+            disabled={currentIndex === formSections.length - 1}
           >
             <ChevronRight size={32} />
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

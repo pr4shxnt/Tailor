@@ -1,13 +1,27 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../../Context/ContextProvider";
-import axios from "axios";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const formSections = [
+  { key: "waist", label: "Waist", image: "/images/waist.png" },
+  { key: "hip", label: "Hip", image: "/images/hip.png" },
+  { key: "thigh", label: "Thigh", image: "/images/thigh.png" },
+  { key: "knee", label: "Knee", image: "/images/knee.png" },
+  { key: "calf", label: "Calf", image: "/images/calf.png" },
+  { key: "ankle", label: "Ankle", image: "/images/ankle.png" },
+  { key: "inseamLength", label: "Inseam Length", image: "/images/inseam-length.png" },
+  { key: "outseamLength", label: "Outseam Length", image: "/images/outseam-length.png" },
+  { key: "crotchDepth", label: "Crotch Depth", image: "/images/crotch-depth.png" },
+  { key: "crotchLengthFront", label: "Crotch Length Front", image: "/images/crotch-length-front.png" },
+  { key: "crotchLengthBack", label: "Crotch Length Back", image: "/images/crotch-length-back.png" },
+];
 
 const LowerBody = () => {
   const { lowerBodyData, setLowerBodyData, saveMeasurement } = useContext(Context);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLowerBodyData((prev) => ({
@@ -16,51 +30,37 @@ const LowerBody = () => {
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    try {
-      await saveMeasurement();
-      alert("Measurements saved successfully!");
-    } catch (err) {
-      setError("Error saving measurements. Please try again.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-md">
-      <h2 className="text-xl font-bold mb-4">Lower Body Measurements</h2>
+    <div className="flex flex-col md:flex-row items-center justify-center space-x-6 p-4">
+      <div className="w-1/2 hidden md:block">
+        <img
+          src={formSections[currentIndex].image}
+          alt={formSections[currentIndex].label}
+          className="w-full h-auto object-contain"
+        />
+      </div>
 
-      {error && <p className="text-red-500">{error}</p>}
+      <form className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
+        <h3 className="text-lg font-semibold mb-4">{formSections[currentIndex].label}</h3>
 
-      {Object.keys(lowerBodyData).map((key) => (
-        <div key={key} className="mb-2">
-          <label className="block text-sm font-semibold capitalize">{key.replace(/([A-Z])/g, " $1")}</label>
-          <input
-            type="text"
-            name={key}
-            value={lowerBodyData[key]}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          />
+        <input
+          type="number"
+          name={formSections[currentIndex].key}
+          className="w-full p-2 border rounded-md"
+          value={lowerBodyData[formSections[currentIndex].key]}
+          onChange={handleChange}
+        />
+
+        <div className="flex items-center justify-between mt-6">
+          <button type="button" onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}>
+            <ChevronLeft size={32} />
+          </button>
+          <button type="button" onClick={() => setCurrentIndex((prev) => Math.min(formSections.length - 1, prev + 1))}>
+            <ChevronRight size={32} />
+          </button>
         </div>
-      ))}
-
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
-        disabled={loading}
-      >
-        {loading ? "Saving..." : "Save Measurements"}
-      </button>
-    </form>
+      </form>
+    </div>
   );
 };
 
