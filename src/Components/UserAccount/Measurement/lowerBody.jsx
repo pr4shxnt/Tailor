@@ -17,7 +17,8 @@ const formSections = [
 ];
 
 const LowerBody = () => {
-  const { lowerBodyData, setLowerBodyData, saveMeasurement } = useContext(Context);
+  const { lowerBodyData, setLowerBodyData, saveMeasurement, measurementExists, 
+    setMeasurementExists } = useContext(Context);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -29,6 +30,9 @@ const LowerBody = () => {
       [name]: value,
     }));
   };
+
+  console.log(measurementExists);
+  
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center space-x-6 p-4">

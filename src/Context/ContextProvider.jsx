@@ -6,9 +6,17 @@ export const Context = createContext();
 const ContextProvider = ({ children }) => {
   const userId = localStorage.getItem("user");
   const token = localStorage.getItem("sessionid");
-
+  const [measurementExists, setMeasurementExists] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+
+
+
+
+
+
+
 
   // Upper Body Measurements
   const [upperBodyData, setUpperBodyData] = useState({
@@ -26,6 +34,16 @@ const ContextProvider = ({ children }) => {
     jacketLength: "",
   });
 
+
+
+
+
+
+
+
+
+
+
   // Lower Body Measurements
   const [lowerBodyData, setLowerBodyData] = useState({
     waist: "",
@@ -41,6 +59,18 @@ const ContextProvider = ({ children }) => {
     crotchLengthBack: "",
   });
 
+
+
+
+
+
+
+
+
+
+
+
+
   // Additional Measurements
   const [additionalData, setAdditionalData] = useState({
     bustPointToBustPoint: "",
@@ -50,6 +80,57 @@ const ContextProvider = ({ children }) => {
     dressLength: "",
     backWidth: "",
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const fetchMeasurementCheck = async()=>{
+    try{
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/measurement/exists/${userId}`
+      );
+      if(response.data.state === true){
+        setMeasurementExists(true);
+      }
+      if(response.data.state === false){
+        setMeasurementExists(false);
+      }
+    }  catch (error) {
+      console.error("Error fetching user details:", error);
+      if (error.response && error.response.status === 404) {
+        setError(error.response.data.message);
+      } else {
+        setError("Error fetching measurement");
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchMeasurementCheck();
+  }, [fetchMeasurementCheck]);
+
+
+
+
+
+
+
+
+
+
+
+
 
   const fetchMeasurement = useCallback(async () => {
     if (!userId) {
@@ -81,28 +162,69 @@ const ContextProvider = ({ children }) => {
     fetchMeasurement();
   }, [fetchMeasurement]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // Function to save measurements
   const saveMeasurement = async () => {
+    console.log("Before saving, token:", token); // Debugging
+  
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/measurement`,
-        {
-          userId,
-          token,
-          upperBody: upperBodyData,
-          lowerBody: lowerBodyData,
-          additional: additionalData,
-        }
-      );
+      const userId = localStorage.getItem("user");
+      const data = {
+        userId,
+        token,
+        upperBody: upperBodyData,
+        lowerBody: lowerBodyData,
+        additional: additionalData,
+      };
+  
+      const headers = { Authorization: `Bearer ${token}` };
+  
+      let response;
+      if (measurementExists) {
+        response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/measurement`, data, { headers });
+      } else {
+        response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/measurement`, data, { headers });
+      }
+  
       console.log("Measurement saved:", response.data);
-      
-      // Fetch updated measurement data after saving
-      fetchMeasurement();
+      fetchMeasurement(); // Refresh data after saving
+  
     } catch (error) {
       console.error("Error saving measurement:", error);
+  
+      // Check if error is due to an expired token
+      if (error.response?.status === 401) {
+        console.log("Token expired while saving measurement. Refreshing...");
+      }
     }
+  
+    console.log("After saving, token:", token); // Debugging
   };
   
+
+
+
+
+
+
+
+
 
   return (
     <Context.Provider
@@ -116,6 +238,8 @@ const ContextProvider = ({ children }) => {
         saveMeasurement,
         loading,
         error,
+        measurementExists, 
+        setMeasurementExists
       }}
     >
       {children}
