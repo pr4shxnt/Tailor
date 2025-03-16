@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import MainMeasurementPage from './Measurement/MainMeasurementPage';
+import PreviewPage from './Measurement/PreviewPage';
 
 const Measurement = () => {
     const [userMeasurement, setUserMeasurement] = useState(null);
@@ -42,7 +44,7 @@ const Measurement = () => {
         <div className='w-full'>
             <h2>Measurement Details</h2>
             {error ? <p>{error}</p> : <div className=""></div> }
-            {error == "Measurement not found" ? <Link to={`/user/measurement`}>Add measurement</Link> : null}
+            {error == "Measurement not found" ? <Link to={`/user/measurement`}>Add measurement</Link> : <PreviewPage/> }
         </div>
     );
 };

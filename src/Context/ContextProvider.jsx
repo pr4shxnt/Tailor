@@ -214,7 +214,7 @@ const ContextProvider = ({ children }) => {
       }
     }
   
-    console.log("After saving, token:", token); // Debugging
+    console.log("After saving, token:", token); // Debugging    
   };
   
 
