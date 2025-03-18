@@ -48,9 +48,9 @@ const UpperBody = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center space-x-6 p-4">
+    <div className="flex flex-col md:flex-row items-center w-full justify-center md:space-x-6 p-4">
       {/* Image Side */}
-      <div className="w-1/2 hidden md:block">
+      <div className="w-full md:w-1/2">
         <img
           src={formSections[currentIndex].image}
           alt={formSections[currentIndex].label}
@@ -60,7 +60,7 @@ const UpperBody = () => {
 
       {/* Form Side */}
       <form className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
-        <h3 className="text-lg font-semibold mb-4">{formSections[currentIndex].label}</h3>
+        <h3 className="text-lg w-full font-semibold mb-4">{formSections[currentIndex].label}</h3>
 
         <input
           type="number"

@@ -31,8 +31,8 @@ const Additional = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center space-x-6 p-4">
-      <div className="w-1/2 hidden md:block">
+    <div className="flex flex-col md:flex-row items-center justify-center md:space-x-6 p-4">
+      <div className="md:w-1/2 w-full">
         <img
           src={formSections[currentIndex].image}
           alt={formSections[currentIndex].label}

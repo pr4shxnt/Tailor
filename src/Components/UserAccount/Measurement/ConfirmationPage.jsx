@@ -29,12 +29,12 @@ const ConfirmationPage = () => {
   return (
     <div>
       <div className=" mx-auto py-16">
-        <div className="grid grid-cols-2 items-start gap-12 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-12 ">
           <div>
             <h2 className="text-3xl font-bold mb-6">Upper Body Measurements</h2>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid  grid-cols-1 md:grid-cols-2 gap-2">
               {Object.keys(upperBodyData).map((key) => (
-                <div className=" p-3 flex items-center gap-3 rounded-lg" key={key}>
+                <div className=" p-2 md:p-3 flex items-center gap-3 rounded-lg" key={key}>
                   <h3 className="font-semibold ">{key}:</h3>
                   <p className="text-sm text-gray-600">{upperBodyData[key]}</p>
                 </div>
@@ -43,9 +43,9 @@ const ConfirmationPage = () => {
           </div>
           <div>
             <h2 className="text-3xl font-bold mb-6">Lower Body Measurements</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.keys(lowerBodyData).map((key) => (
-                <div className=" p-3 flex items-center gap-3 rounded-lg" key={key}>
+                <div className=" p-2 md:p-3 flex items-center gap-3 rounded-lg" key={key}>
                   <h3 className="font-semibold ">{key}</h3>
                   <p className="text-sm text-gray-600">{lowerBodyData[key]}</p>
                 </div>
@@ -55,9 +55,9 @@ const ConfirmationPage = () => {
 
           <div>
             <h2 className="text-3xl font-bold mb-6">Additional Measurements</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.keys(additionalData).map((key) => (
-                <div className=" p-3 flex items-center gap-3 rounded-lg" key={key}>
+                <div className="p-2 md:p-3 flex items-center gap-3 rounded-lg" key={key}>
                   <h3 className="font-semibold ">{key}</h3>
                   <p className="text-sm text-gray-600">{lowerBodyData[key]}</p>
                 </div>

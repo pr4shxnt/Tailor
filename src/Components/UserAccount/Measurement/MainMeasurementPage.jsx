@@ -31,7 +31,7 @@ const MainMeasurementPage = () => {
   };
 
   return (
-    <div className=" mx-auto p-4 text-center">
+    <div className=" mx-auto relative p-4 text-center">
       <h2 className="text-xl font-semibold mb-4">{sections[currentIndex].label}</h2>
 
       <div className="p-4 bg-white shadow-lg rounded-lg transition-all flex items-center justify-between">
@@ -39,7 +39,7 @@ const MainMeasurementPage = () => {
         <button
           onClick={prevSection}
           disabled={currentIndex === 0}
-          className={`p-2 text-gray-600 hover:text-black disabled:text-gray-300 disabled:cursor-not-allowed`}
+          className={`p-2 absolute left-0 text-gray-600 hover:text-black disabled:text-gray-300 disabled:cursor-not-allowed`}
         >
           <ChevronLeft size={32} />
         </button>
@@ -50,7 +50,7 @@ const MainMeasurementPage = () => {
         <button
           onClick={nextSection}
           disabled={currentIndex === sections.length - 1}
-          className={`p-2 text-gray-600 hover:text-black disabled:text-gray-300 disabled:cursor-not-allowed`}
+          className={`p-2 absolute right-0 text-gray-600 hover:text-black disabled:text-gray-300 disabled:cursor-not-allowed`}
         >
           <ChevronRight size={32} />
         </button>
