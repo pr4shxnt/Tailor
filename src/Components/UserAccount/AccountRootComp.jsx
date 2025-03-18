@@ -7,6 +7,7 @@ import { AuthContext } from '../Log-in/AuthProvider'
 import useAuth from '../../hooks/useAuth'
 import { ArrowBigRight } from 'lucide-react'
 import ResponsiveNavbar from '../Navbar/ResponsiveNavbar'
+import ScrollToTop from '../../essUtils/ScrollToTop'
 
 const AccountRootComp = () => {
 
@@ -29,8 +30,9 @@ useEffect(() => {
   return (
 <>
 <div onClick={()=>setIsResponsive(true)} className="fixed  top-28 md:hidden">
+  
   <ArrowBigRight size={30}/>
-</div>
+</div><ScrollToTop/>
 <div className="hidden md:block">
 <Navbar/>
 </div>
