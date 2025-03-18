@@ -20,7 +20,7 @@ const formSections = [
 const UpperBody = () => {
   const { upperBodyData, setUpperBodyData, saveMeasurement } = useContext(Context);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -59,7 +59,7 @@ const UpperBody = () => {
       </div>
 
       {/* Form Side */}
-      <form onSubmit={handleSubmit} className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
+      <form className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
         <h3 className="text-lg font-semibold mb-4">{formSections[currentIndex].label}</h3>
 
         <input
@@ -84,13 +84,7 @@ const UpperBody = () => {
             <ChevronLeft size={32} />
           </button>
 
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
-            disabled={loading}
-          >
-            {loading ? "Saving..." : "Save"}
-          </button>
+         
 
           <button
             type="button"

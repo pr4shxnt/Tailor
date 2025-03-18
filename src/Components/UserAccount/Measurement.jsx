@@ -42,7 +42,6 @@ const Measurement = () => {
 
     return (
         <div className='w-full'>
-            <h2>Measurement Details</h2>
             {error ? <p>{error}</p> : <div className=""></div> }
             {error == "Measurement not found" ? <Link to={`/user/measurement`}>Add measurement</Link> : <PreviewPage/> }
         </div>

@@ -3,13 +3,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import UpperBody from "./upperBody";
 import LowerBody from "./lowerBody";
 import Additional from "./additional";
+import ConfirmationPage from "./ConfirmationPage";
 
 
 const sections = [
   { key: "upperBody", label: "Upper Body", component: <UpperBody /> },
   { key: "lowerBody", label: "Lower Body", component: <LowerBody /> },
   { key: "additional", label: "Additional", component: <Additional /> },
+  {key: "confirmation", label: "Confirmation", component: <ConfirmationPage />}
 ];
+
+
 
 const MainMeasurementPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +31,7 @@ const MainMeasurementPage = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 text-center">
+    <div className=" mx-auto p-4 text-center">
       <h2 className="text-xl font-semibold mb-4">{sections[currentIndex].label}</h2>
 
       <div className="p-4 bg-white shadow-lg rounded-lg transition-all flex items-center justify-between">

@@ -7,30 +7,35 @@ import { Trash2 } from "lucide-react";
 const CartScreen = () => {
   const { isUserAuthenticated, loading } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState({ items: [] }); // Default to an empty cart
   const [cartLoading, setCartLoading] = useState(true);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("sessionid");
   const [confirmDelete, setConfirmDelete] = useState(null);
+  
+  const token = localStorage.getItem("sessionid");
 
+  // Redirect if user is not authenticated
   useEffect(() => {
     if (!loading && isUserAuthenticated === false) {
       navigate("/login");
     }
   }, [isUserAuthenticated, loading, navigate]);
 
-  if (isUserAuthenticated === null) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  }
-
+  // Fetch cart data
   useEffect(() => {
     const loadCart = async () => {
-      if (!token) return;
+      if (!token) {
+        setError("No token found. Please log in.");
+        setCartLoading(false);
+        return;
+      }
+
       try {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${token}`);
-        setCart(response.data);
+        console.log("Cart API Response:", response.data); // Debugging Log
+        setCart(response.data || { items: [] });
       } catch (error) {
-        console.error("Error fetching cart data:", error);
+        console.error("Error fetching cart data:", error.response?.data || error.message);
         setError("Failed to load cart. Please try again later.");
       } finally {
         setCartLoading(false);
@@ -40,11 +45,14 @@ const CartScreen = () => {
     loadCart();
   }, [token]);
 
+  // Remove item from cart
   const removeItem = async (productId) => {
     try {
       await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/cart/remove/${productId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
+      // Update cart state after removal
       setCart((prevCart) => {
         const updatedItems = prevCart.items.filter((item) => item.productId._id !== productId);
         return {
@@ -60,52 +68,81 @@ const CartScreen = () => {
   };
 
   return (
-    <div className="container mx-auto "> 
+    <div className="container mx-auto p-4">
       <div className="flex w-full justify-between mb-3">
-        <div className=""> <h2 className="text-3xl text-center font-bold mb-6">Your Cart</h2></div>
+        <h2 className="text-3xl font-bold">Your Cart</h2>
         <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">
-          Checkout <p className="font-light text-xs lowercase">NPR. {cart && cart.items.length > 0 ? cart.totalPrice : "Add items to cart"}</p>
+          Checkout <p className="font-light text-xs lowercase">
+            NPR {cart.items.length > 0 ? cart.totalPrice : "Add items to cart"}
+          </p>
         </div>
       </div>
 
-      {cartLoading ? (
-        <div className="flex justify-center items-center h-screen">Loading cart...</div>
-      ) : error ? (
-        <div className="text-red-500 text-center">{error}</div>
-      ) : cart && cart.items.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      {/* Loading State */}
+      {cartLoading && (
+        <div className="flex justify-center items-center h-64">Loading cart...</div>
+      )}
+
+      {/* Error Message */}
+      {error && <div className="text-red-500 text-center">{error}</div>}
+
+      {/* Cart Items */}
+      {!cartLoading && cart.items.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cart.items.map((item) => (
-            <div key={item.productId._id} className="flex w-full md:w-auto flex-row items-center shadow-2xl border rounded-lg">
-              <img src={`${import.meta.env.VITE_IMAGES}/${item.productId.images[0]}`} alt={item.productId.name} className="w-28 h-28 object-cover" />
-              <div className="flex flex-col md:flex-row justify-between flex-grow px-4 md:gap-6">
-                <div>
-                  <h3 className=" text-lg md:text-xl font-semibold">{item.productId.name.slice(0,13) + ".."} (x {item.quantity})</h3>
-                  <p className="text-gray-600 text-xs md:text-sm">NPR {item.price} x {item.quantity} = NPR {item.price * item.quantity}</p>
-                  <NavLink to={`/product/${item.productId._id}`}>
-                    <button className="text-blue-500 text-sm font-light hover:underline">View Product</button>
-                  </NavLink>
-                </div>
-                <button
-                  className=" rounded-full text-red-500 hover:text-red-300 transition"
-                  onClick={() => setConfirmDelete(item.productId._id)}
-                >
-                  <Trash2 />
-                </button>
+            <div key={item.productId._id} className="flex flex-row items-center shadow-md border rounded-lg p-4">
+              {/* Product Image (Fallback added) */}
+              <img
+                src={item.images?.[0] || "/default-image.jpg"}
+                alt={item.productId?.name || "Product"}
+                className="w-24 h-24 object-cover rounded"
+              />
+
+              {/* Product Info */}
+              <div className="flex flex-col justify-between flex-grow px-4">
+                <h3 className="text-lg font-semibold">
+                  {item.productId?.name?.slice(0, 13) + "..."} (x {item.quantity})
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  NPR {item.price} x {item.quantity} = NPR {item.price * item.quantity}
+                </p>
+                <NavLink to={`/product/${item.productId._id}`} className="text-blue-500 text-sm hover:underline">
+                  View Product
+                </NavLink>
               </div>
+
+              {/* Delete Button */}
+              <button className="text-red-500 hover:text-red-300 transition" onClick={() => setConfirmDelete(item.productId._id)}>
+                <Trash2 />
+              </button>
             </div>
           ))}
         </div>
       ) : (
-        <div className="flex justify-center items-center h-screen">Your cart is empty.</div>
+        !cartLoading && <div className="flex justify-center items-center h-40 text-lg">Your cart is empty.</div>
       )}
-      
+
+      {/* Delete Confirmation Modal */}
       {confirmDelete && (
         <div className="fixed top-0 left-0 w-screen h-full bg-opacity-70 backdrop-blur-sm bg-black flex justify-center items-center">
           <div className="bg-white w-96 p-6 rounded-lg shadow-lg">
-            <p className="text-lg font-semibold mb-4">Do you really wish to remove {cart.items.find(item => item.productId._id === confirmDelete)?.productId.name} from your Cart?</p>
+            <p className="text-lg font-semibold mb-4">
+              Do you really wish to remove{" "}
+              {cart.items.find((item) => item.productId._id === confirmDelete)?.productId.name} from your Cart?
+            </p>
             <div className="flex justify-between">
-              <button className="px-4 py-2 bg-gray-300 rounded-md" onClick={() => setConfirmDelete(null)}>No</button>
-              <button className="px-4 py-2 bg-red-500 text-white rounded-md" onClick={() => { removeItem(confirmDelete); setConfirmDelete(null); }}>Yes, Delete</button>
+              <button className="px-4 py-2 bg-gray-300 rounded-md" onClick={() => setConfirmDelete(null)}>
+                No
+              </button>
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded-md"
+                onClick={() => {
+                  removeItem(confirmDelete);
+                  setConfirmDelete(null);
+                }}
+              >
+                Yes, Delete
+              </button>
             </div>
           </div>
         </div>
