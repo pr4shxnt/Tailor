@@ -213,7 +213,7 @@ const ContextProvider = ({ children }) => {
         console.log("Token expired while saving measurement. Refreshing...");
       }
     }
-  
+
     console.log("After saving, token:", token); // Debugging    
   };
   
