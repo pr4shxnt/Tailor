@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Heart, Home, Scroll, Search, ShoppingCart, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import CollectionDropdown from '../Dropdown/CollectionDropdown';
+import ThemeToggle from '../Cards/ThemeToggle';
 
 const Navbar = () => {
 
@@ -78,7 +79,7 @@ const Navbar = () => {
                             
                         </NavLink>
 
-                       
+                       <ThemeToggle/>
 
                         {/* Profile */}
                       

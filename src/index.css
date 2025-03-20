@@ -3,6 +3,22 @@
 @tailwind utilities;
 
 
+body.light{
+  --primary-color: #9b4dca;
+  --secondary-color: #2ecc71;
+}
+
+body.dark{
+  background-color: black;
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
+
+body.light{
+  background-color: white;
+  color: black;
+  transition: all 0.5s ease-in-out;
+}
 
 .container{
   margin: auto;

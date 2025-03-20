@@ -10,13 +10,20 @@ const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // 🌙 Theme State Management
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
+  useEffect(() => {
+    // Apply theme to <body> on mount and whenever theme changes
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-
-
-
-
-
+  // Function to toggle theme
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   // Upper Body Measurements
   const [upperBodyData, setUpperBodyData] = useState({
@@ -34,16 +41,6 @@ const ContextProvider = ({ children }) => {
     jacketLength: "",
   });
 
-
-
-
-
-
-
-
-
-
-
   // Lower Body Measurements
   const [lowerBodyData, setLowerBodyData] = useState({
     waist: "",
@@ -59,18 +56,6 @@ const ContextProvider = ({ children }) => {
     crotchLengthBack: "",
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
   // Additional Measurements
   const [additionalData, setAdditionalData] = useState({
     bustPointToBustPoint: "",
@@ -81,56 +66,21 @@ const ContextProvider = ({ children }) => {
     backWidth: "",
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  const fetchMeasurementCheck = async()=>{
-    try{
+  const fetchMeasurementCheck = async () => {
+    try {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/measurement/exists/${userId}`
       );
-      if(response.data.state === true){
-        setMeasurementExists(true);
-      }
-      if(response.data.state === false){
-        setMeasurementExists(false);
-      }
-    }  catch (error) {
+      setMeasurementExists(response.data.state);
+    } catch (error) {
       console.error("Error fetching user details:", error);
-      if (error.response && error.response.status === 404) {
-        setError(error.response.data.message);
-      } else {
-        setError("Error fetching measurement");
-      }
+      setError(error.response?.data?.message || "Error fetching measurement");
     }
-  }
+  };
 
   useEffect(() => {
     fetchMeasurementCheck();
-  }, [fetchMeasurementCheck]);
-
-
-
-
-
-
-
-
-
-
-
-
+  }, []);
 
   const fetchMeasurement = useCallback(async () => {
     if (!userId) {
@@ -148,11 +98,7 @@ const ContextProvider = ({ children }) => {
       setAdditionalData(response.data.additional || {});
     } catch (error) {
       console.error("Error fetching user details:", error);
-      if (error.response && error.response.status === 404) {
-        setError(error.response.data.message);
-      } else {
-        setError("Error fetching measurement");
-      }
+      setError(error.response?.data?.message || "Error fetching measurement");
     } finally {
       setLoading(false);
     }
@@ -162,27 +108,8 @@ const ContextProvider = ({ children }) => {
     fetchMeasurement();
   }, [fetchMeasurement]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Function to save measurements
   const saveMeasurement = async () => {
-    console.log("Before saving, token:", token); // Debugging
-  
     try {
       const userId = localStorage.getItem("user");
       const data = {
@@ -192,43 +119,31 @@ const ContextProvider = ({ children }) => {
         lowerBody: lowerBodyData,
         additional: additionalData,
       };
-  
+
       const headers = { Authorization: `Bearer ${token}` };
-  
+
       let response;
       if (measurementExists) {
         response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/measurement`, data, { headers });
       } else {
         response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/measurement`, data, { headers });
       }
-  
+
       console.log("Measurement saved:", response.data);
       fetchMeasurement(); // Refresh data after saving
-  
     } catch (error) {
       console.error("Error saving measurement:", error);
-  
-      // Check if error is due to an expired token
       if (error.response?.status === 401) {
         console.log("Token expired while saving measurement. Refreshing...");
       }
     }
-
-    console.log("After saving, token:", token); // Debugging    
   };
-  
-
-
-
-
-
-
-
-
 
   return (
     <Context.Provider
       value={{
+        theme,
+        toggleTheme, // 🌙 Expose theme functions to all components
         upperBodyData,
         setUpperBodyData,
         lowerBodyData,
@@ -238,8 +153,8 @@ const ContextProvider = ({ children }) => {
         saveMeasurement,
         loading,
         error,
-        measurementExists, 
-        setMeasurementExists
+        measurementExists,
+        setMeasurementExists,
       }}
     >
       {children}
