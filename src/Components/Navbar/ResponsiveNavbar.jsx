@@ -2,6 +2,7 @@ import { ChevronDown, ChevronUp, Menu, X } from 'lucide-react'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import CollectionDropdown from '../Dropdown/CollectionDropdown'
+import ThemeToggle from '../Cards/ThemeToggle'
 
 const ResponsiveNavbar = () => {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -25,7 +26,7 @@ const ResponsiveNavbar = () => {
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                <button 
+                <div className="flex gap-3"> <button 
                     onClick={() => {setMenuOpen(!menuOpen)
                         setIsCollectionOpen(false)
                     }} 
@@ -34,6 +35,10 @@ const ResponsiveNavbar = () => {
                 >
                     {menuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
+                
+                <ThemeToggle/></div>
+               
+
             </div>
 
             {/* Mobile Menu */}
