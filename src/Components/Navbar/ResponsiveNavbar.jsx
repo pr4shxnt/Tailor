@@ -9,7 +9,7 @@ const ResponsiveNavbar = () => {
     const [isCollectionOpen, setIsCollectionOpen] = useState(false)
 
     return (
-        <div className="w-full bg-primary text-tertiary z-30 fixed shadow-second-primary shadow-md">
+        <div className="w-full bg-primary text-tertiary z-30 fixed  shadow-md">
             <div className="w-full px-4 py-3 flex justify-between items-center">
                 {/* Brand + Collection Dropdown */}
                 <div className="flex gap-3">
