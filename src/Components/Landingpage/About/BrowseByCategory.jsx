@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const categories = [
-  { id: 1, name: "Electronics", img: "https://via.placeholder.com/150" },
-  { id: 2, name: "Clothing", img: "https://via.placeholder.com/150" },
-  { id: 3, name: "Home & Kitchen", img: "https://via.placeholder.com/150" },
-  { id: 4, name: "Beauty & Health", img: "https://via.placeholder.com/150" },
+  { id: 1, link:"category/women/traditionals", name: "Traditionals for Women", img: "https://via.placeholder.com/150" },
+  { id: 2, link:"category/formal/men", name: "Formal Clothing for Men", img: "https://via.placeholder.com/150" },
+  { id: 3, link:"category/men/partywear", name: "Partywear for Men", img: "https://via.placeholder.com/150" },
+  { id: 4, link:"category/swimming", name: "Swimming Costumes", img: "https://via.placeholder.com/150" },
 ];
 
 const BrowseByCategory = () => {
@@ -46,7 +46,7 @@ const BrowseByCategory = () => {
           <div 
             key={category.id} 
             className={`bg-gray-200 text-gray-800 rounded-[3px] shadow-lg text-center p-4 opacity-0 ${
-              hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 300}` : ""
+              hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 200}` : ""
             }`}
           >
             <img src={category.img} alt={category.name} className="w-full h-40 object-cover rounded-md" />

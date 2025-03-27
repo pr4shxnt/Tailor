@@ -1,5 +1,6 @@
 import ImageCarousel from "./Carousels"
 import backgroundImage from "../../../assets/white-minimal-hexagons-background/5134336.jpg"
+import backgroundDark from "../../../assets/backgroundDark.jpg"
 import SlidingIcon from "../../Cards/SlidingIcons";
 import { Home } from "lucide-react";
 import { AuthContext } from "../../Log-in/AuthProvider";
@@ -7,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../Context/ContextProvider";
 import useAuth from "../../../hooks/useAuth";
 import { NavLink } from "react-router-dom";
+
 
 const Homepage = () => {
 
@@ -28,7 +30,7 @@ const Homepage = () => {
   return (
     <section
     className={`pb-11 md:min-h-screen container mx-auto bg-cover bg-center ${isDark ? "bg-black" : ""}`}
-    style={{ backgroundImage: `url(${theme === "dark" ? "" : backgroundImage })` }}
+    style={{ backgroundImage: `url(${theme === "dark" ? backgroundDark : backgroundImage })` }}
   >
       <div className="container mx-auto">
         <div className="w-[90%] lg:w-[85%] relative mx-auto pt-24 pb-8">

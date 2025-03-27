@@ -5,17 +5,32 @@ const images = [
   {
     url: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba',
     alt: 'Scenic mountain landscape',
-    text: 'Men Collection'
+    text: 'Men Collection',
+    link: "category/men"
   },
   {
     url: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538',
     alt: 'Women Collection',
-    text: 'Women Collection'
+    text: 'Women Collection',
+     link: "category/women"
   },
   {
     url: 'https://images.unsplash.com/photo-1682687220795-796d3f6f7000',
     alt: 'Unisex',
-    text: 'Unisex Collection'
+    text: 'Unisex Collection',
+     link: "category/unisex"
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1682687220795-796d3f6f7000',
+    alt: 'Formals',
+    text: 'Formals Collection',
+     link: "category/formal"
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1682687220795-796d3f6f7000',
+    alt: 'Casuals',
+    text: 'Casuals Collection',
+     link: "category/casual"
   },
   
 ];
@@ -57,7 +72,7 @@ export default function ImageCarousel() {
               <div className="text-center">
                 <div className="text-3xl font-medium mb-4">{image.text}</div>
                 <Link
-                  to="/shop"
+                  to={image.link}
                   className="inline-block text-sm uppercase border border-white px-6 py-3 hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Shop now
