@@ -54,13 +54,13 @@ const FeaturedProducts = () => {
         {/* Featured Product Grid */}
         <div
           ref={sectionRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-8"
         >
           {featuredProducts.length > 0 ? (
             featuredProducts.map((products, index) => (
               <div
                 key={products._id}
-                className={`bg-gray-200 text-gray-800 rounded-[3px] shadow-lg text-center opacity-0 ${
+                className={`bg-primary text-tertiary rounded-[3px] shadow-lg text-center opacity-0 ${
                   hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 300}` : ""
                 }`}
               >
