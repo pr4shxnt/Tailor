@@ -24,17 +24,17 @@ const Navbar = () => {
 
     return (
         <div className="z-[100] w-full fixed animate-fade-up-down opacity-0 animation-delay-300">
-            <div className={`container ${isScrollTriggered? "bg-gray-100 transition-all ease-in-out duration-500 shadow-2xl" : "transition-all ease-in-out duration-500"} mx-auto px-10`}>
+            <div className={`container ${isScrollTriggered? " bg-primary transition-all ease-in-out duration-500 shadow-2xl" : "transition-all  ease-in-out duration-500"} mx-auto px-10`}>
                 <div className="flex justify-between items-center">
                     {/* Left Section */}
                     <div className="flex items-center gap-6">
-                        <NavLink to='/' className="text-3xl py-4 font-bold uppercase tracking-wider text-gray-700 hover:text-gray-500 transition-all duration-300">
+                        <NavLink to='/' className="text-3xl py-4 font-bold uppercase tracking-wider text-tertiary hover:text-gray-500 transition-all duration-300">
                             Shanta
                         </NavLink>
                         
                         {/* Collections Dropdown */}
                         <div className="group pt-6 pb-4 h-full relative">
-                            <NavLink to='/category/all_collection' className='text-xs font-semibold tracking-wider uppercase text-gray-700 hover:text-purple-600 transition'>
+                            <NavLink to='/category/all_collection' className='text-xs font-semibold tracking-wider uppercase text-tertiary hover:text-purple-600 transition'>
                                 Collections
                             </NavLink>
                             <div className="hidden fixed left-0 right-0 w-full group-hover:flex top-16">
@@ -53,7 +53,7 @@ const Navbar = () => {
                     
                     {/* Right Section */}
                     <div className="flex items-center gap-6">
-                        <div className="flex gap-4 text-sm font-semibold text-gray-500  uppercase">
+                        <div className="flex gap-4 text-sm font-semibold text-tertiary  uppercase">
                             <NavLink to='/' className="hover:text-purple-600 transition">Home</NavLink>
                             <NavLink to='/about' className="hover:text-purple-600 transition">About</NavLink>
                             <NavLink to='/contact' className="hover:text-purple-600 transition">Contact</NavLink>

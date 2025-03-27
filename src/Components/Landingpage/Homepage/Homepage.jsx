@@ -3,22 +3,33 @@ import backgroundImage from "../../../assets/white-minimal-hexagons-background/5
 import SlidingIcon from "../../Cards/SlidingIcons";
 import { Home } from "lucide-react";
 import { AuthContext } from "../../Log-in/AuthProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../../Context/ContextProvider";
 import useAuth from "../../../hooks/useAuth";
 import { NavLink } from "react-router-dom";
 
 const Homepage = () => {
 
-  const {isUserAuthenticated, userData} = useContext(AuthContext)
-  console.log(userData);
+  const {isUserAuthenticated, userData} = useContext(AuthContext);
+  const { theme } = useContext(Context);
   const { login, logout, token } = useAuth();
+
+  
+  
+  const [isDark, setIsDark] = useState(false);
+
+
+ 
+  
+
+  console.log(isDark);
   
 
   return (
-    <section 
-      className="pb-11 md:min-h-screen container mx-auto bg-cover bg-center" 
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <section
+    className={`pb-11 md:min-h-screen container mx-auto bg-cover bg-center ${isDark ? "bg-black" : ""}`}
+    style={{ backgroundImage: `url(${theme === "dark" ? "" : backgroundImage })` }}
+  >
       <div className="container mx-auto">
         <div className="w-[90%] lg:w-[85%] relative mx-auto pt-24 pb-8">
           <div className="gap-8">

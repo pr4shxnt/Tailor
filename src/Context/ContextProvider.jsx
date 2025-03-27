@@ -10,6 +10,7 @@ const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+
   // 🌙 Theme State Management
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -17,6 +18,7 @@ const ContextProvider = ({ children }) => {
     // Apply theme to <body> on mount and whenever theme changes
     document.body.classList.remove("light", "dark");
     document.body.classList.add(theme);
+
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -143,7 +145,7 @@ const ContextProvider = ({ children }) => {
     <Context.Provider
       value={{
         theme,
-        toggleTheme, // 🌙 Expose theme functions to all components
+        toggleTheme, 
         upperBodyData,
         setUpperBodyData,
         lowerBodyData,
