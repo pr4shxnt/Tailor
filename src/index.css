@@ -2,191 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
-body.light{
-  --primary-color: #9b4dca;
-  --secondary-color: #2ecc71;
+:root {
+  --primary-color: #e5e7eb;
+  --secondary-color: #9ca3af;
+  --second-primary-color: white;
+  --second-secondary-color: #374151;
+  --tertiary-color: #1f2937;
+  --secondary-tertiary-color: black;
 }
 
-body.dark{
-  background-color: black;
-  color: white;
-  transition: all 0.5s ease-in-out;
-}
+body.light {
+  --primary-color: #e5e7eb;
+  --secondary-color: #9ca3af;
+  --second-primary-color: white;
+  --second-secondary-color: #374151;
+  --tertiary-color: #1f2937;
+  --secondary-tertiary-color: black;
 
-body.light{
   background-color: white;
   color: black;
   transition: all 0.5s ease-in-out;
 }
 
+body.dark {
+  --primary-color: black;
+  --secondary-color: #1f2937;
+  --second-primary-color: #374151;
+  --second-secondary-color: #9ca3af;
+  --tertiary-color: #e5e7eb;
+  --secondary-tertiary-color: white;
+
+  background-color: black;
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
+
 .container{
   margin: auto;
-}
-
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* For modern browsers */
-element {
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-}
-
-element::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
-}
-
-/* For modern browsers */
-
-/* For Firefox */
-html {
-  scrollbar-width: none; /* Disables scrollbar */
-}
-
-/* For Internet Explorer and Edge */
-html {
-  -ms-overflow-style: none; /* Disables scrollbar */
-}
-
-/* For Chrome, Safari, and Opera */
-html::-webkit-scrollbar {
-  display: none; /* Hides scrollbar */
-}
-
-/* Add this to your global CSS file or inside a <style> tag */
-
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 10px; /* Scrollbar width */
-  height: 2px; /* Horizontal scrollbar height */
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #f0f0f0; /* Track color */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #eb8f41; /* Thumb color */
-  border-radius: 4px; /* Rounded corners */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #d97706; /* Hover color */
-}
-
-
-.logout-panel{
-  display: none;
-  position: absolute;
-}
-
-/* For the entire HTML page */
-
-
-
-.profile-name:hover>.logout-panel{
-  display: block;
-}
-
-.fa-brands{
-  filter: drop-shadow(gray 3px 3px 3px);
-}
-
-
-
-@media (max-width: 768px) {
-  .mapping-elem{
-    display: grid;
-    grid-column: auto;
-    justify-content: space-around;
-  }
-
-  .address12{
-    font-size: 16px;
-  }
-
-
-  .img-container{
-    display: none;
-  }
-
-  .imgbox{
-    display: none;
-  }
-
-  .about-text-box{
-    width: 80%;
-  }
-
-  .flex-box2{
-    flex-direction: column;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .about-text-box2{
-    width: 80%;
-    text-align: center;
-  }
-
-  .txtBox1{
-    z-index: 1;
-  }
-
-  .menuMbl{
-    z-index: 50;
-  }
-
- .Damnbox{
-  width: 100%;
-  padding: 20px;
-  }
-  
-
-  .fa-brands{
-    padding: 4px;
-    font-size: 50px;
-  }
-
-  .form-flexbox1{
-    flex-direction: column;
-    gap: 10px;
-  }
-  }
-
-  
-.fa-solid,.fa-regular{
-  font-size: 3vh;
-}
-
-.damnCart{
-  color: white;
-}
-
-.item {
-  width: auto;
-  max-width: 150px;
-  margin: 0 15px;
-  aspect-ratio: 3/2;
-  object-fit: contain;
-}
-
-.mover {
-  display: flex;
-  background-color: white;
-  animation: scroll 20s linear infinite;
-  
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-25%);
-  }
 }
