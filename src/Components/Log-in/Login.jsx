@@ -58,6 +58,9 @@ const Login = ({ LoginModel, setIsLoginModel }) => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
             />
+            <Link to="/password-reset" className="text-center text-sm text-blue-500">
+              Forgot Password?
+            </Link>
             <button className="bg-black hover:bg-zinc-900 p-2 rounded-xl text-white">
               Login
             </button>

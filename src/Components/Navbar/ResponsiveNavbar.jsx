@@ -43,7 +43,7 @@ const ResponsiveNavbar = () => {
 
             {/* Mobile Menu */}
             {menuOpen && (
-                <div className="absolute animate-fade-up-down opacity-0 animation-delay-100 w-full h-[50vh] shadow-xl bg-white flex flex-col items-center gap-6 pt-20 text-sm font-semibold text-gray-600 uppercase">
+                <div className="absolute animate-fade-up-down opacity-0 animation-delay-100 w-full h-[50vh] shadow-xl bg-second-primary text-tertiary flex flex-col items-center gap-6 pt-20 text-sm font-semibold text-gray-600 uppercase">
                     <NavLink onClick={()=>setMenuOpen(false)} to='/' className="hover:text-purple-600 transition">Home</NavLink>
                     <NavLink onClick={()=>setMenuOpen(false)} to='/about' className="hover:text-purple-600 transition">About</NavLink>
                     <NavLink onClick={()=>setMenuOpen(false)} to='/contact' className="hover:text-purple-600 transition">Contact</NavLink>
