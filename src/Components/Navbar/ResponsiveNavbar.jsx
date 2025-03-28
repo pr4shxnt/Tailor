@@ -12,8 +12,8 @@ const ResponsiveNavbar = () => {
         <div className="w-full bg-primary text-tertiary z-30 fixed  shadow-md">
             <div className="w-full px-4 py-3 flex justify-between items-center">
                 {/* Brand + Collection Dropdown */}
-                <div className="flex gap-3">
-                    <h1 className="uppercase text-3xl  font-bold tracking-wider">Shanta</h1>
+                <div className="flex gap-2">
+                    <h1 className="uppercase text-2xl  font-bold tracking-wider">Shanta</h1>
                     <button 
                         onClick={() => {setIsCollectionOpen(!isCollectionOpen)
                             setMenuOpen(false)
@@ -26,7 +26,9 @@ const ResponsiveNavbar = () => {
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                <div className="flex gap-3"> <button 
+                <div className="flex gap-3">
+                <ThemeToggle/>
+                     <button 
                     onClick={() => {setMenuOpen(!menuOpen)
                         setIsCollectionOpen(false)
                     }} 
@@ -36,7 +38,7 @@ const ResponsiveNavbar = () => {
                     {menuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
                 
-                <ThemeToggle/></div>
+                </div>
                
 
             </div>
