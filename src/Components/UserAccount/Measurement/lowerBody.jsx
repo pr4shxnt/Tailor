@@ -44,7 +44,7 @@ const LowerBody = () => {
         />
       </div>
 
-      <form className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
+      <form className="w-full md:w-1/2 bg-second-primary p-6 shadow-lg rounded-lg">
         <h3 className="text-lg font-semibold mb-4">{formSections[currentIndex].label}</h3>
 
         <input

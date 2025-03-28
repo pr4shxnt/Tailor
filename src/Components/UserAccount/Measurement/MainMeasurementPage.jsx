@@ -34,7 +34,7 @@ const MainMeasurementPage = () => {
     <div className=" mx-auto relative p-4 text-center">
       <h2 className="text-xl font-semibold mb-4">{sections[currentIndex].label}</h2>
 
-      <div className="p-4 bg-white shadow-lg rounded-lg transition-all flex items-center justify-between">
+      <div className="p-4 bg-second-primary transition-all flex items-center justify-between">
         {/* Previous Button - Disabled on First Section */}
         <button
           onClick={prevSection}

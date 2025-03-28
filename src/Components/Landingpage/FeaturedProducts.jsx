@@ -61,7 +61,7 @@ const FeaturedProducts = () => {
               <div
                 key={products._id}
                 className={`bg-primary text-tertiary rounded-[3px] shadow-lg text-center opacity-0 ${
-                  hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 300}` : ""
+                  hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 200}` : ""
                 }`}
               >
                 <CardsNew product={products.product} />

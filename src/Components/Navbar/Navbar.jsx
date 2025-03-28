@@ -61,7 +61,7 @@ const Navbar = () => {
                         
                         {/* Separator */}
         
-                        <div className="w-1 min-w-[1.5px] rounded-full bg-black h-8"></div>
+                        <div className="w-1 min-w-[1.5px] rounded-full bg-tertiary h-8"></div>
 
                         {/* Wishlist */}
                         <NavLink to='/user/account' className="group flex items-center">

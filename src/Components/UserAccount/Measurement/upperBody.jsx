@@ -59,7 +59,7 @@ const UpperBody = () => {
       </div>
 
       {/* Form Side */}
-      <form className="w-full md:w-1/2 bg-white p-6 shadow-lg rounded-lg">
+      <form className="w-full md:w-1/2 bg-second-primary p-6 shadow-lg rounded-lg">
         <h3 className="text-lg w-full font-semibold mb-4">{formSections[currentIndex].label}</h3>
 
         <input

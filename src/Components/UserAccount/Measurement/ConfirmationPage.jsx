@@ -35,8 +35,8 @@ const ConfirmationPage = () => {
             <div className="grid  grid-cols-1 md:grid-cols-2 gap-2">
               {Object.keys(upperBodyData).map((key) => (
                 <div className=" p-2 md:p-3 flex items-center gap-3 rounded-lg" key={key}>
-                  <h3 className="font-semibold ">{key}:</h3>
-                  <p className="text-sm text-gray-600">{upperBodyData[key]}</p>
+                  <h3 className="font-semibold text-tertiary ">{key}:</h3>
+                  <p className="text-sm text-tertiary">{upperBodyData[key]}</p>
                 </div>
               ))}
             </div>
@@ -46,8 +46,8 @@ const ConfirmationPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.keys(lowerBodyData).map((key) => (
                 <div className=" p-2 md:p-3 flex items-center gap-3 rounded-lg" key={key}>
-                  <h3 className="font-semibold ">{key}</h3>
-                  <p className="text-sm text-gray-600">{lowerBodyData[key]}</p>
+                  <h3 className="font-semibold text-tertiary ">{key}</h3>
+                  <p className="text-sm text-tertiary">{lowerBodyData[key]}</p>
                 </div>
               ))}
             </div>
@@ -58,8 +58,8 @@ const ConfirmationPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.keys(additionalData).map((key) => (
                 <div className="p-2 md:p-3 flex items-center gap-3 rounded-lg" key={key}>
-                  <h3 className="font-semibold ">{key}</h3>
-                  <p className="text-sm text-gray-600">{lowerBodyData[key]}</p>
+                  <h3 className="font-semibold text-tertiary ">{key}</h3>
+                  <p className="text-sm text-tertiary">{lowerBodyData[key]}</p>
                 </div>
               ))}
             </div>
