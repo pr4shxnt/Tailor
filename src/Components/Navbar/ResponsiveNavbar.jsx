@@ -10,7 +10,7 @@ const ResponsiveNavbar = () => {
 
     return (
         <div className="w-full bg-primary text-tertiary z-30 fixed  shadow-md">
-            <div className="w-full px-4 pt-4  flex justify-between items-center">
+            <div className="w-full px-4 pt-3 pb-1.5 flex justify-between items-center">
                 {/* Brand + Collection Dropdown */}
                 <div className="flex gap-2">
                     <h1 className="uppercase text-2xl font-bold tracking-wider">Shanta</h1>
