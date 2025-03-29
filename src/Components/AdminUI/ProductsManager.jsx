@@ -2,22 +2,51 @@ import axios from "axios";
 import { MoreVertical } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
+
 const ProductCard = ({ product }) => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isFeatured, setIsFeatured] = useState(false);
+    const [isBestSelling, setIsBestSelling] = useState(false);
+    const [isRecommended, setIsRecommended] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-
-    const handleAddToFeatured = async () => {
+    const checkFeaturedList = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/featured`, {
-                productId: product._id, // Properly sending the ID inside an object
-            });
-            alert("Product added to featured successfully!");
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/featured/check/${product._id}`);
+            setIsFeatured(response.data.state);
         } catch (error) {
-            console.error("Error adding to featured:", error);
-            alert("Failed to add product to featured.");
+            console.error("Error fetching featured products:", error);
         }
     };
-    
+
+    useEffect(() => {
+        checkFeaturedList();
+    }, [product._id]);
+
+
+    const toggleFeatured = async () => {
+        setIsLoading(true);
+        try {
+            if (isFeatured) {
+                // If already featured, remove it
+                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/featured/${product._id}`);
+                alert("Product removed from featured successfully!");
+            } else {
+                // If not featured, add it
+                await axios.post(`${import.meta.env.VITE_BACKEND_URL}/featured`, {
+                    productId: product._id,
+                });
+                alert("Product added to featured successfully!");
+            }
+            setIsFeatured(!isFeatured); // Toggle state after update
+        } catch (error) {
+            console.error("Error toggling featured status:", error);
+            alert("Failed to update product featured status.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
 
     return (
         <div key={product._id} className="p-4 bg-gray-100 rounded-lg relative">
@@ -48,8 +77,8 @@ const ProductCard = ({ product }) => {
                     <button className="block w-full text-left px-4 py-2 hover:bg-gray-200">
                         Add to Recommended
                     </button>
-                    <button onClick={handleAddToFeatured} className="block w-full text-left px-4 py-2 hover:bg-gray-200">
-                        Add to Featured
+                    <button onClick={toggleFeatured} className="block w-full text-left px-4 py-2 hover:bg-gray-200">
+                        {isFeatured ? "Remove from Featured" : "Add to Featured"}
                     </button>
                     <button className="block w-full text-left px-4 py-2 hover:bg-gray-200">
                         Add to Best Selling
