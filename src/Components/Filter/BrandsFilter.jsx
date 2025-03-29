@@ -18,7 +18,7 @@ const BrandsFilter = ({ brands = [], setFilteredBrands, selectedBrands = [] }) =
 
   return (
     <div className="m-5">
-      <h3 className="font-semibold text-lg text-gray-700">Brands</h3>
+      <h3 className="font-semibold text-lg text-tertiary">Brands</h3>
 
       {/* Search bar */}
       <div className="h-10 flex font-light items-center  mr-2 my-2 ">
@@ -28,7 +28,7 @@ const BrandsFilter = ({ brands = [], setFilteredBrands, selectedBrands = [] }) =
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full relative pl-7 p-2 bg-gray-100 outline-primary border-none rounded-full"
+          className="w-full relative pl-7 p-2 bg-second-primary outline-tertiary border-none rounded-full"
         />
         <FontAwesomeIcon icon={faSearch} className="ml-2 absolute text-gray-500 mr-2" />
       </div>

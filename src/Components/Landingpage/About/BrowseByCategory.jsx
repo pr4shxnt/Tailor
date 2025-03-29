@@ -45,11 +45,11 @@ const BrowseByCategory = () => {
         {categories.map((category, index) => (
           <div 
             key={category.id} 
-            className={`bg-gray-200 text-gray-800 rounded-[3px] shadow-lg text-center p-4 opacity-0 ${
+            className={`bg-gray-200 w-80 h-80 text-gray-800 rounded-[3px] shadow-lg text-center p-4 opacity-0 ${
               hasBeenVisible ? `animate-fade-in-up animation-delay-${index * 200}` : ""
             }`}
           >
-            <img src={category.img} alt={category.name} className="w-full h-40 object-cover rounded-md" />
+            <img src={category.img} alt={category.name} className="w-full h-full object-cover rounded-md" />
             <h2 className="mt-2 text-lg font-semibold">{category.name}</h2>
           </div>
         ))}

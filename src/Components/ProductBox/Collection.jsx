@@ -103,6 +103,7 @@ const Collection = () => {
 
   return (
     <section className=" pt-16 lg:mx-10 mb-20 min-h-screen">
+      <div className="w-full h-80 bg-primary"></div>
       <div className="flex flex-col">
         {/* Mobile Sort/Filter Button */}
         <div className="block fixed top-[61px] z-20 border-t w-full  lg:hidden">
@@ -126,7 +127,7 @@ const Collection = () => {
         {/* Breadcrumbs */}
         <div className="hidden lg:block">
           {brand ? null : (
-            <p className="pt-10 text-xs text-gray-500">
+            <p className="pt-10 text-xs text-tertiary">
               <Link to="/"><span className="text-blue-400">Home</span></Link>
               <Link to={`/category/all_collection`}>{"> All Products"}</Link>
               <Link to={`/category/${encodeURIComponent(masterCategory)}`}>{masterCategory ? ` > ${masterCategory.charAt(0).toUpperCase() + masterCategory.slice(1)}` : ""}</Link>
@@ -136,7 +137,7 @@ const Collection = () => {
           )}
         </div>
 
-        <div className="flex lg:bg-white mt-5 pt-5 lg:pt-0 pb-3 lg:pb-14">
+        <div className="flex lg:bg-primary mt-5 pt-5 lg:pt-0 pb-3 lg:pb-14">
           {/* Desktop Filter Component */}
           <div className="hidden lg:block">
             <FilterComp

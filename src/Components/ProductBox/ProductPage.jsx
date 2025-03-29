@@ -68,7 +68,7 @@ const ProductPage = ({
           <div className="relative hidden lg:block" ref={dropdownRef}>
             <button
               onClick={() => setIsSortDropdownVisible((prev) => !prev)}
-              className="text-sm text-gray-700 w-56 rounded-full border-gray-400 border"
+              className="text-sm text-tertiary w-56 rounded-full border-tertiary border"
             >
               <div className="flex w-full items-start justify-between px-3 py-2.5">
                 <p>{showCase ? showCase : 'Sort By'}</p>
@@ -91,15 +91,15 @@ const ProductPage = ({
             </button>
 
             {isSortDropdownVisible && (
-              <div className="absolute z-20 right-0 mt-2 w-48 bg-white shadow-md border rounded">
-                <ul className="py-2 text-sm text-gray-700">
+              <div className="absolute z-20 right-0 mt-2 w-48 bg-second-primary shadow-md border rounded">
+                <ul className="py-2 text-sm text-tertiary">
                   <li
                     onClick={() => {
                       setSortState('asc');
                       setSortOrder('asc');
                       setIsSortDropdownVisible(false);
                     }}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    className="px-4 py-2 hover:bg-secondary cursor-pointer"
                   >
                     Price: Low to High
                   </li>
@@ -109,7 +109,7 @@ const ProductPage = ({
                       setSortOrder('desc');
                       setIsSortDropdownVisible(false);
                     }}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    className="px-4 py-2 hover:bg-secondary cursor-pointer"
                   >
                     Price: High to Low
                   </li>

@@ -24,7 +24,7 @@ const FilterComp = ({
       <div className="flex justify-between px-5 pt-3 items-center">
         <h1 className="text-xl font-bold">Filter</h1>
         <button
-          className="text-primary flex justify-center px-3 items-center gap-1 font-thin text-sm"
+          className="text-secondary-tertiary flex justify-center px-3 items-center gap-1 font-thin text-sm"
           onClick={handleReset}
         >
           Reset

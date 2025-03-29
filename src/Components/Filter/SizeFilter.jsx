@@ -19,7 +19,7 @@ const SizeFilter = ({ sizes = [], setFilteredSizes, selectedSizes = [] }) => {
 
   return (
     <div className="m-5">
-      <h3 className="font-semibold text-lg text-gray-700">Sizes</h3>
+      <h3 className="font-semibold text-lg text-tertiary">Sizes</h3>
 
       {/* Search bar */}
       <div className="h-10 flex font-light items-center  mr-2 my-2 ">
@@ -29,7 +29,7 @@ const SizeFilter = ({ sizes = [], setFilteredSizes, selectedSizes = [] }) => {
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full relative pl-7 p-2 bg-gray-100 outline-primary border-none rounded-full"
+          className="w-full relative pl-7 p-2 bg-second-primary outline-tertiary border-none rounded-full"
         />
         <FontAwesomeIcon icon={faSearch} className="ml-2 absolute text-gray-500 mr-2" />
       </div>
@@ -40,7 +40,7 @@ const SizeFilter = ({ sizes = [], setFilteredSizes, selectedSizes = [] }) => {
           filteredSizes.map((size, index) => (
             <div
               key={index}
-              className="flex px-1 items-center cursor-pointer font-light justify-between py-2.5 pr-2 border-t border-gray-300"
+              className="flex px-1 items-center cursor-pointer font-light justify-between py-2.5 pr-2 border-t border-second-secondary"
             >
               <label htmlFor={`size-${size}`} className="cursor-pointer text-sm">
                 {size}
@@ -48,7 +48,7 @@ const SizeFilter = ({ sizes = [], setFilteredSizes, selectedSizes = [] }) => {
               <input
                 type="checkbox"
                 id={`size-${size}`}
-                className="w-4 h-4 cursor-pointer"
+                className="w-4 h-4 bg-secondary cursor-pointer"
                 checked={selectedSizes.includes(size)}
                 onChange={() => handleSizeSelection(size)}
                 aria-checked={selectedSizes.includes(size)}

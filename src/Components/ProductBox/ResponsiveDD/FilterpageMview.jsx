@@ -21,10 +21,10 @@ const FilterpageMview = ({
   return (
     <div className="flex max-h-[70vh] flex-col h-screen">
       <div className="flex flex-grow pl-3">
-        <div className="flex flex-col bg-gray-200 text-start">
+        <div className="flex flex-col bg-primary text-start">
           <button
             className={`py-3 px-4 border-b-2 border-gray-100 ${
-              activeComponent === "price" ? "bg-white text-primary" : ""
+              activeComponent === "price" ? "bg-second-secondary text-primary" : ""
             }`}
             onClick={() => setActiveComponent("price")}
           >
@@ -34,8 +34,8 @@ const FilterpageMview = ({
           {/* Conditionally render the "Brands" button if brands are available */}
           {brands && brands.length > 1 && (
             <button
-              className={`py-3 px-4 border-b-2 border-gray-100 ${
-                activeComponent === "brands" ? "bg-white text-primary" : ""
+              className={`py-3 px-4 border-b-2 border-tertiary ${
+                activeComponent === "brands" ? "bg-second-secondary text-primary" : ""
               }`}
               onClick={() => setActiveComponent("brands")}
             >
@@ -45,7 +45,7 @@ const FilterpageMview = ({
 
           <button
             className={`py-3 px-4 border-b-2 border-gray-100 ${
-              activeComponent === "size" ? "bg-white text-primary" : ""
+              activeComponent === "size" ? "bg-second-secondary text-primary" : ""
             }`}
             onClick={() => setActiveComponent("size")}
           >
@@ -54,7 +54,7 @@ const FilterpageMview = ({
         </div>
 
         {/* Main content area */}
-        <div className="flex-grow bg-gray-50">
+        <div className="flex-grow ">
           {activeComponent === "brands" && (
             brands.length > 1 ? (
               <BrandsFilter
@@ -86,15 +86,15 @@ const FilterpageMview = ({
         </div>
       </div>
 
-      <div className="flex justify-end px-2.5 pb-1 bg-gray-100">
+      <div className="flex justify-end px-2.5 pb-1 ">
         <button
-          className="py-2 px-4 w-full bg-gray-600 text-white"
+          className="py-2 px-4 w-full bg-second-secondary text-tertiary"
           onClick={handleReset}
         >
           Reset
         </button>
         <button
-          className="py-2 px-4 w-full bg-black text-white"
+          className="py-2 px-4 w-full bg-second-primary text-tertiary"
           onClick={closeDiv}
         >
           Done
