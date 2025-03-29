@@ -13,7 +13,9 @@ const ResponsiveNavbar = () => {
             <div className="w-full px-4 pt-4 pb-1.5 flex justify-between items-center">
                 {/* Brand + Collection Dropdown */}
                 <div className="flex gap-2">
+                    <NavLink to='/' >
                     <h1 className="uppercase text-2xl font-bold tracking-wider">Shanta</h1>
+                    </NavLink>
                     <button 
                         onClick={() => {setIsCollectionOpen(!isCollectionOpen)
                             setMenuOpen(false)

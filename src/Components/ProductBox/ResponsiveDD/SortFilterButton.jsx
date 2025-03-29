@@ -57,10 +57,10 @@ const SortFilterButton = ({
   }, [isDiv1Visible, isDiv2Visible]);
 
   return (
-    <div className="relative">
-      <div className="flex  py-1 bg-primary">
-        <div onClick={() => setIsDiv1Visible(!isDiv1Visible)} className="w-full border-r-2 border-r-gray-200">
-          <div className="justify-center items-center  flex">
+    <div className=" top-[54px] z-20  w-full border-t border-tertiary lg:hidden fixed">
+      <div className="flex  py-1 container mx-auto w-full md:w-[85%] bg-primary">
+        <div onClick={() => setIsDiv1Visible(!isDiv1Visible)} className="w-full border-r-2 border-r-tertiary">
+          <div className="justify-center  items-center  flex">
             <div className="fill-second-secondary">
             <svg
               xmlns="http://www.w3.org/2000/svg"

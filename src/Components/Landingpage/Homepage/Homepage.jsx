@@ -59,7 +59,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        <div className="w-full animate-fade-in-up animation-delay-400 opacity-0 relative">
+        <div className="w-[85%] mx-auto animate-fade-in-up animation-delay-400 opacity-0 relative">
           <ImageCarousel />
         </div>
       </div>

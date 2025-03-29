@@ -6,6 +6,7 @@ import SortFilterButton from "./ResponsiveDD/SortFilterButton";
 import SliderComp from "../Filter/SliderComp"; // Import the SliderComp component
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Carousels from "../Landingpage/Homepage/Carousels"
 
 const Collection = () => {
   const { category, subCategory, masterCategory, brand } = useParams();
@@ -102,11 +103,13 @@ const Collection = () => {
   };
 
   return (
-    <section className=" pt-16 lg:mx-10 mb-20 min-h-screen">
-      <div className="w-full h-80 bg-primary"></div>
+    <div className=" pt-16  pb-20 min-h-screen">
+      <div className="hidden md:w-[85%] container mx-auto md:block">
+        <Carousels/>
+      </div>
       <div className="flex flex-col">
         {/* Mobile Sort/Filter Button */}
-        <div className="block fixed top-[61px] z-20 border-t w-full  lg:hidden">
+        <div className="block fixed top-[54px] z-20  w-full  lg:hidden">
           <SortFilterButton
             minPrice={filteredPrice[0]}
             maxPrice={filteredPrice[1]}
@@ -125,7 +128,7 @@ const Collection = () => {
         </div>
 
         {/* Breadcrumbs */}
-        <div className="hidden lg:block">
+        <div className="hidden container md:w-[85%] mx-auto md:block">
           {brand ? null : (
             <p className="pt-10 text-xs text-tertiary">
               <Link to="/"><span className="text-blue-400">Home</span></Link>
@@ -137,7 +140,7 @@ const Collection = () => {
           )}
         </div>
 
-        <div className="flex lg:bg-primary mt-5 pt-5 lg:pt-0 pb-3 lg:pb-14">
+        <div className="flex md:w-[85%] container mx-auto lg:bg-second-primary md:shadow-2xl md:shadow-primary mt-5 pt-9 lg:pt-0 pb-3 lg:pb-14">
           {/* Desktop Filter Component */}
           <div className="hidden lg:block">
             <FilterComp
@@ -168,7 +171,7 @@ const Collection = () => {
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

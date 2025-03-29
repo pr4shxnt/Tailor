@@ -55,7 +55,7 @@ export default function ImageCarousel() {
   };
 
   return (
-    <div className="relative w-[85%] rounded-xl mx-auto h-[350px] overflow-hidden">
+    <div className="relative  rounded-xl mx-auto h-[350px] overflow-hidden">
       {/* Image Slider */}
       <div
         className="flex transition-transform duration-500 ease-out"

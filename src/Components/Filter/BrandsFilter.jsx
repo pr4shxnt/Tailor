@@ -21,23 +21,23 @@ const BrandsFilter = ({ brands = [], setFilteredBrands, selectedBrands = [] }) =
       <h3 className="font-semibold text-lg text-tertiary">Brands</h3>
 
       {/* Search bar */}
-      <div className="h-10 flex font-light items-center  mr-2 my-2 ">
+      <div className="h-14 flex border-t border-tertiary font-light items-center  mr-2 my-2 ">
 
         <input
           type="search"
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full relative pl-7 p-2 bg-second-primary outline-tertiary border-none rounded-full"
+          className="w-full h-full relative pl-7  p-2 bg-second-primary outline-none  border-none rounded-full"
         />
-        <FontAwesomeIcon icon={faSearch} className="ml-2 absolute text-gray-500 mr-2" />
+        <FontAwesomeIcon icon={faSearch} className="ml-2 absolute text-tertiary mr-2" />
       </div>
 
       {/* Brand list */}
       <div className="overflow-auto scrollbar-thin scrollbar-thumb-gray-300 pr-2 scrollbar-track-transparent max-h-[350px] lg:max-h-80">
         {filteredBrands.length > 0 ? (
           filteredBrands.map((brand, index) => (
-            <div key={index} className="flex px-1 items-center cursor-pointer font-light justify-between py-2.5 pr-2 border-t border-gray-300">
+            <div key={index} className="flex px-1  items-center cursor-pointer font-light justify-between py-2.5 pr-2 border-t border-gray-300">
               <label htmlFor={`brand-${brand}`} className="text-sm cursor-pointer">{brand}</label>
               <input
                 type="checkbox"

@@ -22,16 +22,16 @@ const SizeFilter = ({ sizes = [], setFilteredSizes, selectedSizes = [] }) => {
       <h3 className="font-semibold text-lg text-tertiary">Sizes</h3>
 
       {/* Search bar */}
-      <div className="h-10 flex font-light items-center  mr-2 my-2 ">
+      <div className="h-14 flex border-t mt-3  border-tertiary font-light items-center  mr-2 my-2 ">
 
         <input
           type="search"
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full relative pl-7 p-2 bg-second-primary outline-tertiary border-none rounded-full"
+          className="w-full h-full relative pl-7  p-2 bg-second-primary outline-none  border-none rounded-full"
         />
-        <FontAwesomeIcon icon={faSearch} className="ml-2 absolute text-gray-500 mr-2" />
+        <FontAwesomeIcon icon={faSearch} className="ml-2 absolute text-tertiary mr-2" />
       </div>
 
       {/* Size list */}
