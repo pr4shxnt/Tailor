@@ -139,7 +139,6 @@ const Collection = () => {
             </p>
           )}
         </div>
-
         <div className="flex md:w-[85%] container mx-auto lg:bg-second-primary md:shadow-2xl md:shadow-primary mt-5 pt-9 lg:pt-0 pb-3 lg:pb-14">
           {/* Desktop Filter Component */}
           <div className="hidden lg:block">
