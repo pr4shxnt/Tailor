@@ -6,31 +6,31 @@ const images = [
     url: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba',
     alt: 'Scenic mountain landscape',
     text: 'Men Collection',
-    link: "category/men"
+    link: "category/Men"
   },
   {
     url: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538',
     alt: 'Women Collection',
     text: 'Women Collection',
-     link: "category/women"
+     link: "category/Women"
   },
   {
     url: 'https://images.unsplash.com/photo-1682687220795-796d3f6f7000',
     alt: 'Unisex',
     text: 'Unisex Collection',
-     link: "category/unisex"
+     link: "category/Unisex"
   },
   {
     url: 'https://images.unsplash.com/photo-1682687220795-796d3f6f7000',
     alt: 'Formals',
     text: 'Formals Collection',
-     link: "category/formal"
+     link: "category/Formal"
   },
   {
     url: 'https://images.unsplash.com/photo-1682687220795-796d3f6f7000',
     alt: 'Casuals',
     text: 'Casuals Collection',
-     link: "category/casual"
+     link: "category/Casual"
   },
   
 ];
