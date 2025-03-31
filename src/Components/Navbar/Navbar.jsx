@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Heart, Home, Scroll, Search, ShoppingCart, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import CollectionDropdown from '../Dropdown/CollectionDropdown';
 import ThemeToggle from '../Cards/ThemeToggle';
+import UserSidebar from "../UserAccount/UserSidebar"
+import { AuthContext } from '../Log-in/AuthProvider';
 
 const Navbar = () => {
 
         const [isScrollTriggered, setIsScrollTriggered] = useState(false);
+        const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+        const { isUserAuthenticated} = useContext(AuthContext)
+
         useEffect(() => {
             const handleScroll = () => {
               if (window.scrollY > 100) {
@@ -21,6 +26,8 @@ const Navbar = () => {
               window.removeEventListener("scroll", handleScroll);
             };
           }, []);
+
+          console.log(isUserAuthenticated)
 
     return (
         <div className="z-[100] w-full fixed animate-fade-up-down opacity-0 animation-delay-300">
@@ -63,13 +70,25 @@ const Navbar = () => {
         
                         <div className="w-1 min-w-[1.5px] rounded-full bg-tertiary h-8"></div>
 
+
+                        {  isUserAuthenticated ? <NavLink onClick={()=>setIsUserMenuOpen(!isUserMenuOpen)} className="relative flex items-center">
+                
+                           <User size={24} className="text-purple-600 transition" />
+                          
+                    {
+                       isUserMenuOpen &&  (
+                           <div className="absolute top-14 -right-20">
+                              <UserSidebar />
+                           </div>
+                       )}
+                    
+                   </NavLink> : <NavLink to='/login' className="relative flex items-center">
+                   
+                        <User size={24} className="text-purple-600 transition" />   
+
+                    </NavLink>}
                         {/* Wishlist */}
-                        <NavLink to='/user/account' className="group flex items-center">
-                           
-                                <User size={24} className="text-purple-600 transition" />
-                               
-                         
-                        </NavLink>
+                        
 
                         {/* Cart */}
                         <NavLink to='/user/cart' className="w-full">
