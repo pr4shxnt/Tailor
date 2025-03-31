@@ -139,43 +139,46 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
   };
 
   const ReviewItem = ({ review, index, showOptionsMenu }) => (
-    <div className="border-b py-3">
+    <div className="border-b py-3 w-full">
       {
         console.log(review)
         
       }
-      <div className="flex justify-between items-center">
-      <div>
+      <div className="flex w-full justify-between items-center">
+      <div className="w-full">
+        <div className="flex w-full justify-between items-center gap-2">
       <p className="text-yellow-500">
-  Rating: <div className="flex">{Array.from({ length: review.rating }).map((_, index) => (
+ <div className="flex">{Array.from({ length: review.rating }).map((_, index) => (
     <div key={index}>⭐</div>
-  ))}</div>
+  ))}
+  </div>
 </p>
-
+<MoreHorizontal
+              size={20}
+              className="cursor-pointer"
+              onClick={() => showOptionsMenu(index)}
+            />
+</div>
   
   <p className="text-gray-400 flex items-center text-sm gap-1">
     <div className="text-green-900 ">{review.user.name}</div> at{" "}
     {new Date(review.createdAt).toLocaleString()}
   </p>
-  <p className="text-gray-700 ">{review.comment}</p>
+  <p className="text-second-secondary mt-1 w-full">{review.comment}</p>
 </div>
 
         {isUserAuthenticated && review.user._id === userId && (
           <div className="relative">
-            <MoreHorizontal
-              size={20}
-              className="cursor-pointer"
-              onClick={() => showOptionsMenu(index)}
-            />
+           
             {showOptions === index && (
-              <div className="absolute top-0 right-0 mt-2 w-40 bg-white shadow-lg rounded-lg z-50">
+              <div className="absolute top-0 right-0 mt-2 w-40 bg-primary shadow-lg rounded-lg z-50">
                 <button
-                  className="block w-full text-left px-4 rounded-t-lg py-2 text-red-600 hover:bg-gray-100"
+                  className="block w-full text-left px-4 rounded-t-lg py-2 text-red-600 hover:bg-secondary"
                   onClick={() => handleDelete(review._id)}
                 >
                   Delete
                 </button>
-                <button onClick={() => showOptionsMenu(false)} className="block w-full rounded-b-lg text-left px-4 py-2 text-blue-600 hover:bg-gray-100">
+                <button onClick={() => showOptionsMenu(false)} className="block w-full rounded-b-lg text-left px-4 py-2 text-blue-600 hover:bg-secondary">
                   Close
                 </button>
               </div>
@@ -187,16 +190,16 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
   );
 
   return (
-    <div className="p-6 mt-3 bg-white shadow-lg">
+    <div className="my-16 bg-second-primary border-t border-gray-200 ">
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
           {error}
         </div>
       )}
       
-      <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+      <div className="flex mt-16 p-6 flex-col pt-10 md:flex-row justify-between items-start gap-10 shadow-2xl shadow-primary">
         <div className="w-full max-w-2xl">
-          <h1 className="text-2xl font-bold mb-4 text-gray-800">Review of {productName}</h1>
+          <h1 className="text-2xl font-bold mb-4 text-tertiary">Review of {productName}</h1>
 
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Rate this product</h3>
@@ -225,7 +228,7 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
             <div className="relative">
               <textarea
                 rows={5}
-                className={`w-full p-4 border rounded-lg resize-y focus:outline-none 
+                className={`w-full p-4 border bg-second-primary rounded-lg resize-y focus:outline-none 
                   ${!isValid ? 'border-red-300' : 'border-gray-200'}
                   focus:ring-2 focus:ring-blue-500
                   transition-colors duration-200`}
@@ -261,7 +264,7 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
                 className={`px-6 py-2 rounded-lg transition-colors duration-200
                   ${isValid && rating > 0 && review.length >= 10
                     ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-400 text-primary cursor-not-allowed'
                   }`}
                 disabled={!isValid || rating === 0 || review.length < 10 || isLoading}
               >
@@ -278,7 +281,7 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
             <p className="text-gray-500">No reviews yet.</p>
           )}
           {!isLoading && reviews.length > 0 && (
-            <>
+            <div className="w-full">
               {reviews.slice(0, 2).map((review, index) => (
                 <ReviewItem
                   key={review._id}
@@ -295,7 +298,7 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
                   See All Reviews
                 </button>
               )}
-            </>
+            </div>
           )}
         </div>
       </div>
@@ -305,7 +308,7 @@ const ProductReview = ({ productId, productName, setReviewsCount, token, isUserA
           <div ref={modalRef} className="bg-white pt-6 pl-6 pb-6 mx-2 rounded-lg max-w-2xl w-full">
             <h2 className="text-2xl font-semibold mb-4">All Reviews</h2>
 
-            <div className="h-96 md:px-6 pr-6  overflow-auto">
+            <div className="h-96 md:px-6 pr-6  overflow-auto ">
               {reviews.map((review, index) => (
                 <ReviewItem
                   key={review._id}
