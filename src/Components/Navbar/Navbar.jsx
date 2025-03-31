@@ -77,7 +77,7 @@ const Navbar = () => {
                           
                     {
                        isUserMenuOpen &&  (
-                           <div className="absolute top-14 -right-20">
+                           <div className="absolute top-12 shadow-2xl shadow-secondary -right-20">
                               <UserSidebar />
                            </div>
                        )}
