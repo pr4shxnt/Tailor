@@ -26,6 +26,7 @@ const AdminHandling = () => {
     setNewAdmin({ ...newAdmin, [name]: value });
   };
 
+  
   const handleAddAdmin = (e) => {
     e.preventDefault();
     if (newAdmin.password !== newAdmin.confirmPassword) {
