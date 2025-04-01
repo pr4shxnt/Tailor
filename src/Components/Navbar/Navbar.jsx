@@ -71,7 +71,7 @@ const Navbar = () => {
                         <div className="w-1 min-w-[1.5px] rounded-full bg-tertiary h-8"></div>
 
 
-                        {  isUserAuthenticated ? <NavLink onClick={()=>setIsUserMenuOpen(!isUserMenuOpen)} className="relative flex items-center">
+                        {  isUserAuthenticated ? <div onClick={()=>setIsUserMenuOpen(!isUserMenuOpen)} className="relative flex items-center">
                 
                            <User size={24} className="text-purple-600 transition" />
                           
@@ -82,7 +82,7 @@ const Navbar = () => {
                            </div>
                        )}
                     
-                   </NavLink> : <NavLink to='/login' className="relative flex items-center">
+                   </div> : <NavLink to='/login' className="relative flex items-center">
                    
                         <User size={24} className="text-purple-600 transition" />   
 
