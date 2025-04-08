@@ -25,6 +25,7 @@ import ProductsManager from "./Components/AdminUI/ProductsManager";
 import UserDetailsMeasurement from "./Components/UserAccount/UserDetailsMeasurement";
 import ContextProvider from "./Context/ContextProvider";
 import MainMeasurementPage from "./Components/UserAccount/Measurement/MainMeasurementPage";
+import CheckOutPage from "./Components/UserAccount/PaymentGateway/CheckOutPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
       path: "measurement",
       element: <MainMeasurementPage/>,
     },
+    {
+      path: "user-checkout",
+      element: <CheckOutPage/>
+      
+    }
     ],
   },
  
