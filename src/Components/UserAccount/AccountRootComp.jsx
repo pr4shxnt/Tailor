@@ -39,7 +39,10 @@ useEffect(() => {
 <div className="md:hidden">
   <ResponsiveNavbar/>
 </div>
-<div className="pt-[70px]  h-full flex gap-5 container w-[85%] mx-auto">
+<div className=" h-full container w-[85%] mx-auto pt-16">
+  <img src="" alt="" className="h-80 bg-black" />
+</div>
+<div className="pt-3  h-full flex gap-5 container w-[85%] mx-auto">
     <UserSidebar isResponsive={isResponsive} setIsResponsive={setIsResponsive}/>
     <div className="w-full">   <Outlet/></div>
  

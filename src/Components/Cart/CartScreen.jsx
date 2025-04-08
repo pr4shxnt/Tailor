@@ -12,6 +12,8 @@ const CartScreen = () => {
   const [error, setError] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
   
+  console.log("CartScreen Rendered"); // Debugging Log
+  console.log("Cart State:", cart.items.productId); // Debugging Log
   const token = localStorage.getItem("sessionid");
 
   // Redirect if user is not authenticated
@@ -32,7 +34,7 @@ const CartScreen = () => {
 
       try {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${token}`);
-        console.log("Cart API Response:", response.data); // Debugging Log
+
         setCart(response.data || { items: [] });
       } catch (error) {
         console.error("Error fetching cart data:", error.response?.data || error.message);
@@ -90,16 +92,17 @@ const CartScreen = () => {
       {!cartLoading && cart.items.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cart.items.map((item) => (
-            <div key={item.productId._id} className="flex flex-row items-center shadow-md border rounded-lg p-4">
+            <div key={item.productId._id} className="flex flex-row items-center shadow-md shadow-second-secondary  rounded-tl-2xl">
+
               {/* Product Image (Fallback added) */}
               <img
-                src={item.images?.[0] || "/default-image.jpg"}
+                src={item.productId?.images?.[0] || "/default-image.jpg"}
                 alt={item.productId?.name || "Product"}
-                className="w-24 h-24 object-cover rounded"
+                className="w-24 h-24 object-cover rounded-tl-2xl"
               />
 
               {/* Product Info */}
-              <div className="flex flex-col justify-between flex-grow px-4">
+              <div className="flex flex-col justify-between flex-grow  px-4">
                 <h3 className="text-lg font-semibold">
                   {item.productId?.name?.slice(0, 13) + "..."} (x {item.quantity})
                 </h3>
@@ -112,7 +115,7 @@ const CartScreen = () => {
               </div>
 
               {/* Delete Button */}
-              <button className="text-red-500 hover:text-red-300 transition" onClick={() => setConfirmDelete(item.productId._id)}>
+              <button className="text-red-500 hover:text-red-300 px-4 transition" onClick={() => setConfirmDelete(item.productId._id)}>
                 <Trash2 />
               </button>
             </div>

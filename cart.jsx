@@ -76,7 +76,7 @@ const CartScreen = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cart.items.map((item) => (
           <div key={item.productId._id} className="flex flex-col md:flex-row items-center p-4 shadow-lg border rounded-lg">
-            <img src={item.productId.image} alt={item.productId.name} className="w-24 h-24 object-cover rounded-lg" />
+            <img src={item.image} alt={item.productId.name} className="w-24 h-24 object-cover rounded-lg" />
             <div className="flex flex-col md:flex-row justify-between flex-grow px-6">
               <div>
                 <h3 className="text-xl font-semibold">{item.productId.name}</h3>
