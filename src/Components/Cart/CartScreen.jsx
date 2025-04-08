@@ -13,7 +13,7 @@ const CartScreen = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   
   console.log("CartScreen Rendered"); // Debugging Log
-  console.log("Cart State:", cart.items.productId); // Debugging Log
+  console.log("Cart State:", cart); // Debugging Log
   const token = localStorage.getItem("sessionid");
 
   // Redirect if user is not authenticated
@@ -74,9 +74,10 @@ const CartScreen = () => {
       <div className="flex w-full justify-between mb-3">
         <h2 className="text-3xl font-bold">Your Cart</h2>
         <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">
+          <NavLink to={`/user/user-checkout`}>
           Checkout <p className="font-light text-xs lowercase">
             NPR {cart.items.length > 0 ? cart.totalPrice : "Add items to cart"}
-          </p>
+          </p></NavLink>
         </div>
       </div>
 
@@ -90,9 +91,9 @@ const CartScreen = () => {
 
       {/* Cart Items */}
       {!cartLoading && cart.items.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
           {cart.items.map((item) => (
-            <div key={item.productId._id} className="flex flex-row items-center shadow-md shadow-second-secondary  rounded-tl-2xl">
+            <div key={item.productId._id} className="flex flex-row items-center shadow-2xl shadow-second-secondary  rounded-tl-2xl">
 
               {/* Product Image (Fallback added) */}
               <img
