@@ -47,19 +47,19 @@ console
   };
 
   return (
-    <div className=" w-full p-6 bg-white border   shadow-md">
+    <div className=" w-full p-6 bg-second-primary border-t border-primary shadow-md">
 
       <div className="relative">
         {/* Scroll Buttons */}
         <button
           onClick={scrollLeft}
-          className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-black text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none"
+          className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-tertiary text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none"
         >
           ‹
         </button>
         <button
           onClick={scrollRight}
-          className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-black text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:[#1a1a1a] focus:outline-none"
+          className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-tertiary text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:[#1a1a1a] focus:outline-none"
         >
           ›
         </button>
@@ -73,12 +73,12 @@ console
           {Object.keys(hierarchy).map((masterCat, index) => (
             <div
               key={index}
-              className="min-w-[250px] flex-shrink-0 bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
+              className="min-w-[250px] flex-shrink-0 bg-primary p-4 rounded shadow hover:shadow-lg transition"
             >
               {/* Link to /category/:masterCategory */}
               <Link
                 to={`/category/${encodeURIComponent(masterCat)}`}
-                className="block text-gray-900 font-bold text-lg hover:underline"
+                className="block text-tertiary font-bold text-lg hover:underline"
               >
                 {masterCat}
               </Link>
@@ -90,11 +90,11 @@ console
                       to={`/category/${encodeURIComponent(
                         masterCat
                       )}/${encodeURIComponent(cat)}`}
-                      className="block text-gray-700 font-medium hover:text-blue-500"
+                      className="block text-second-secondary font-medium hover:text-blue-500"
                     >
                       {cat}
                     </Link>
-                    <ul className="pl-4 mt-1 space-y-1 text-sm text-gray-600">
+                    <ul className="pl-4 mt-1 space-y-1 text-sm text-second-secondary">
                       {[...hierarchy[masterCat][cat]].map((subCat, id) => (
                         <li key={id}>
                           {/* Link to /category/:masterCategory/:category/:subCategory */}

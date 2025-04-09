@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Log-in/AuthProvider";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
-import { Trash2 } from "lucide-react";
+import { Trash2, ChevronRightCircleIcon, LucideShoppingBag } from "lucide-react";
 
 const CartScreen = () => {
   const { isUserAuthenticated, loading } = useContext(AuthContext);
@@ -70,14 +70,18 @@ const CartScreen = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto min-h-screen p-4">
       <div className="flex w-full justify-between mb-3">
         <h2 className="text-3xl font-bold">Your Cart</h2>
-        <div className="text-right text-xl bg-gray-600 rounded px-3 py-1 text-white font-bold">
-          <NavLink to={`/user/user-checkout`}>
-          Checkout <p className="font-light text-xs lowercase">
-            NPR {cart.items.length > 0 ? cart.totalPrice : "Add items to cart"}
-          </p></NavLink>
+        <div className="text-left text-xl bg-primary rounded px-3 py-1 text-tertiary font-bold">
+        {cart.items.length > 0 ? <NavLink className={`flex gap-4 items-center justify-center`} to={`/user/user-checkout`}><div className="">
+          <h1 className="">Checkout  </h1> <p className="font-light text-xs">
+              { "NPR" + "\u00A0" + cart.totalPrice}
+          </p></div><ChevronRightCircleIcon/></NavLink>   :
+          <NavLink className={`flex gap-4 items-center justify-center`} to={`/category/all_collection`}>
+          <div className=""><h1 className="">Cart Empty  </h1> <p className="font-light text-xs case">
+              Add items to cart
+          </p></div><LucideShoppingBag/></NavLink> }
         </div>
       </div>
 
