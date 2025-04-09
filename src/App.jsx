@@ -45,7 +45,11 @@ const router = createBrowserRouter([
       { path: "/crud", element: <MasterCategory /> },
       { path: "/crud2", element: <ProductsCRUD /> },
       { path: "/crud3", element: <AdminHandling /> },
-      { path: "/product/:id", element: <ProductsDetails /> }
+      { path: "/product/:id", element: <ProductsDetails /> },
+      {
+        path: "user/payment-success",
+        element: <PaymentSuccess/>,
+      }
     ],
   },
   {
@@ -76,10 +80,7 @@ const router = createBrowserRouter([
     }
     ],
   },
-  {
-    path: "user/payment-success",
-    element: <PaymentSuccess/>,
-  }
+ 
  
 ]);
 
