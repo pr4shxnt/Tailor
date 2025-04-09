@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import { Home } from 'lucide-react';
+import axios from 'axios';
 
 const PaymentSuccess = () => {
     const location = useLocation();
     const [decodedData, setDecodedData] = useState(null);
+    const [parsedData, setParsedData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    const user_id = localStorage.getItem('user');
 
     const isBase64 = (str) => {
         const base64Regex = /^[A-Za-z0-9+/=]+$/;
@@ -25,7 +30,7 @@ const PaymentSuccess = () => {
             if (isBase64(encodedData)) {
                 try {
                     const decoded = atob(encodedData);
-                    setDecodedData(decoded);   
+                    setDecodedData(decoded);
                 } catch (error) {
                     console.error('Error decoding Base64:', error);
                     navigate('/');   
@@ -41,15 +46,49 @@ const PaymentSuccess = () => {
 
     useEffect(() => {
         if (decodedData) {
+            setLoading(true);
             try {
                 // Parse the decoded data as JSON
-                const parsedData = JSON.parse(decodedData);
-                console.log(parsedData);  // Example: Log parsed data
+                const parsed = JSON.parse(decodedData);
+                setParsedData(parsed);
+                setLoading(false); // Set loading to false once data is parsed
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
         }
     }, [decodedData]);
+
+    const handleCreateOrder = async () => {
+        try {
+            if (loading || !parsedData) return; // Ensure loading is false and parsedData is available before sending the request
+
+            // Extract cartId from transaction_uuid (the part before the first hyphen)
+            const cartId = parsedData.transaction_uuid.split('-')[0];
+
+            // Prepare the data for the API request
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/order`, {
+                data: parsedData, 
+                cartId: cartId,  // Send the extracted cartId to the backend
+                user_id: user_id
+            });
+
+            if (response.status !== 200) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = response.data; // Assuming the response data contains the result
+            console.log('Order created successfully:', data);
+
+        } catch (error) {
+            console.error('Error creating order:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (parsedData && !loading) {
+            handleCreateOrder(); // Call handleCreateOrder only when parsedData is ready and loading is false
+        }
+    }, [parsedData, loading]); // Run effect when parsedData or loading changes
 
     return (
         <div className="text-center bg-second-primary flex flex-col justify-center items-center h-screen">
