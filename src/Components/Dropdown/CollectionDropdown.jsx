@@ -47,7 +47,7 @@ console
   };
 
   return (
-    <div className=" w-full p-6 bg-second-primary border-t border-primary shadow-md">
+    <div className=" w-full p-6 bg-primary border-t border-primary shadow-md">
 
       <div className="relative">
         {/* Scroll Buttons */}
@@ -73,7 +73,7 @@ console
           {Object.keys(hierarchy).map((masterCat, index) => (
             <div
               key={index}
-              className="min-w-[250px] flex-shrink-0 bg-primary p-4 rounded shadow hover:shadow-lg transition"
+              className="min-w-[250px] flex-shrink-0 bg-second-primary p-4 rounded shadow hover:shadow-lg transition"
             >
               {/* Link to /category/:masterCategory */}
               <Link
