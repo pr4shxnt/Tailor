@@ -18,8 +18,8 @@ const CheckOutPage = () => {
     product_code: "EPAYTEST",
     product_service_charge: "0",
     product_delivery_charge: "0",
-    success_url: "http://localhost:5173/user/payment-success",
-    failure_url: "http://localhost:5173/failure",
+    success_url: "https://tailor-nu.vercel.app/user/payment-success",
+    failure_url: "https://tailor-nu.vercel.app/user/payment-failure",
     signed_field_names: "total_amount,transaction_uuid,product_code",
     signature: "",
   });
@@ -36,7 +36,7 @@ const CheckOutPage = () => {
       ...prev,
       transaction_uuid: transactionUUID,
     }));
-  }, [cartId]);
+  }, [cartId, totalPrice]);
 
   // Update form data when total price or cart ID changes
   useEffect(() => {
@@ -51,9 +51,9 @@ const CheckOutPage = () => {
       total_amount: totalPrice.toString(),
       signature: base64Signature,
     }));
-  }, [totalPrice, formdata.transaction_uuid]); // Updated to trigger on both totalPrice and transaction_uuid
+  }, [totalPrice, formdata.transaction_uuid]); 
 
-  console.log("Form Data:", formdata); // Debugging Log
+  console.log("Form Data:", formdata);
   
   return (
     <div className="p-4 max-w-md mx-auto">

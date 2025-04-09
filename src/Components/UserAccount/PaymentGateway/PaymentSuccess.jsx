@@ -17,12 +17,11 @@ const PaymentSuccess = () => {
         const base64Regex = /^[A-Za-z0-9+/=]+$/;
         if (!base64Regex.test(str)) return false;
         const padding = str.length % 4;
-        if (padding === 1) return false; // Invalid Base64 length
+        if (padding === 1) return false;
         return true;
     };
 
     useEffect(() => {
-        // Get the query parameter "data" from the URL
         const params = new URLSearchParams(location.search);
         const encodedData = params.get('data');
 
@@ -44,14 +43,15 @@ const PaymentSuccess = () => {
         }
     }, [location.search, navigate]);
 
+
+
     useEffect(() => {
         if (decodedData) {
             setLoading(true);
             try {
-                // Parse the decoded data as JSON
-                const parsed = JSON.parse(decodedData);
+                 const parsed = JSON.parse(decodedData);
                 setParsedData(parsed);
-                setLoading(false); // Set loading to false once data is parsed
+                setLoading(false); 
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
@@ -60,15 +60,15 @@ const PaymentSuccess = () => {
 
     const handleCreateOrder = async () => {
         try {
-            if (loading || !parsedData) return; // Ensure loading is false and parsedData is available before sending the request
+            if (loading || !parsedData) return;  
 
-            // Extract cartId from transaction_uuid (the part before the first hyphen)
+             
             const cartId = parsedData.transaction_uuid.split('-')[0];
 
-            // Prepare the data for the API request
+            
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/order`, {
                 data: parsedData, 
-                cartId: cartId,  // Send the extracted cartId to the backend
+                cartId: cartId,  
                 user_id: user_id
             });
 
@@ -76,7 +76,7 @@ const PaymentSuccess = () => {
                 throw new Error('Network response was not ok');
             }
 
-            const data = response.data; // Assuming the response data contains the result
+            const data = response.data; 
             console.log('Order created successfully:', data);
 
         } catch (error) {
