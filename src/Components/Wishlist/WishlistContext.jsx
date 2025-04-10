@@ -129,6 +129,7 @@ const WishListProvider = ({ children }) => {
             addToWishList, 
             removeFromWishList,
             cartId,
+            cartItems,
             totalPrice
         }}>
             {children}

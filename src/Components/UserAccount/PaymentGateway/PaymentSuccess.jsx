@@ -9,6 +9,7 @@ const PaymentSuccess = () => {
     const [decodedData, setDecodedData] = useState(null);
     const [parsedData, setParsedData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const user_id = localStorage.getItem('user');
@@ -72,17 +73,24 @@ const PaymentSuccess = () => {
                 user_id: user_id
             });
 
-            if (response.status !== 200) {
-                throw new Error('Network response was not ok');
-            }
+
 
             const data = response.data; 
             console.log('Order created successfully:', data);
 
         } catch (error) {
             console.error('Error creating order:', error);
+            setError(error.response?.data.state); // Set error message from response or fallback to error message
         }
     };
+
+   useEffect(() => {
+        if (error === 'unAuthorized') {
+            navigate('/user/user-checkout'); // Redirect to login page if unauthorized
+        }
+    }
+    , [error]); // Run effect when loading changes
+    
 
     useEffect(() => {
         if (parsedData && !loading) {

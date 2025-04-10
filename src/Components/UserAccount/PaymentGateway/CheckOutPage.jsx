@@ -57,6 +57,7 @@ const CheckOutPage = () => {
   
   return (
     <div className="p-4 max-w-md mx-auto">
+      
       <h2 className="text-lg font-semibold mb-2">Select Payment Method</h2>
       <div className="mb-4 space-x-4">
         <label>

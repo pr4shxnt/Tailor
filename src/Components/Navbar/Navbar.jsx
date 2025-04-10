@@ -5,6 +5,7 @@ import CollectionDropdown from '../Dropdown/CollectionDropdown';
 import ThemeToggle from '../Cards/ThemeToggle';
 import UserSidebar from "../UserAccount/UserSidebar"
 import { AuthContext } from '../Log-in/AuthProvider';
+import SearchBar from './Search/SearchBar';
 
 const Navbar = () => {
 
@@ -50,12 +51,8 @@ const Navbar = () => {
                         </div>
 
                         {/* Search Bar */}
-                        <div className="relative w-96">
-                            <input type="text" placeholder='Search...' className='bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 px-4 py-2 pl-10 w-full rounded-full' />
-                            <div className="absolute top-2 left-3 text-purple-600">
-                                <Search size={20} />
-                            </div>
-                        </div>
+                        
+                        <SearchBar/>
                     </div>
                     
                     {/* Right Section */}

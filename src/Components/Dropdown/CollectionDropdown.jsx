@@ -53,13 +53,13 @@ console
         {/* Scroll Buttons */}
         <button
           onClick={scrollLeft}
-          className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-tertiary text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none"
+          className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-tertiary text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg focus:outline-none"
         >
           ‹
         </button>
         <button
           onClick={scrollRight}
-          className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-tertiary text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:[#1a1a1a] focus:outline-none"
+          className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-tertiary text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg focus:outline-none"
         >
           ›
         </button>
