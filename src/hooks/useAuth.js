@@ -178,10 +178,17 @@ const useAuth = () => {
     // Remove token from localStorage
     localStorage.removeItem("sessionid"); 
 
+
+
     // Remove user ID from localStorage
     localStorage.removeItem("user"); 
     setToken(""); 
     setUser(null);
+
+    // Redirect to home page
+    navigate("/");
+
+
 
      // Update authentication state
     setIsUserAuthenticated(false);
