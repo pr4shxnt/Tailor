@@ -84,9 +84,11 @@ const PaymentSuccess = () => {
         }
     };
 
+    console.log(error);
+    
    useEffect(() => {
         if (error === 'unAuthorized') {
-            navigate('/user/user-checkout'); // Redirect to login page if unauthorized
+            navigate('/');
         }
     }
     , [error]); // Run effect when loading changes
