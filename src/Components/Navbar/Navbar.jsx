@@ -28,7 +28,6 @@ const Navbar = () => {
             };
           }, []);
 
-          console.log(isUserAuthenticated)
 
     return (
         <div className="z-[100] w-full fixed animate-fade-up-down opacity-0 animation-delay-300">

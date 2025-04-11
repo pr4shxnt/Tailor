@@ -16,20 +16,14 @@ const Homepage = () => {
   const { theme } = useContext(Context);
   const { login, logout, token } = useAuth();
 
-  
-  
-  const [isDark, setIsDark] = useState(false);
 
-
- 
   
 
-  console.log(isDark);
   
 
   return (
     <section
-    className={`pb-11 md:min-h-screen container mx-auto bg-cover bg-center ${isDark ? "bg-black" : ""}`}
+    className={`pb-11 md:min-h-screen container mx-auto bg-cover bg-center `}
     style={{ backgroundImage: `url(${theme === "dark" ? backgroundDark : backgroundImage })` }}
   >
       <div className="container mx-auto">

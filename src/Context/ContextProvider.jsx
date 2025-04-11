@@ -81,7 +81,10 @@ const ContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchMeasurementCheck();
+    if(userId){
+         fetchMeasurementCheck();
+    }
+ 
   }, []);
 
   const fetchMeasurement = useCallback(async () => {
