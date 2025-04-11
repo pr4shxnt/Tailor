@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
   const [userData, setUserData] = useState([])
+  const [cartPrice , setCartPrice] = useState(0)
   const[CartDataCount, setCartDataCount] =useState()
   const [cartData, setCartData] = useState([])
 const token = localStorage.getItem("sessionid")
@@ -19,6 +20,7 @@ const token = localStorage.getItem("sessionid")
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${token}`);
             setCartData(response.data);
             setCartDataCount(response.data.items.length)
+            
         } catch (error) {
             console.error("Error fetching cart data:", error);
         }
@@ -27,10 +29,7 @@ const token = localStorage.getItem("sessionid")
      
     fetchCart();
     
-}, [token]); // Runs when session changes or cart updates
-
-
- 
+}, [token]); // Runs when session changes or cart updates 
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

@@ -64,25 +64,25 @@ const UserDetails = () => {
 
     return (
         <div className="flex w-full justify-center ">
-            <div className="w-full max-w-md bg-transparent  transition-all duration-500 cursor-pointer rounded-lg p-6">
+            <div className="w-full lg:w-80 bg-transparent  transition-all duration-500 cursor-pointer rounded-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">User Details</h2>
-                <div className="space-y-4">
-                    <div className="flex  hover:scale-105 transition-all duration-200 items-center space-x-3">
-                        <User className="text-blue-500" />
-                        <span className="text-gray-700 font-medium">{userData.name}</span>
+                <div className="space-y-2">
+                    <div className="flex  hover:scale-105 text-xs  transition-all duration-200 items-center space-x-3">
+                        <User className="mx-1 text-second-secondary h-10  " />NAME:
+                        <span className="text-gray-700  text-sm font-medium">{userData.name}</span>
                     </div>
-                    <div className="flex  hover:scale-105 transition-all duration-200 items-center space-x-3">
-                        <MapPin className="text-red-500" />
-                        <span className="text-gray-700 font-medium">{userData.Address}</span> 
+                    <div className="flex  hover:scale-105 text-xs transition-all duration-200 items-center space-x-3">
+                        <MapPin className="mx-1 text-second-secondary h-10  " />ADDRESS:
+                        <span className="text-gray-700 text-sm font-medium">{userData.Address.slice(0,15)+"..."}</span> 
                         {/* Use "Address" here */}
                     </div>
-                    <div className="flex  hover:scale-105 transition-all duration-200 items-center space-x-3">
-                        <Phone className="text-green-500" />
-                        <span className="text-gray-700 font-medium">{userData.number}</span>
+                    <div className="flex  hover:scale-105 text-xs transition-all duration-200 items-center space-x-3">
+                        <Phone className="mx-1 text-second-secondary h-10  " />PHONE:
+                        <span className="text-gray-700 text-sm font-medium">{userData.number}</span>
                     </div>
-                    <div className="flex  hover:scale-105 transition-all duration-200 items-center space-x-3">
-                        <Mail className="text-yellow-500" />
-                        <span className="text-gray-700 font-medium">{userData.email}</span>
+                    <div className="flex  hover:scale-105 text-xs transition-all duration-200 items-center space-x-3">
+                        <Mail className="mx-1 text-second-secondary h-10  " />EMAIL: 
+                        <span className="text-gray-700 text-sm font-medium">{userData.email.slice(0,15)+"..."}</span>
                     </div>
                     <button 
                         
