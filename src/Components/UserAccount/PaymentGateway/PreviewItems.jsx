@@ -11,7 +11,7 @@ const PreviewItems = () => {
     
     <div className='grid lg:grid-cols-3 mr-3 gap-2'>
       {
-        cartData.items.map((item) => (
+        cartData.items?.map((item) => (
 
           <NavLink to={`/product/${item.productId._id}`} key={item._id} className="flex flex-col">
           
