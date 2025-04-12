@@ -16,11 +16,13 @@ const token = localStorage.getItem("sessionid")
  
     const fetchCart = async () => {
         if (!token) return;
+
+        setLoading(true)
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/cart/${token}`);
             setCartData(response.data);
             setCartDataCount(response.data.items.length)
-            
+            setLoading(false)
         } catch (error) {
             console.error("Error fetching cart data:", error);
         }

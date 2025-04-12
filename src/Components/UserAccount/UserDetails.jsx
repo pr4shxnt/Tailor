@@ -8,6 +8,10 @@ const UserDetails = () => {
     const [editModal, setEditModal] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    if (!userData) {
+        return <div>Loading...</div>; // Handle loading state or error
+    }; // Ensure userData is available
+
     // State for holding user details
     const [formData, setFormData] = useState({
         name: userData.name || "",
@@ -73,7 +77,7 @@ const UserDetails = () => {
                     </div>
                     <div className="flex  hover:scale-105 text-xs transition-all duration-200 items-center space-x-3">
                         <MapPin className="mx-1 text-second-secondary h-10  " />ADDRESS:
-                        <span className="text-gray-700 text-sm font-medium">{userData.Address.slice(0,15)+"..."}</span> 
+                        <span className="text-gray-700 text-sm font-medium">{userData.Address?.slice(0,15)+"..."}</span> 
                         {/* Use "Address" here */}
                     </div>
                     <div className="flex  hover:scale-105 text-xs transition-all duration-200 items-center space-x-3">
@@ -82,7 +86,7 @@ const UserDetails = () => {
                     </div>
                     <div className="flex  hover:scale-105 text-xs transition-all duration-200 items-center space-x-3">
                         <Mail className="mx-1 text-second-secondary h-10  " />EMAIL: 
-                        <span className="text-gray-700 text-sm font-medium">{userData.email.slice(0,15)+"..."}</span>
+                        <span className="text-gray-700 text-sm font-medium">{userData.email?.slice(0,15)+"..."}</span>
                     </div>
                     <button 
                         

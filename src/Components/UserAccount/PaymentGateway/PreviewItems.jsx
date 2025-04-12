@@ -3,8 +3,9 @@ import { AuthContext } from '../../Log-in/AuthProvider'
 import { NavLink } from 'react-router-dom';
 
 const PreviewItems = () => {
-  const { cartData,  } = useContext(AuthContext);
+  const { cartData, loading } = useContext(AuthContext);
 
+  
   return (
 
     
