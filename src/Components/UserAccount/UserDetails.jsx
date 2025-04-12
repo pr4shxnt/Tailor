@@ -68,7 +68,7 @@ const UserDetails = () => {
 
     return (
         <div className="flex w-full justify-center ">
-            <div className="w-full lg:w-80 bg-transparent  transition-all duration-500 cursor-pointer rounded-lg p-6">
+            <div className="w-full  bg-transparent  transition-all duration-500 cursor-pointer rounded-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">User Details</h2>
                 <div className="space-y-2">
                     <div className="flex  hover:scale-105 text-xs  transition-all duration-200 items-center space-x-3">

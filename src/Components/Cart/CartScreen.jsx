@@ -95,7 +95,7 @@ const CartScreen = () => {
 
       {/* Cart Items */}
       {!cartLoading && cart.items.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-3">
           {cart.items.map((item) => (
             <div key={item.productId._id} className="flex flex-row items-center shadow-2xl shadow-second-secondary  rounded-tl-2xl">
 

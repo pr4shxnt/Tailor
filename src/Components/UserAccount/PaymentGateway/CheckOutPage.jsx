@@ -66,7 +66,7 @@ const CheckOutPage = () => {
 <div className="w-full">
   <PreviewItems/>
 </div>
-        <div className=" flex flex-col">
+        <div className="w-[45%] flex flex-col">
           <div className="shadow"><UserDetails /></div>
           
       <div className="w-full p-6 rounded-lg shadow">
