@@ -21,7 +21,7 @@ const PreviewItems = () => {
               <img src={item.productId.images[0]} alt="" className="w-full h-full object-cover" /></div>
               {console.log(item.images)
               }
-              <div className='flex flex-col bg-primary border-t border-second-primary md:w-52 w-full p-2 rounded-b'>
+              <div className='flex flex-col bg-primary border-t border-second-w md:w-52 w-full p-2 rounded-b'>
 
                 <h1 className="text-lg font-semibold">{item.productId.name.slice(0,20)+"..."}</h1>
                 <p className="text-sm text-gray-500">Size: {item.productId.size}</p>

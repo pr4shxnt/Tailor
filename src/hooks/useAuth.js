@@ -169,8 +169,6 @@ const useAuth = () => {
 
 
 
-
-
   //logout function to remove token and user from localstorage and set token to empty string
 
   const logout = () => {
