@@ -23,7 +23,7 @@ const CheckOutPage = () => {
     product_code: "EPAYTEST",
     product_service_charge: "0",
     product_delivery_charge: "0",
-    success_url: "https://tailor-nu.vercel.app/user/payment-success",
+    success_url: "http://localhost:5173/user/payment-success",
     failure_url: "https://tailor-nu.vercel.app/user/payment-failure",
     signed_field_names: "total_amount,transaction_uuid,product_code",
     signature: "",
@@ -58,8 +58,10 @@ const CheckOutPage = () => {
     }));
   }, [totalPrice, formdata.transaction_uuid, cartData ]); 
 
-  console.log("cart Data:", cartData);
+ 
+  console.log("formdata", formdata);
   
+
   return (
     <div className="p-4   mx-auto">
       <div className="flex w-full flex-col lg:flex-row justify-between mb-6">

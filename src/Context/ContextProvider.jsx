@@ -9,6 +9,7 @@ const ContextProvider = ({ children }) => {
   const [measurementExists, setMeasurementExists] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [orderContainer , setOrderContainer] = useState([]);
 
 
   // 🌙 Theme State Management
@@ -144,6 +145,27 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  const fetchOrdersByUserId = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/order/user/${userId}`
+      );
+      setOrderContainer(response.data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setError(error.response?.data?.message || "Error fetching orders");
+    }
+  }
+
+
+  useEffect(() => {
+    if (userId) {
+      fetchOrdersByUserId();
+    }
+  }, [userId]);
+
+  console.log("Order Container:", orderContainer);
+
   return (
     <Context.Provider
       value={{
@@ -160,6 +182,7 @@ const ContextProvider = ({ children }) => {
         error,
         measurementExists,
         setMeasurementExists,
+        orderContainer
       }}
     >
       {children}

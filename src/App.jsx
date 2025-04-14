@@ -27,6 +27,7 @@ import ContextProvider from "./Context/ContextProvider";
 import MainMeasurementPage from "./Components/UserAccount/Measurement/MainMeasurementPage";
 import CheckOutPage from "./Components/UserAccount/PaymentGateway/CheckOutPage";
 import PaymentSuccess from "./Components/UserAccount/PaymentGateway/PaymentSuccess";
+import OrdersPage from "./Components/UserAccount/Orders/OrdersPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       path: "user-checkout",
       element: <CheckOutPage/>
       
+    },
+    {
+      path: "orders",
+      element: <OrdersPage/>,
     }
     ],
   },
