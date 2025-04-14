@@ -23,7 +23,7 @@ const CheckOutPage = () => {
     product_code: "EPAYTEST",
     product_service_charge: "0",
     product_delivery_charge: "0",
-    success_url: import.meta.env.SUCCESS_URL,
+    success_url: import.meta.env.VITE_SUCCESS_URL,
     failure_url: "https://tailor-nu.vercel.app/user/payment-failure",
     signed_field_names: "total_amount,transaction_uuid,product_code",
     signature: "",
