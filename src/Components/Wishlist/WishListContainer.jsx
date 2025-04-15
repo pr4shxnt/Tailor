@@ -12,7 +12,7 @@ const WishListContainer = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-6 mt-3">
             {wishList?.length > 0 ? (
                
-                wishList.map((item) => (
+                wishList?.map((item) => (
                     <div className="">{console.log(item.productId)
                     }<Cards key={item.productId._id} product={item.productId} /></div>
                     
