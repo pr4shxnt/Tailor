@@ -4,7 +4,7 @@ import Cards from '../Cards/Cards';
 
 const WishListContainer = () => {
     const { wishList } = useContext(WLContext);
-    console.log(wishList);
+    console.log( 'wishlist :' , wishList);
 
     return (
         <div className=''>
@@ -22,6 +22,8 @@ const WishListContainer = () => {
                 <p>No items in wishlist</p>
             )}
         </div></div>
+
+
     );
 };
 
