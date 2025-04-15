@@ -34,16 +34,16 @@ html {
   
   
   .custom-scrollbar::-webkit-scrollbar {
-    width: 10px; /* Scrollbar width */
+    width: 1px; /* Scrollbar width */
     height: 2px; /* Horizontal scrollbar height */
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f0f0f0; /* Track color */
+    background: var(--primary-color); /* Track color */
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #eb8f41; /* Thumb color */
+    background-color: rgb(147 51 234); /* Thumb color */
     border-radius: 4px; /* Rounded corners */
   }
   
