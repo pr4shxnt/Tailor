@@ -53,7 +53,7 @@ const InitialResults = ({ query, setQuery }) => {
             ) : results.length === 0 ? (
                 <p className="text-sm text-gray-500">No products found</p>
             ) : (
-                results.map((item) => (
+                results.slice(0,10).map((item) => (
                     <Link
                         key={item._id}
                         onClick={() => setQuery("")}
