@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../../../Context/ContextProvider';
+import OrderTracking from './OrderTracking';
+import { NavLink } from 'react-router-dom';
 
 const OrdersPage = () => {
   const { orderContainer } = useContext(Context);
@@ -34,11 +36,15 @@ const OrdersPage = () => {
                 </div>
                 <p className='mt-2'>Total Amount: ${order.totalPrice}</p>
                 <p>Status: {order.status || "Pending"}</p>
+                <button className="">
+                  <NavLink to={`/user/order-track/${order._id}`}>Check</NavLink>
+                </button>
               </div>
             ))
           )}
         </div>
       </div>
+      
     </div>
   );
 };

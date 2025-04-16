@@ -28,6 +28,7 @@ import MainMeasurementPage from "./Components/UserAccount/Measurement/MainMeasur
 import CheckOutPage from "./Components/UserAccount/PaymentGateway/CheckOutPage";
 import PaymentSuccess from "./Components/UserAccount/PaymentGateway/PaymentSuccess";
 import OrdersPage from "./Components/UserAccount/Orders/OrdersPage";
+import OrderTracking from "./Components/UserAccount/Orders/OrderTracking";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
     {
       path: "orders",
       element: <OrdersPage/>,
+    },
+    {
+      path: "order-track/:orderId",
+      element: <OrderTracking/>
     }
     ],
   },
