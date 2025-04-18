@@ -32,13 +32,13 @@ const OrdersPage = () => {
                 <div className="mx-5 p-3 my-3 bg-primary text-tertiary rounded">
                 <div className='flex flex-col gap-2 pl-5'>
                   {order.Products?.map((item, idx) => (
-                    <div key={idx} title={`Click to view ${item.id.name}'s page`} className='flex tracking-wider uppercase font-light hover:scale-105 cursor-pointer transition-all duration-700 items-center gap-2'>
+                    <div key={idx} title={`Click to view ${item.id.name}'s page`} className='flex tracking-wider font-light cursor-pointer items-center gap-2'>
                       <img
                         src={item.id.images[0]}
-                        alt={item.id.name.slice(0, 8)}
+                        alt={item.id.name?.slice(0, 8)}
                         className='h-10 w-10 object-cover shadow-md'
                       />
-                      <span>{item.id.name.slice(0,10)+"..."}  x {item.quantity} </span>
+                      <span>{item.id.name?.slice(0,10)+"..."}  x {item.quantity} </span>
                     </div>
                   ))}
                 </div>
