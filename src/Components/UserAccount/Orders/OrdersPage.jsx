@@ -19,7 +19,8 @@ const OrdersPage = () => {
 
   return (
     <div>
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col '>
+        <div className="w-full text-end uppercase tracking-wide mb-4 font-bold text-2xl">Your Orders History</div>
          <div className='flex flex-col gap-5'>
           {orderContainer?.length === 0 ? (
             <p className='text-center text-gray-500'>No orders found.</p>
