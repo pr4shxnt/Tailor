@@ -29,6 +29,10 @@ import CheckOutPage from "./Components/UserAccount/PaymentGateway/CheckOutPage";
 import PaymentSuccess from "./Components/UserAccount/PaymentGateway/PaymentSuccess";
 import OrdersPage from "./Components/UserAccount/Orders/OrdersPage";
 import OrderTracking from "./Components/UserAccount/Orders/OrderTracking";
+
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,10 +52,7 @@ const router = createBrowserRouter([
       { path: "/crud2", element: <ProductsCRUD /> },
       { path: "/crud3", element: <AdminHandling /> },
       { path: "/product/:id", element: <ProductsDetails /> },
-      {
-        path: "user/payment-success",
-        element: <PaymentSuccess/>,
-      }
+      { path: "user/payment-success", element: <PaymentSuccess/>,}
     ],
   },
   {
