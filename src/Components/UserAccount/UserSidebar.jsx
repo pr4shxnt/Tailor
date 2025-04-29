@@ -22,7 +22,7 @@ const UserSidebar = ({ isResponsive, setIsResponsive }) => {
 
   return (
     <div className={`${isResponsive ? 'fixed left-0 animate-fade-left-right' : 'hidden '} md:block bg-primary
-     z-[500]`}>
+     z-20`}>
       <div className="relative  ">
         <div className="w-64 h-full  p-4">
           {/* Close button for responsive sidebar */}
