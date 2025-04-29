@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
 
 
     return (
-        <div key={product._id} className="p-4 bg-gray-100 rounded-lg relative">
+        <div key={product._id} className="p-4 bg-primary rounded-lg relative">
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-sm text-gray-600">{product.description}</p>
             <p className="text-sm text-gray-500">Brand: {product.brand}</p>
@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
             {/* Product Images */}
             <div className="flex space-x-2 mt-2">
                 {product.images.slice(0, 3).map((image, index) => (
-                    <img key={index} src={`${import.meta.env.VITE_BACKEND_URL}/${image}`} alt="Product" className="w-12 h-12 rounded" />
+                    <img key={index} src={`${image}`} alt="Product" className="w-12 h-12 rounded" />
                 ))}
             </div>
 
@@ -73,7 +73,7 @@ const ProductCard = ({ product }) => {
 
             {/* Dropdown Menu */}
             {menuOpen && (
-                <div className="absolute z-20 top-8 right-2 bg-white shadow-md p-2 rounded-md w-48">
+                <div className="absolute z-20 top-8 right-2 bg-second-primary shadow-md p-2 rounded-md w-48">
                     <button className="block w-full text-left px-4 py-2 hover:bg-gray-200">
                         Add to Recommended
                     </button>
@@ -156,11 +156,11 @@ const ProductsManager = () => {
                             setSelectedCategory("");
                             setSelectedSubCategory("");
                         }}
-                        className="p-2 border rounded-md w-full"
+                        className="p-2 rounded-md w-full bg-primary"
                     >
-                        <option value="">All Master Categories</option>
+                        <option className="bg-second-primary" value="">All Master Categories</option>
                         {Object.keys(categories).map((masterCategory) => (
-                            <option key={masterCategory} value={masterCategory}>
+                            <option className="bg-second-primary" key={masterCategory} value={masterCategory}>
                                 {masterCategory}
                             </option>
                         ))}
@@ -176,13 +176,13 @@ const ProductsManager = () => {
                             setSelectedCategory(e.target.value);
                             setSelectedSubCategory("");
                         }}
-                        className="p-2 border rounded-md w-full"
+                        className="p-2 bg-primary text-tertiary rounded-md w-full"
                         disabled={!selectedMasterCategory}
                     >
-                        <option value="">All Categories</option>
+                        <option className="bg-second-primary outline-none" value="">All Categories</option>
                         {selectedMasterCategory &&
                             Object.keys(categories[selectedMasterCategory] || {}).map((category) => (
-                                <option key={category} value={category}>
+                                <option className="bg-second-primary" key={category} value={category}>
                                     {category}
                                 </option>
                             ))}

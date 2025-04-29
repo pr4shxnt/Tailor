@@ -6,9 +6,11 @@ import SubCategorySelect from '../Components/AdminUI/SubCategory'
 const ProductCategoriesManager = () => {
   return (
     <div>
-        <MasterCategory/>
-        <Category/>
-        <SubCategorySelect/>
+      <div className="flex bg-primary">
+        <div className="w-full"><MasterCategory/></div><div className="w-full"><Category/></div><div className="w-full"><SubCategorySelect/></div>
+        
+        
+        </div>
     </div>
   )
 }

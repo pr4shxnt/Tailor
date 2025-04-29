@@ -71,7 +71,7 @@ const AdminSidebar = ({ isToggled, setIsToggled }) => {
           ) : (
             <div className="flex gap-1">
               <img
-                src="https://krishnapranami.org/assets/front/images/pranam_logo.png"
+                src=""
                 className="w-20"
                 alt=""
               />
@@ -89,7 +89,7 @@ const AdminSidebar = ({ isToggled, setIsToggled }) => {
       >
         <h1>
           <img
-            src="https://krishnapranami.org/assets/front/images/pranam_logo.png"
+            src=""
             className="w-20"
             alt=""
           />
@@ -103,7 +103,7 @@ const AdminSidebar = ({ isToggled, setIsToggled }) => {
       <ul className="sidebar-items h-[82vh] md:h-full overflow-auto flex flex-col gap-6 mt-8">
         <NavLink
           className="sidecomp hover:bg-[#EB8F41] hover:bg-opacity-80 hover:text-white rounded-lg transition-all"
-          to="dashboard"
+          to="category-management"
         >
           <li
             className={`flex items-center space-x-4  py-3 cursor-pointer  ${

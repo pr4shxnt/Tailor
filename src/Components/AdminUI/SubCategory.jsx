@@ -7,6 +7,7 @@ const SubCategorySelect = () => {
     const [selectedMasterCategory, setSelectedMasterCategory] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [newSubCategoryName, setNewSubCategoryName] = useState('');
+    const [subcategories, setSubCategories] = useState([]);
 
     // Fetch master categories on component mount
     useEffect(() => {
@@ -21,9 +22,26 @@ const SubCategorySelect = () => {
             .catch(err => console.error('Error fetching master categories:', err));
     }, []);
 
+    useEffect(() => {
+        const getSubCategories = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/subcategories`);
+                setSubCategories(response.data);
+            } catch (error) {
+                console.error('Error fetching subcategories:', error);
+            }
+        }
+        getSubCategories();
+    }, []);
+
+    console.log('subcategories', subcategories); // Debugging line to check fetched subcategories
+    console.log('masterCategories', masterCategories); // Debugging line to check fetched master categories
+    
+
     // Fetch categories when a master category is selected
     useEffect(() => {
         if (selectedMasterCategory) {
+            // If you're sending ID, you should pass selectedMasterCategoryId here
             axios.get(`${import.meta.env.VITE_BACKEND_URL}/subcategories/by-master-category/${selectedMasterCategory}`)
                 .then(res => {
                     if (Array.isArray(res.data)) {
@@ -78,63 +96,68 @@ const SubCategorySelect = () => {
                 console.error('Error creating subcategory:', err);
             });
     };
-    
 
     return (
-        <div className="p-4 pt-16">
-            <h2 className="text-xl font-semibold mb-4">Create Subcategory</h2>
+        <div className="max-w-3xl mx-auto px-4 py-8">
+            <div className="bg-white shadow-lg rounded-xl p-6">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Create Subcategory</h2>
 
-            {/* Master Category Select */}
-            <label htmlFor="master-category" className="block text-sm font-medium mb-2">Master Category</label>
-            <select 
-                id="master-category"
-                onChange={(e) => setSelectedMasterCategory(e.target.value)}
-                className="border p-2 rounded w-full mb-4"
-            >
-                <option value="">Select Master Category</option>
-                {masterCategories.map((cat) => (
-                    <option key={cat._id} value={cat.name}>{cat.name}</option>
-                ))}
-            </select>
-
-            {/* Category Select (based on selected master category) */}
-            {selectedMasterCategory && categories.length > 0 && (
-                <>
-                    <label htmlFor="category" className="block text-sm font-medium mb-2">Category</label>
-                    <select 
-                        id="category"
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="border p-2 rounded w-full mb-4"
+                {/* Master Category Select */}
+                <div className="mb-4">
+                 
+                    <select
+                        id="master-category"
+                        onChange={(e) => setSelectedMasterCategory(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                        <option value="">Select Category</option>
-                        {categories.map((cat) => (
+                        <option value="">Select Master Category</option>
+                        {masterCategories.map((cat) => (
                             <option key={cat._id} value={cat.name}>{cat.name}</option>
                         ))}
                     </select>
-                </>
-            )}
+                </div>
 
-            {/* Input for New Subcategory Name */}
-            <div className="mt-4">
-                <label htmlFor="new-subcategory" className="block text-sm font-medium mb-2">New Subcategory Name</label>
-                <input 
-                    id="new-subcategory"
-                    type="text"
-                    value={newSubCategoryName}
-                    onChange={(e) => setNewSubCategoryName(e.target.value)}
-                    className="border p-2 rounded w-full mb-4"
-                    placeholder="Enter subcategory name"
-                />
+                {/* Category Select */}
+                {selectedMasterCategory && categories.length > 0 && (
+                    <div className="mb-4">
+                        
+                        <select
+                            id="category"
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Category</option>
+                            {categories.map((cat) => (
+                                <option key={cat._id} value={cat.name}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+
+                {/* Subcategory Name Input */}
+                <div className="mb-4">
+                     
+                    <input
+                        id="new-subcategory"
+                        type="text"
+                        value={newSubCategoryName}
+                        onChange={(e) => setNewSubCategoryName(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter subcategory name"
+                    />
+                </div>
+
+                {/* Create Button */}
+                <div className="flex justify-end">
+                    <button
+                        onClick={handleCreateSubCategory}
+                        className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Create Subcategory
+                    </button>
+                </div>
             </div>
-
-            {/* Create Subcategory Button */}
-            <button 
-                onClick={handleCreateSubCategory}
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-            >
-                Create Subcategory
-            </button>
         </div>
     );
 };
