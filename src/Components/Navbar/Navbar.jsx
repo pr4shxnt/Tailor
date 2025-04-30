@@ -3,7 +3,7 @@ import { Heart, Home, Scroll, Search, ShoppingCart, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import CollectionDropdown from '../Dropdown/CollectionDropdown';
 import ThemeToggle from '../Cards/ThemeToggle';
-import UserSidebar from "../UserAccount/UserSidebar"
+import DropdownUser from "../UserAccount/DropdownUser"
 import { AuthContext } from '../Log-in/AuthProvider';
 import SearchBar from './Search/SearchBar';
 import InitialResults from './Search/InitialResults';
@@ -72,7 +72,7 @@ const Navbar = () => {
                                 <User size={24} className="text-purple-600 transition" />
                                 {isUserMenuOpen && (
                                     <div className="absolute top-12 shadow-2xl shadow-secondary -right-20">
-                                        <UserSidebar />
+                                        <DropdownUser />
                                     </div>
                                 )}
                             </div>

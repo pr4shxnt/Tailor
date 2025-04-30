@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import { AuthContext } from '../Log-in/AuthProvider';
 import { X } from 'lucide-react';
 
-const UserSidebar = ({ isResponsive, setIsResponsive }) => {
+const DropdownUser = ({ isResponsive, setIsResponsive }) => {
   const { logout } = useAuth();
   const { userData } = useContext(AuthContext);
 
@@ -61,4 +61,4 @@ const UserSidebar = ({ isResponsive, setIsResponsive }) => {
   );
 };
 
-export default UserSidebar;
+export default DropdownUser;
