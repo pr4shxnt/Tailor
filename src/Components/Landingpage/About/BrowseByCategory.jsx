@@ -52,7 +52,7 @@ const BrowseByCategory = () => {
           >
            <NavLink to={category.link} >
             <div className="fixed w-80 h-80 bg-black hover:bg-opacity-15 transition-all duration-200 bg-opacity-25"> </div>
-            <img src={category.img} alt={category.name} className="w-80 h-80  object-cover " /><h2 className="text-lg font-semibold">{category.name}</h2>
+            <img src={category.img} alt={category.name} className="w-80 h-80  object-cover " /><h2 className="text-lg text-second-secondary font-semibold">{category.name}</h2>
           </NavLink></div>
         ))}
       </div>
