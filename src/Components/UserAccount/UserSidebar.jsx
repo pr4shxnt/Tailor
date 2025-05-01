@@ -23,12 +23,12 @@ const UserSidebar = ({ isResponsive, setIsResponsive }) => {
     <div className={`${isResponsive ? 'fixed left-0 animate-fade-left-right' : 'hidden '} md:block bg-primary
      z-20`}>
       <div className="relative  ">
-        <div className="w-64 h-full  p-4">
+        <div className="w-64 h-full">
           {/* Close button for responsive sidebar */}
           <div className="absolute md:hidden top-4 right-4 cursor-pointer" onClick={() => setIsResponsive(false)}>
             <X />
           </div>
-          <div className="flex items-center gap-3 py-3 pb-5"><img src="https://imgs.search.brave.com/Lb0XX94isOAALv_dg_l-z-cdwKwxVHYK8WI4MUirYTg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDQ3Lzcz/My82ODIvbm9uXzJ4/L2dyZXktYXZhdGFy/LWljb24tdXNlci1h/dmF0YXItcGhvdG8t/aWNvbi1zb2NpYWwt/bWVkaWEtdXNlci1p/Y29uLXZlY3Rvci5q/cGc" alt="" className='h-10 w-10 rounded-full'/>
+          <div className="flex items-center p-4 gap-3 py-3 pb-5"><img src="https://imgs.search.brave.com/Lb0XX94isOAALv_dg_l-z-cdwKwxVHYK8WI4MUirYTg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDQ3Lzcz/My82ODIvbm9uXzJ4/L2dyZXktYXZhdGFy/LWljb24tdXNlci1h/dmF0YXItcGhvdG8t/aWNvbi1zb2NpYWwt/bWVkaWEtdXNlci1p/Y29uLXZlY3Rvci5q/cGc" alt="" className='h-10 w-10 rounded-full'/>
           <div className="flex flex-col">
             <div className="font-bold text-xl">Hi, <span><span className='text-purple-500'>
             {userData?.name?.split(' ').slice(0, -1).join(' ')}
@@ -38,23 +38,28 @@ const UserSidebar = ({ isResponsive, setIsResponsive }) => {
           </div>
           
 </div>
-          <div className="flex flex-col pt-7 md:pt-0 space-y-4">
-            <NavLink to="/user/orders" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><ListOrdered size={26} color='rgb(168 85 247)' /> Orders</NavLink>
-            <NavLink to="/user/wishlist" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"> <Heart size={26} color='rgb(168 85 247)' /> Wish List</NavLink>
-            <NavLink to="/user/cart" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><ShoppingCart  size={26} color='rgb(168 85 247)' /> Cart</NavLink>
-            <NavLink to="/user/account" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><UserCircle2  size={26} color='rgb(168 85 247)' /> Account</NavLink>
-            <NavLink to="/user/measurement" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><UnfoldVerticalIcon size={26} color='rgb(168 85 247)' /> Edit Measurement</NavLink>
+          <div className="flex flex-col pt-5 p-4 border-t space-y-4">
+            <div className="flex flex-col space-y-4">
+              <p className="text-xs uppercase text-center">Shopping and Cart</p>
+            <NavLink to="/user/orders" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"><div className=""><ListOrdered size={28}  /> </div> Orders</NavLink>
+            <NavLink to="/user/wishlist" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"><div className=""> <Heart size={28}  /> </div> Wish List</NavLink>
+            <NavLink to="/user/cart" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><ShoppingCart  size={28}  /></div> Cart</NavLink>
+            <NavLink to="/user/account" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><UserCircle2  size={28}  /></div> Account</NavLink>
+            <NavLink to="/user/measurement" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><UnfoldVerticalIcon size={28}  /></div> Edit Measurement</NavLink>
+            </div>
 
-            <NavLink to="/settings" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><Settings size={26} color='rgb(168 85 247)' />Settings</NavLink>
-            <NavLink to="/help" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><MessageCircleQuestion size={26} color='rgb(168 85 247)' /> Help & Support</NavLink>
-           
+            <div className="flex flex-col pt-12 space-y-4">
+            <p className="text-xs uppercase text-center">Shopping and Cart</p>
+            <NavLink to="/settings" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><Settings size={28}  /></div>Settings</NavLink>
+            <NavLink to="/help" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><MessageCircleQuestion size={28}  /></div> Help & Support</NavLink>
+            </div>
             {/* Logout button */}
-            <button onClick={logout} className="px-4 py-2 flex gap-2 text-red-500 rounded-lg hover:bg-red-100 text-left">
+            <button onClick={logout} className="px-4 py-2 flex gap-4 text-red-500 border-b-[0.5px] border-b-second-secondary hover:bg-red-100 text-left">
               <LogOutIcon/>
               Logout
             </button>
 
-            <NavLink to="/terms" className="px-4 flex gap-2 py-2 rounded-lg hover:bg-secondary"><BookCopy  size={26} color='rgb(168 85 247)' /> Terms & Conditions</NavLink>
+            <NavLink to="/terms" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><BookCopy  size={28}  /></div> Terms & Conditions</NavLink>
           </div>
         </div>
       </div>
