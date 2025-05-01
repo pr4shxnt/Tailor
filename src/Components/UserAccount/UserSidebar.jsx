@@ -38,28 +38,28 @@ const UserSidebar = ({ isResponsive, setIsResponsive }) => {
           </div>
           
 </div>
-          <div className="flex flex-col pt-5 p-4 border-t space-y-4">
-            <div className="flex flex-col space-y-4">
-              <p className="text-xs uppercase text-center">Shopping and Cart</p>
-            <NavLink to="/user/orders" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"><div className=""><ListOrdered size={28}  /> </div> Orders</NavLink>
-            <NavLink to="/user/wishlist" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"><div className=""> <Heart size={28}  /> </div> Wish List</NavLink>
-            <NavLink to="/user/cart" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><ShoppingCart  size={28}  /></div> Cart</NavLink>
-            <NavLink to="/user/account" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><UserCircle2  size={28}  /></div> Account</NavLink>
-            <NavLink to="/user/measurement" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><UnfoldVerticalIcon size={28}  /></div> Edit Measurement</NavLink>
+          <div className="flex flex-col pt-5 p-4 space-y-4">
+            <div className="flex pt-4 flex-col space-y-4">
+              <p className="text-xs uppercase text-end">Shopping and Cart</p>
+            <NavLink to="/user/orders" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"><div className=""><ListOrdered size={28}  /> </div> Orders</NavLink>
+            <NavLink to="/user/wishlist" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"><div className=""> <Heart size={28}  /> </div> Wish List</NavLink>
+            <NavLink to="/user/cart" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"> <div className=""><ShoppingCart  size={28}  /></div> Cart</NavLink>
+            <NavLink to="/user/account" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"> <div className=""><UserCircle2  size={28}  /></div> Account</NavLink>
+            <NavLink to="/user/measurement" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"> <div className=""><UnfoldVerticalIcon size={28}  /></div> Edit Measurement</NavLink>
             </div>
 
-            <div className="flex flex-col pt-12 space-y-4">
-            <p className="text-xs uppercase text-center">Shopping and Cart</p>
-            <NavLink to="/settings" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><Settings size={28}  /></div>Settings</NavLink>
-            <NavLink to="/help" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><MessageCircleQuestion size={28}  /></div> Help & Support</NavLink>
+            <div className="flex flex-col pt-5 space-y-4">
+            <p className="text-xs uppercase text-end">Settings and Privacy</p>
+            <NavLink to="/settings" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"> <div className=""><Settings size={28}  /></div>Settings</NavLink>
+            <NavLink to="/help" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"> <div className=""><MessageCircleQuestion size={28}  /></div> Help & Support</NavLink>
             </div>
             {/* Logout button */}
-            <button onClick={logout} className="px-4 py-2 flex gap-4 text-red-500 border-b-[0.5px] border-b-second-secondary hover:bg-red-100 text-left">
+            <button onClick={logout} className="px-4 py-2 flex gap-4 text-red-500 border-b-[0.5px] border-b-second-secondary hover:bg-red-500 hover:text-white text-left">
               <LogOutIcon/>
               Logout
             </button>
 
-            <NavLink to="/terms" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-secondary"> <div className=""><BookCopy  size={28}  /></div> Terms & Conditions</NavLink>
+            <NavLink to="/terms" className="px-4 flex gap-4 py-2 border-b-[0.5px] border-b-second-secondary hover:bg-second-primary"> <div className=""><BookCopy  size={28}  /></div> Terms & Conditions</NavLink>
           </div>
         </div>
       </div>
