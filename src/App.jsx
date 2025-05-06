@@ -40,6 +40,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Lmain /> },
       { path: "/login", element: <UserLogin /> },
+      {path: "/forgot-password", element: <ForgotPasswordPage />},
       { path: "/register", element: <Register /> },
       { path: "/home", element: <Homepage /> },
       { path: "/category/all_collection", element: <Collection /> },
