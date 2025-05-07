@@ -8,13 +8,10 @@ import { ArrowBigRight } from 'lucide-react';
 import ResponsiveNavbar from '../Navbar/ResponsiveNavbar';
 import ScrollToTop from '../../essUtils/ScrollToTop';
 
-
 const AccountRootComp = () => {
-   const [isResponsive, setIsResponsive] = useState(false);
-
+  const [isResponsive, setIsResponsive] = useState(false);
   const navigate = useNavigate();
   const { isUserAuthenticated, loading } = useContext(AuthContext);
-
   
   useEffect(() => {
     if (!loading && isUserAuthenticated === false) {
@@ -34,7 +31,6 @@ const AccountRootComp = () => {
     <>
       <ScrollToTop />
 
-      {/* Responsive Toggle Button */}
       <div onClick={() => setIsResponsive(true)} className="fixed top-28 md:hidden z-50">
         <ArrowBigRight size={30} />
       </div>
