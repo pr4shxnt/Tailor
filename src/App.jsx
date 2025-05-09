@@ -29,6 +29,7 @@ import CheckOutPage from "./Components/UserAccount/PaymentGateway/CheckOutPage";
 import PaymentSuccess from "./Components/UserAccount/PaymentGateway/PaymentSuccess";
 import OrdersPage from "./Components/UserAccount/Orders/OrdersPage";
 import OrderTracking from "./Components/UserAccount/Orders/OrderTracking";
+import ForgotPasswordPage from "./Components/Log-in/ForgotPasswordPage";
 
 
 
@@ -37,8 +38,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootComp />,
-    children: [
-      { path: "/", element: <Lmain /> },
+    children: [{ path: "/", element: <Lmain /> },
       { path: "/login", element: <UserLogin /> },
       {path: "/forgot-password", element: <ForgotPasswordPage />},
       { path: "/register", element: <Register /> },
